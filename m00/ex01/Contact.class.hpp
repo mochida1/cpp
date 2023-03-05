@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:46 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 18:00:42 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:21:58 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ class Contact {
 		bool		SetNickname(std::string str);
 		bool		SetPhoneNumber(std::string str);
 		bool		SetDarkestSecret(std::string str);
+		bool		SetIndex(int index);
 
 	private:
 		int			_Index;

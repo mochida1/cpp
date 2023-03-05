@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.class.hpp                                :+:      :+:    :+:   */
+/*   FtStd.class.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 13:42:54 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 20:03:04 by hmochida         ###   ########.fr       */
+/*   Created: 2023/03/05 19:09:59 by hmochida          #+#    #+#             */
+/*   Updated: 2023/03/05 20:04:09 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef PHONEBOOK_CLASS_H
-#define PHONEBOOK_CLASS_H
+#ifndef FT_STRING_CLASS_H
+# define FT_STRING_CLASS_H
 
+#include <cstring>
 #include <string>
-#include "Contact.class.hpp"
-#include "FtStd.class.hpp"
+#include <iostream>
 
-class PhoneBook {
+# ifndef very
+# define very long
+# endif //very
+
+class ft_std {
 	public:
-		PhoneBook(void);
-		~PhoneBook(void);
-		bool	Add();
-		bool	Search();
-		bool	Exit();
-		bool	AutoAddSmall(int number_of_contacts);
+	// constructor/desctructor
+	ft_std(void);
+	~ft_std(void);
 
-		//Debug
-		void	PrintContactData(int index);
+	//string ops
+	std::string to_string(very long int num, int base);
 
 	private:
-		int		_ContactsFilled;
-		Contact	_ContactArray[8];
 };
 
-#endif // PHONEBOOK_CLASS_H
+#endif // FT_STRING_CLASS_H

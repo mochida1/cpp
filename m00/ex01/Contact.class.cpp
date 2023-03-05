@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:44 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 18:00:25 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:24:24 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ bool		Contact::SetPhoneNumber(std::string str) {
 bool		Contact::SetDarkestSecret(std::string str) {
 	this->_DarkestSecret = str;
 	if (this->_DarkestSecret.compare(str))
+		return (true);
+	return (false);
+}
+
+bool		Contact::SetIndex(int index) {
+	this->_Index = index;
+	if(this->_Index == index)
 		return (true);
 	return (false);
 }
