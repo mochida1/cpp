@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:49 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 20:01:59 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/05 22:22:11 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@
 int main(void)
 {
 	PhoneBook	PhoneBook;
-	int max;
-	max = 8;
+	int		control;
 
+	control = 1;
+
+	int		max;
+	max = 9;
 	PhoneBook.AutoAddSmall(max);
+
+	while (control != 4)
+	{
+		control = PhoneBook.PromptUser();
+		PhoneBook.DoAction(control);
+	}
+
 	for (int i = 0; i < max; i++)
+	{
 		PhoneBook.PrintContactData(i);
+	}
 	return (0);
 }

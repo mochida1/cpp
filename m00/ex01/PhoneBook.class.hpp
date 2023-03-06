@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:54 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 20:03:04 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/05 21:07:29 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 #include "Contact.class.hpp"
 #include "FtStd.class.hpp"
 
+#define ACTION_ADD		1
+#define ACTION_SEARCH	2
+#define ACTION_EXIT		4
+
 class PhoneBook {
 	public:
 		PhoneBook(void);
@@ -25,9 +29,11 @@ class PhoneBook {
 		bool	Add();
 		bool	Search();
 		bool	Exit();
-		bool	AutoAddSmall(int number_of_contacts);
+		int		PromptUser();
+		bool	DoAction (int control);
 
 		//Debug
+		bool	AutoAddSmall(int number_of_contacts);
 		void	PrintContactData(int index);
 
 	private:
