@@ -6,11 +6,11 @@
 #    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/03/11 15:03:29 by hmochida         ###   ########.fr        #
+#    Updated: 2023/03/11 15:37:37 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = zomb
+NAME = horde
 MAKEFLAGS = --no-print-directory
 BUILDDIR = objs
 VPATH = src
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+MAIN = main.cpp Zombie.cpp zombieHorde.cpp
 
 # Names sources
 SOURCES = $(MAIN)

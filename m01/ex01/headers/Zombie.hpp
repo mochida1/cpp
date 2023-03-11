@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 13:51:23 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/11 14:20:42 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:26:17 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 class Zombie {
 public:
 	Zombie(std::string name);
+	Zombie(void);
 	~Zombie(void);
 	void	announce(void);
+	void	SetName(std::string name);
 
 private:
 	std::string _name;
