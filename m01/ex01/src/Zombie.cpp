@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 13:42:49 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 22:22:11 by hmochida         ###   ########.fr       */
+/*   Created: 2023/03/11 13:51:18 by hmochida          #+#    #+#             */
+/*   Updated: 2023/03/11 13:58:43 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.class.hpp"
-#include "FtStd.class.hpp"
+#include "Zombie.hpp"
+#include <iostream>
 
-int main(void)
-{
-	PhoneBook	PhoneBook;
-	int		control;
+Zombie::Zombie(std::string name) {
+	this->_name = name;
+}
 
-	control = 1;
+Zombie::~Zombie(void) {
+	std::cout << "Destroing [" << this->_name << "]" << std::endl;
+}
 
-	int		max;
-	max = 9;
-	PhoneBook.AutoAddSmall(max);
-
-	while (control != 4)
-	{
-		control = PhoneBook.PromptUser();
-		PhoneBook.DoAction(control);
-	}
-
-	for (int i = 0; i < max; i++)
-	{
-		PhoneBook.PrintContactData(i);
-	}
-	return (0);
+void Zombie::announce(void) {
+	std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
