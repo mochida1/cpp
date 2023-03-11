@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   Zombie.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 14:11:38 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/11 14:13:27 by hmochida         ###   ########.fr       */
+/*   Created: 2023/03/11 14:19:53 by hmochida          #+#    #+#             */
+/*   Updated: 2023/03/11 14:21:15 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
+#ifndef ZOMBIE_H
+# define ZOMBIE_H
 
-void randomChump( std::string name )
-{
-	Zombie aRandomChump(name);
+Zombie*	newZombie( std::string name );
+void	randomChump( std::string name );
 
-	aRandomChump.announce();
-	return ;
-}
+
+#endif // ZOMBBIE_H
