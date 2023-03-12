@@ -6,7 +6,7 @@
 #    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/03/12 13:28:30 by hmochida         ###   ########.fr        #
+#    Updated: 2023/03/12 18:31:42 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp Unsed.class.cpp
+MAIN = main.cpp Unsed.class.cpp Parser.class.cpp
 
 # Names sources
 SOURCES = $(MAIN)
@@ -58,10 +58,12 @@ test:
 
 clean:
 	@rm -rf $(BUILDDIR)
+	@rm -rf *.replace
 	@rm -f vgcore*
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -rf *.replace
 	@rm -f vgcore*
 
 re: fclean all

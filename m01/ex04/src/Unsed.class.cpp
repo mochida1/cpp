@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:10:26 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/12 16:59:06 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:12:28 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,25 @@ void	Unsed::printFileContent(void) {
 
 bool	Unsed::doTrFileContent(void) {
 	int idx;
+	std::string strabaene("\\n");
 
+	idx = this->_s1.compare("\\n");
+	if (idx == 0)
+		this->_s1 = "\n";
+	if (idx != 0)
+	{
+		idx = this->_s1.find(strabaene);
+		this->_s1.erase(idx, strabaene.size());
+		this->_s1.insert(idx, "\n");
+	}
 	idx = this->_fileContent.find(this->_s1);
 	if (idx == -1)
 		return (false);
 	while (idx != -1)
 	{
-		std::cout << "string found: " << idx << std::endl;
 		this->_fileContent.erase(idx, this->_s1.size());
 		this->_fileContent.insert(idx, this->_s2);
-		idx = this->_fileContent.find(this->_s1);
+		idx = this->_fileContent.find(this->_s1.c_str(), idx);
 	}
 	return (true);
 }

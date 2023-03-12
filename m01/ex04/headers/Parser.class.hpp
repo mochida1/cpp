@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 21:23:52 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/12 13:10:10 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:43:09 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,23 @@
 
 #include <iostream>
 #include <string>
+#include <sys/stat.h>
 
 class Parser {
 	public:
-		Parser();
+		Parser(void);
 		Parser(int argc, char **argv);
-		~Parser();
+		~Parser(void);
 		bool		setArgc(int argc);
-		const int	getArgc(void);
-		bool		checkArgc(int argc);
+		int			getArgc(void);
+		bool		checkArgc(int argc_min, int argc_max);
 		bool		setArgv(char **argv);
-		const char	**getArgv(void);
+		char		**getArgv(void);
 		bool		setFileExtension(std::string file_extension);
-		std::string const &getFileExtension(void);
+		std::string	const &getFileExtension(void);
 		bool		checkFileExtension(int argv_idx, std::string pattern);
+		bool		checkEmptyArguments(void);
+		bool		fileExists(char *path_to_file);
 
 	private:
 		int			_argc;
