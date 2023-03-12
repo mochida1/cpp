@@ -6,9 +6,13 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:51:42 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/12 16:46:22 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:37:21 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
+#ifndef UNSED_CLASS_HPP
+# define UNSED_CLASS_HPP
 
 #include <string>
 #include <iostream>
@@ -43,3 +47,5 @@ class Unsed {
 		bool			_inFileIsOpen;
 		std::string		_fileContent;
 };
+
+#endif // UNSED_CLASS_HPP
