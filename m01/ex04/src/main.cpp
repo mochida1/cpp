@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:43:55 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/12 18:30:53 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:13:59 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int main(int argc, char *argv[])
 	std::cout << "outfilename is : " << sedme.getOutFileName() << std::endl;
 
 	sedme.openInFile();
-	std::cout << sedme.isInFileOpen() << std::endl;
 	sedme.closeInFile();
 	sedme.doTrFileContent();
 	sedme.writeToOutFile();
