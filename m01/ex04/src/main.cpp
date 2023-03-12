@@ -5,31 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 13:51:20 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/11 21:40:31 by hmochida         ###   ########.fr       */
+/*   Created: 2023/03/11 20:43:55 by hmochida          #+#    #+#             */
+/*   Updated: 2023/03/11 21:21:16 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
-#include "Zombie.h"
+#include <string>
+#include <fstream>
+#include <iostream>
+#include "Unsed.class.hpp"
 
-int	main(void)
+/*      ./unsed <file> <string to replace> <stringt that replaces>     */
+// int main (int argc, char *argv[])
+// {
+// 	(void) (argc);
+// 	(void) (argv);
+// 	std::fstream fs;
+// 	std::fstream ofs;
+// 	ofs.open("teste.txt", std::fstream::out);
+// 	ofs << "testing" << std::endl;
+// 	fs.open("teste.txt", std::fstream::in | std::fstream::out);
+// 	return (0);
+// }
+
+
+int main(int argc, char *argv[])
 {
-	Zombie *fred;
-	fred = newZombie("fred");
-	randomChump("NPC");
-	Zombie george("George");
-	george.announce();
-	george.~Zombie();
-	new (&george) Zombie("Bill");
-	george.announce();
 
-	/*
-		NPC does not exists outside of randomChump scope.
-		Objects are a variable, and as such, when not allocated to the heap
-		or not declared as static, are destroyed afterwards.
-	*/
-	fred->announce();
-
-	delete fred;
 }
