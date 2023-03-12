@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:43:55 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/11 21:21:16 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/03/12 13:38:48 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,11 @@
 
 int main(int argc, char *argv[])
 {
+	(void) (argc);
+	std::cout << argv[1] << "\t" << argv[2] << "\t" << argv[3] << std::endl;
+	Unsed sedme((std::string) (argv[1]), (std::string) (argv[2]), (std::string) (argv[3]));
 
+	std::cout << "infilename is: " << sedme.getInFileName() << std::endl;
+	// sedme.setOutFileName(sedme.getInFileName() + ".replace");
+	std::cout << "outfilename is : " << sedme.getOutFileName() << std::endl;
 }
