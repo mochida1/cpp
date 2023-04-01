@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:45:21 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/30 21:53:55 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:48:22 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ Fixed::Fixed(Fixed const &fixed)
 
 Fixed::Fixed(const int fixedPointNumber) : _fixedPointNumber(fixedPointNumber << 8)
 {
-	std::cout << "Argument construcor called" << std::endl;
-	std::cout << "toInt is: " << this->toInt() << std::endl;
+	std::cout << "Int construcor called" << std::endl;
 	if (this->_fixedPointNumber > this->_fixedMax)
 	{
 		std::cerr << "Error: passed value ["<< fixedPointNumber <<"] is greater than " << this->_fixedMax << std::endl;
@@ -44,10 +43,10 @@ Fixed::Fixed(const int fixedPointNumber) : _fixedPointNumber(fixedPointNumber <<
 	return;
 }
 
-// seeeeeeeemmmmmmmmmmmmmmmmmmmmmmm
 Fixed::Fixed(const float fixedPointNumber)
 {
-	int fl = *(int*)&fixedPointNumber;
+	std::cout << "Float constructor called" << std::endl;
+/* 	int fl = *(int*)&fixedPointNumber;
 	int exponent;
 	int mantissa;
 
@@ -73,7 +72,8 @@ Fixed::Fixed(const float fixedPointNumber)
 		this->_fixedPointNumber |= 0x80000000;
 	this->printBinary(&mantissa, 32);
 	this->printBinary(&exponent, 32);
-	std::cout << "Argument construcor called" << std::endl;
+	std::cout << "Argument construcor called" << std::endl; */
+	this->_fixedPointNumber = (int)roundf(fixedPointNumber * (1 << Fixed::_fractionalBits));
 	return;
 }
 
@@ -92,7 +92,7 @@ Fixed & Fixed::operator=(const Fixed &fixed)
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (this->_fixedPointNumber);
 }
 
@@ -127,9 +127,13 @@ int	Fixed::toInt(void) const
 	return (this->_fixedPointNumber >> 8);
 }
 
+/*
+	interprets the member fixedPointNumber bits as a float and does the math
+	shenanigans to put it back to float.
+*/
 float	Fixed::toFloat(void) const
 {
-	return 0;
+	return ((float)this->_fixedPointNumber / (float)(1 << this->_fractionalBits));
 }
 
 void	Fixed::printBinary(void *ptrToValue, int bitSize)
@@ -147,4 +151,10 @@ void	Fixed::printBinary(void *ptrToValue, int bitSize)
 	}
 	std::cout << std::endl;
 	return ;
+}
+
+std::ostream &operator<<(std::ostream &outStream, Fixed const &instance)
+{
+	outStream << instance.toFloat();
+	return outStream;
 }

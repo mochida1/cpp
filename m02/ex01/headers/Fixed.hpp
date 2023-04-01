@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:26:13 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/30 20:21:30 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:45:24 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define FIXED_HPP
 
 #include <iostream>
+#include <cmath>
 
 class Fixed {
 public:
@@ -42,5 +43,6 @@ private:
 	static const int	_fixedMax = 0x7fffff;
 	static const int	_fixedMin = 0x800000;
 };
+std::ostream &operator<<(std::ostream &outStream, Fixed const &instance); // this has to be declard as a nonmember function because of the implicit *this* parameter.
 
 #endif // FIXED_HPP
