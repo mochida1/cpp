@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:26:13 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/19 13:33:39 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:04:43 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,41 @@
 # define FIXED_HPP
 
 #include <iostream>
+#include <cmath>
 
-// +, -, *, and /
 class Fixed {
 public:
 	Fixed(void);
-	Fixed(int fixedPointNumber);
+	Fixed(const int fixedPointNumber);
+	Fixed(const float fixedPointNumber);
 	Fixed(const Fixed &fixed);
 	Fixed & operator=(Fixed const &fixed);
-	Fixed operator>(Fixed const &fixed);
-	Fixed operator>=(Fixed const &fixed);
-	Fixed operator<=(Fixed const &fixed);
-	Fixed operator==(Fixed const &fixed);
-	Fixed operator!=(Fixed const &fixed);
-	Fixed operator+(Fixed const &fixed);
-	Fixed operator-(Fixed const &fixed);
-	Fixed operator*(Fixed const &fixed);
-	Fixed operator/(Fixed const &fixed);
-	Fixed operator++(int);
-	Fixed & operator++(void);
-	Fixed operator--(int);
-	Fixed & operator--(void);
 	~Fixed(void);
 	int getRawBits(void) const;
 	void setRawBits(int const raw);
-	static Fixed & min(Fixed &a, Fixed &b);
+	float	toFloat(void) const;
+	int		toInt(void) const;
+	void	printFixedMin(void);
+	void	printFixedMax(void);
+	void	printMinusOne(void);
+	void	printInt(void);
+	void	printBinary(void *ptrToValue, int bitSize);
+
+	// comparison: >, <, >=, <=, == !=
+	bool	&operator
+
+	// arithmetic: +, -, *, /
+
+	// in(de)crement: ++ --;
 
 private:
 	int					_fixedPointNumber;
-	static const int	_factionalBits = 8;
-
+	static const int	_fractionalBits = 8;
+	static const int	_integerPart = 0xffffff00;
+	static const int	_floatPart = 0x000000ff;
+	static const int	_fixedMax = 0x7fffff;
+	static const int	_fixedMin = 0x800000;
 };
-// A static member function min that takes as parameters two references on fixed-point
-// numbers, and returns a reference to the smallest one.
-// • A static member function min that takes as parameters two references to constant
-// fixed-point numbers, and returns a reference to the smallest one.
-// • A static member function max that takes as parameters two references on fixed-point
-// numbers, and returns a reference to the greatest one.
-// • A static member function max that takes as parameters two references to constant
-// fixed-point numbers, and returns a reference to the greatest one.
+std::ostream &operator<<(std::ostream &outStream, Fixed const &instance); // this has to be declard as a nonmember function because of the implicit *this* parameter.
 
 #endif // FIXED_HPP
