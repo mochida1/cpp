@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:45:21 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/01 18:48:22 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:32:46 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 Fixed::Fixed(void)
 {
-	std::cout << "Default constructor called" << std::endl;
 	return ;
 }
 
 Fixed::Fixed(Fixed const &fixed)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = fixed;
 	return ;
 }
 
 Fixed::Fixed(const int fixedPointNumber) : _fixedPointNumber(fixedPointNumber << 8)
 {
-	std::cout << "Int construcor called" << std::endl;
 	if (this->_fixedPointNumber > this->_fixedMax)
 	{
 		std::cerr << "Error: passed value ["<< fixedPointNumber <<"] is greater than " << this->_fixedMax << std::endl;
@@ -40,59 +37,28 @@ Fixed::Fixed(const int fixedPointNumber) : _fixedPointNumber(fixedPointNumber <<
 		this->_fixedPointNumber = 0;
 		return ;
 	}
-	return;
+	return ;
 }
 
 Fixed::Fixed(const float fixedPointNumber)
 {
-	std::cout << "Float constructor called" << std::endl;
-/* 	int fl = *(int*)&fixedPointNumber;
-	int exponent;
-	int mantissa;
-
-	exponent = 0;
-	mantissa = 0;
-	this->printBinary(&mantissa, 32);
-	this->printBinary(&exponent, 32);
-	for (int i = 0; i < 31; i++)
-	{
-		if (i < 23)
-		{
-			if (((1 << i) & fl))
-				mantissa += 1 << i;
-		}
-		else
-			if (((1 << i) & fl))
-				exponent += 1 << (i -23);
-	}
-	// exponent -= 127;
-	std::cout << "Mantissa of [" << fixedPointNumber << "] is [" <<  mantissa << "]" << std::endl;
-	std::cout << "Exponent of [" << fixedPointNumber << "] is [" <<  exponent << "]" << std::endl;
-	if (fixedPointNumber < 0)
-		this->_fixedPointNumber |= 0x80000000;
-	this->printBinary(&mantissa, 32);
-	this->printBinary(&exponent, 32);
-	std::cout << "Argument construcor called" << std::endl; */
 	this->_fixedPointNumber = (int)roundf(fixedPointNumber * (1 << Fixed::_fractionalBits));
-	return;
+	return ;
 }
 
 Fixed::~Fixed(void)
 {
-	std::cout << "Destructor called" << std::endl;
-	return;
+	return ;
 }
 
 Fixed & Fixed::operator=(const Fixed &fixed)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixedPointNumber = fixed.getRawBits();
 	return (*this);
 }
 
 int	Fixed::getRawBits(void) const
 {
-	// std::cout << "getRawBits member function called" << std::endl;
 	return (this->_fixedPointNumber);
 }
 
@@ -152,6 +118,120 @@ void	Fixed::printBinary(void *ptrToValue, int bitSize)
 	std::cout << std::endl;
 	return ;
 }
+
+	bool	Fixed::operator>(Fixed const &toCompare) const
+	{
+		return (this->toFloat() > toCompare.toFloat());
+	}
+	bool	Fixed::operator<(Fixed const &toCompare) const
+	{
+		return (this->toFloat() < toCompare.toFloat());
+	}
+
+	bool	Fixed::operator>=(Fixed const &toCompare) const
+	{
+		return (this->toFloat() >= toCompare.toFloat());
+	}
+
+	bool	Fixed::operator<=(Fixed const &toCompare) const
+	{
+		return (this->toFloat() <= toCompare.toFloat());
+	}
+
+	bool	Fixed::operator==(Fixed const &toCompare) const
+	{
+		return (this->getRawBits() == toCompare.getRawBits());
+	}
+
+	bool	Fixed::operator!=(Fixed const &toCompare) const
+	{
+		return (this->getRawBits() != toCompare.getRawBits());
+	}
+
+	// arithmetic: +, -, *, /
+
+	Fixed	Fixed::operator+(Fixed const &toOperate)
+	{
+		return (this->toFloat() + toOperate.toFloat());
+	}
+
+	Fixed	Fixed::operator-(Fixed const &toOperate)
+	{
+		return (this->toFloat() - toOperate.toFloat());
+	}
+
+	Fixed	Fixed::operator*(Fixed const &toOperate)
+	{
+		return (this->toFloat() * toOperate.toFloat());
+	}
+
+	Fixed	Fixed::operator/(Fixed const &toOperate)
+	{
+		return (this->toFloat() / toOperate.toFloat());
+	}
+
+
+	// in(de)crement: ++ --
+	/*
+		returns a copy of the class so that the postfixed increment is read after
+		the operation;
+	*/
+	Fixed	Fixed::operator++(int)
+	{
+		Fixed rv(*this);
+
+		this->_fixedPointNumber++;
+		return rv;
+	}
+
+	Fixed	&Fixed::operator++(void)
+	{
+		this->_fixedPointNumber++;
+		return *this;
+	}
+
+	Fixed	Fixed::operator--(int)
+	{
+		Fixed rv(*this);
+
+		this->_fixedPointNumber--;
+		return rv;
+	}
+
+	Fixed	&Fixed::operator--(void)
+	{
+		this->_fixedPointNumber--;
+		return *this;
+	}
+
+	// min maxes
+	const Fixed &Fixed::min(Fixed const &a, Fixed const &b)
+	{
+		if (a.toFloat() < b.toFloat())
+			return a;
+		return b;
+	}
+
+	const Fixed &Fixed::max(Fixed const &a, Fixed const &b)
+	{
+		if (a.toFloat() > b.toFloat())
+			return a;
+		return b;
+	}
+
+	Fixed &Fixed::min(Fixed &a, Fixed &b)
+	{
+		if (a.toFloat() < b.toFloat())
+			return a;
+		return b;
+	}
+
+	Fixed &Fixed::max(Fixed &a, Fixed &b)
+	{
+		if (a.toFloat() > b.toFloat())
+			return a;
+		return b;
+	}
 
 std::ostream &operator<<(std::ostream &outStream, Fixed const &instance)
 {

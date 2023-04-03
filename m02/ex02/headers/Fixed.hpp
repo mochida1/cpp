@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:26:13 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/01 20:04:43 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:28:35 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,31 @@ public:
 	void	printBinary(void *ptrToValue, int bitSize);
 
 	// comparison: >, <, >=, <=, == !=
-	bool	&operator
+	bool	operator>(Fixed const &toCompare) const;
+	bool	operator<(Fixed const &toCompare) const;
+	bool	operator>=(Fixed const &toCompare) const;
+	bool	operator<=(Fixed const &toCompare) const;
+	bool	operator==(Fixed const &toCompare) const;
+	bool	operator!=(Fixed const &toCompare) const;
 
 	// arithmetic: +, -, *, /
 
+	Fixed	operator+(Fixed const &toOperate);
+	Fixed	operator-(Fixed const &toOperate);
+	Fixed	operator*(Fixed const &toOperate);
+	Fixed	operator/(Fixed const &toOperate);
+
 	// in(de)crement: ++ --;
+	Fixed	operator++(int);
+	Fixed	&operator++(void);
+	Fixed	operator--(int);
+	Fixed	&operator--(void);
+
+	// min maxes
+	static const Fixed &min(Fixed const &a, Fixed const &b);
+	static const Fixed &max(Fixed const &a, Fixed const &b);
+	static Fixed &min(Fixed &a, Fixed &b);
+	static Fixed &max(Fixed &a, Fixed &b);
 
 private:
 	int					_fixedPointNumber;
