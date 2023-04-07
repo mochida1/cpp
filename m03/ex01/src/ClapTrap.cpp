@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 12:29:54 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/07 16:25:39 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:41:11 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ ClapTrap::~ClapTrap(void)
 
 ClapTrap::ClapTrap(std::string name) : _name(name)
 {
-	std::cout << "[ClapTrap] Argument construcor called: [" + name +"]" << std::endl;
+	std::cout << "Argument construcor called" << std::endl;
 	this->_hitPoints = 10;
 	this->_energyPoints = 10;
 	this->_attackDamage = 0;
