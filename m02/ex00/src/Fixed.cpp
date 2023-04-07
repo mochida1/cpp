@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:45:21 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/18 15:56:34 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/07 13:06:48 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ Fixed & Fixed::operator=(const Fixed &fixed)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixedPointNumber = fixed.getRawBits();
-	return (*this);
+	return *this;
 }
 
 int Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
-	return (this->_fixedPointNumber);
+	return this->_fixedPointNumber;
 }
