@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:37 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 16:16:50 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/09 17:40:02 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class Animal
 		std::string type;
 
 	private:
+
 };
 
 #endif // ANIMAL_HPP

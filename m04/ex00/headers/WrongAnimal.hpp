@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:10 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/08 21:05:43 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:18:21 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ class WrongAnimal
 	//------------ OCF
 		WrongAnimal(void); // Default constructor
 		WrongAnimal(const WrongAnimal & instance); // copy constructor
-		WrongAnimal & operator=(const WrongAnimal & instance); // copy operator constructor
-		~WrongAnimal(void);
+		virtual WrongAnimal & operator=(const WrongAnimal & instance); // copy operator constructor
+		virtual ~WrongAnimal(void);
 	//------------
 		WrongAnimal(std::string type);
 
