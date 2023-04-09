@@ -6,7 +6,7 @@
 #    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/04/08 20:03:14 by hmochida         ###   ########.fr        #
+#    Updated: 2023/04/08 21:14:22 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp Animal.cpp Cat.cpp Dog.cpp
+MAIN = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 
 # Names sources
 SOURCES = $(MAIN)

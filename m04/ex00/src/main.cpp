@@ -6,13 +6,14 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:18 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/08 20:44:19 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/08 21:14:05 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongCat.hpp"
 
 void test_constructors(void)
 {
@@ -76,6 +77,19 @@ void test_subj(void)
 	meta->makeSound();
 }
 
+void test_wrong(void)
+{
+	Animal 		*chad = new Cat;
+	// WrongAnimal	*simp = new Cat;
+	WrongAnimal	*simp = new WrongCat;
+
+	std::cout << "Chad cat: " << std::endl;
+	chad->makeSound();
+	std::cout << "Simp cat: " << std::endl;
+	simp->makeSound();
+	return ;
+}
+
 int main(int argc, char *argv[])
 {
 	std::string argument;
@@ -100,6 +114,12 @@ int main(int argc, char *argv[])
 	{
 		std::cout << "Running subject example ..." << std::endl;
 		test_subj();
+		return 0;
+	}
+	if (!argument.compare("wrong"))
+	{
+		std::cout << "Running test suite [WRONG] ..." << std::endl;
+		test_wrong();
 		return 0;
 	}
 
