@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:34 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/08 20:22:42 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/08 20:55:38 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ class Dog : public Animal {
 	//------------
 		Dog(std::string type);
 
-		std::string getType(void) const;
 		void makeSound(void) const;
 	protected:
-		std::string type;
 
 	private:
 };

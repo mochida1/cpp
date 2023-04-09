@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:16 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/08 20:22:30 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/08 20:58:05 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,10 @@ Dog::~Dog(void)
 	return ;
 }
 
-Dog::Dog(std::string type) : type(type)
+Dog::Dog(std::string type) : Animal(type)
 {
 	std::cout << "Dog argument constructor called [" + type + "]" << std::endl;
 	return ;
-}
-
-std::string Dog::getType(void) const
-{
-	return this->type;
 }
 
 void Dog::makeSound(void) const
