@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/08 19:12:37 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 20:56:41 by hmochida         ###   ########.fr       */
+/*   Created: 2023/04/08 21:03:37 by hmochida          #+#    #+#             */
+/*   Updated: 2023/04/08 21:12:19 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-#include <iostream>
+#include "WrongAnimal.hpp"
 
-class Animal
-{
+class WrongCat : public WrongAnimal {
 	public:
 	//------------ OCF
-		Animal(void); // Default constructor
-		Animal(const Animal & instance); // copy constructor
-		virtual Animal & operator=(const Animal & instance); // copy operator constructor
-		virtual ~Animal(void);
+		WrongCat(void); // Default constructor
+		WrongCat(const WrongCat & instance); // copy constructor
+		WrongCat & operator=(const WrongCat & instance); // copy operator constructor
+		~WrongCat(void);
 	//------------
-		Animal(std::string type);
+		WrongCat(std::string type);
 
-		std::string getType(void) const;
-		virtual void makeSound(void) const;
-
+		void makeSound(void) const;
 	protected:
-		std::string type;
 
 	private:
-
 };
 
-#endif // ANIMAL_HPP
+#endif // WRONGCAT_HPP

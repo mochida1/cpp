@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:37 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 20:56:41 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:44:18 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ class Animal
 	//------------
 		Animal(std::string type);
 
-		std::string getType(void) const;
-		virtual void makeSound(void) const;
+		virtual std::string getType(void) const;
+		virtual void makeSound(void) const = 0;
 
 	protected:
 		std::string type;

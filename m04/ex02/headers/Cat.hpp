@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/08 19:12:37 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 20:56:41 by hmochida         ###   ########.fr       */
+/*   Created: 2023/04/08 19:12:32 by hmochida          #+#    #+#             */
+/*   Updated: 2023/04/09 18:13:23 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
-#include <iostream>
+#include "Animal.hpp"
+#include "Brain.hpp"
+#include "typeinfo"
 
-class Animal
-{
+class Cat : public Animal {
 	public:
 	//------------ OCF
-		Animal(void); // Default constructor
-		Animal(const Animal & instance); // copy constructor
-		virtual Animal & operator=(const Animal & instance); // copy operator constructor
-		virtual ~Animal(void);
+		Cat(void); // Default constructor
+		Cat(const Cat & instance); // copy constructor
+		Cat & operator=(const Cat & instance); // copy operator constructor
+		~Cat(void);
 	//------------
-		Animal(std::string type);
+		Cat(std::string type);
 
-		std::string getType(void) const;
-		virtual void makeSound(void) const;
-
+		void makeSound(void) const;
+		const Brain* getBrain(void) const;
+		void setBrain(Brain * brain);
 	protected:
-		std::string type;
 
 	private:
-
+		Brain *_catBrain;
 };
 
-#endif // ANIMAL_HPP
+#endif // CAT_HPP

@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:14 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 20:04:34 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:55:31 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Cat::Cat(void)
 	return ;
 }
 
-Cat::Cat(const Cat & instance) : Animal(instance)
+Cat::Cat(const Cat & instance)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
 	*this = instance;

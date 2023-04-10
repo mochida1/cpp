@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:18 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 21:03:22 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:45:08 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@
 
 void test_constructors(void)
 {
-	Animal burrito;
-	Animal cow("cow");
-	Animal calf(cow);
-	burrito = cow;
-	std::cout << "cow type is: " + cow.getType() << std::endl;
-	std::cout << "calf type is: " + calf.getType() << std::endl;
-	std::cout << "burrito type is: " + burrito.getType() << std::endl;
-
 	Cat isCat;
 	Cat isCow("cow");
 	Cat catCopies(isCat);
@@ -52,11 +44,11 @@ void test_constructors(void)
 void test_sounds(void)
 {
 	std::cout << "\t\t------TESTING [SOUNDS]-------" << std::endl;
-	Animal	ani1;
+	// Animal	ani1;
 	Cat		cat1;
 	Dog		dog1;
-	std::cout << "ani1.makeSound(): " << std::endl;
-	ani1.makeSound();
+	// std::cout << "ani1.makeSound(): " << std::endl;
+	// ani1.makeSound();
 	std::cout << "cat1.makeSounds(): " << std::endl;
 	cat1.makeSound();
 	std::cout << "dog1.makeSounds(): " << std::endl;
@@ -67,7 +59,7 @@ void test_sounds(void)
 void test_subj_ex00(void)
 {
 	std::cout << "\t\t------TESTING [Ex00 example]-------" << std::endl;
-	const Animal* meta = new Animal();
+	// const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 
@@ -76,9 +68,9 @@ void test_subj_ex00(void)
 
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
-	meta->makeSound();
+	// meta->makeSound();
 
-	delete meta;
+	// delete meta;
 	delete j;
 	delete i;
 }

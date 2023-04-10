@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:16 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 21:05:41 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:47:51 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Dog::Dog(void)
 	return ;
 }
 
-Dog::Dog(const Dog & instance) : Animal(instance)
+Dog::Dog(const Dog & instance)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
 	*this = instance;

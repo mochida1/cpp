@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/08 19:12:37 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 20:56:41 by hmochida         ###   ########.fr       */
+/*   Created: 2023/04/08 21:04:10 by hmochida          #+#    #+#             */
+/*   Updated: 2023/04/09 16:19:33 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 #include <iostream>
 
-class Animal
+class WrongAnimal
 {
 	public:
 	//------------ OCF
-		Animal(void); // Default constructor
-		Animal(const Animal & instance); // copy constructor
-		virtual Animal & operator=(const Animal & instance); // copy operator constructor
-		virtual ~Animal(void);
+		WrongAnimal(void); // Default constructor
+		WrongAnimal(const WrongAnimal & instance); // copy constructor
+		virtual WrongAnimal & operator=(const WrongAnimal & instance); // copy operator constructor
+		virtual ~WrongAnimal(void);
 	//------------
-		Animal(std::string type);
+		WrongAnimal(std::string type);
 
 		std::string getType(void) const;
 		virtual void makeSound(void) const;
@@ -34,7 +34,6 @@ class Animal
 		std::string type;
 
 	private:
-
 };
 
-#endif // ANIMAL_HPP
+#endif // WRONGANIMAL_HPP
