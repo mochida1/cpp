@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:18 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 21:03:22 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:31:02 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void test_constructors(void)
 	Cat catCopies(isCat);
 	Cat catEquals;
 	catEquals = isCow;
-
 	std::cout << "isCat is:" + isCat.getType() << std::endl;
 	std::cout << "isCow is:" + isCow.getType() << std::endl;
 	std::cout << "catCopies is:" + catCopies.getType() << std::endl;
@@ -41,7 +40,6 @@ void test_constructors(void)
 	Dog dogCopies(isDog);
 	Dog dogEquals;
 	dogEquals = isNotCat;
-
 	std::cout << "isDog is:" + isDog.getType() << std::endl;
 	std::cout << "isNotCat is:" + isNotCat.getType() << std::endl;
 	std::cout << "dogCopies is:" + dogCopies.getType() << std::endl;

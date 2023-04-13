@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:01:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 18:02:37 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:25:12 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 Brain::Brain(void)
 {
+	for (int idx = 0; idx < 100; idx++)
+		this->_ideas[idx] = "";
 	std::cout << "Brain default constructor called" << std::endl;
 	return ;
 }

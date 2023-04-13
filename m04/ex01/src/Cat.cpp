@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:14 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 20:04:34 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:31:47 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ Cat::Cat(void)
 Cat::Cat(const Cat & instance) : Animal(instance)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
+	this->_catBrain = new Brain;
 	*this = instance;
 	return ;
 }
@@ -38,8 +39,6 @@ Cat & Cat::operator=(const Cat & instance)
 		delete this->_catBrain;
 	if (typeid(*this) == typeid(instance))
 		this->_catBrain = new Brain(*instance.getBrain());
-	else
-		this->_catBrain = new Brain;
 	return *this;
 }
 
