@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 20:05:36 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 17:41:42 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:30:03 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ PhoneBook::~PhoneBook(void) {
 
 bool	PhoneBook::Add(void) {
 	int rc = 0;
-	std::cout << "Contacts filled: " << this->_ContactsFilled << std::endl;
+	// std::cout << "Contacts filled: " << this->_ContactsFilled << std::endl;
 	rc = this->_ContactArray[this->_ContactsFilled].SetContactData();
 	if (rc != true)
 		return rc;
@@ -67,7 +67,7 @@ dot (’.’).
 */
 bool	PhoneBook::Search(void) {
 	int	lmax;
-	std::cout << "contacts filled: " <<this->_ContactsFilled<<std::endl;
+	// std::cout << "contacts filled: " <<this->_ContactsFilled<<std::endl;
 	std::cout << "     Index|First Name| Last Name|  Nickname" << std::endl;
 	if (this->_ContactsFilled == 0)
 		return (false);

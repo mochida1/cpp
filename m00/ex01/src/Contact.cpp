@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:44 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 18:23:12 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:30:21 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ bool		Contact::_ParseUserInput(std::string str)
 
 bool		Contact::_ParsePhoneNumber(std::string str)
 {
-	std::cout << "AQUI!!!!" << std::endl;
 	size_t i = str.find_first_not_of(' ', 0);
 	if (i == (size_t) (-1))
 		i = 0;
@@ -110,7 +109,6 @@ int		Contact::SetContactData(void) {
 	std::string	lPhoneNumber;
 	std::string	lDarkestSecret;
 
-std::cout << "INDEX: ["<< this->_Index << "]" << std::endl;
 	std::cout << "Please insert first name: ";
 	std::getline(std::cin, lFirstName);
 	if (std::cin.eof())
