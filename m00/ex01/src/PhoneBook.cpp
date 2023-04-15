@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 20:05:36 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 18:30:03 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:57:41 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ PhoneBook::~PhoneBook(void) {
 bool	PhoneBook::Add(void) {
 	int rc = 0;
 	// std::cout << "Contacts filled: " << this->_ContactsFilled << std::endl;
+	if (this->_ContactsFilled > 7)
+		this->_ContactsFilled = 7;
 	rc = this->_ContactArray[this->_ContactsFilled].SetContactData();
 	if (rc != true)
 		return rc;
 	this->_ContactArray[this->_ContactsFilled].SetIndex(this->_ContactsFilled);
 
-	if (this->_ContactsFilled < 7)
+	if (this->_ContactsFilled < 8)
 		this->_ContactsFilled++;
 	return (true);
 
@@ -68,15 +70,19 @@ dot (’.’).
 bool	PhoneBook::Search(void) {
 	int	lmax;
 	// std::cout << "contacts filled: " <<this->_ContactsFilled<<std::endl;
-	std::cout << "     Index|First Name| Last Name|  Nickname" << std::endl;
 	if (this->_ContactsFilled == 0)
-		return (false);
+	{
+		std::cerr << "No entries yet" << std::endl;
+		return (true);
+	}
+std::cout << "CONTACTS FILLED:" << this->_ContactsFilled << std::endl;
 	lmax = this->_ContactsFilled;
 	if (this->_ContactsFilled > 8)
 		lmax = 8;
-	for (int i = 0; i <= lmax; i++)
+	std::cout << "     Index|First Name| Last Name|  Nickname" << std::endl;
+	for (int i = 0; i < lmax; i++)
 	{
-		print_format(ft_std::to_string(this->_ContactArray[i].GetIndex(), 10), 0);
+		print_format(ft_std::to_string(this->_ContactArray[i].GetIndex() + 1, 10), 0);
 		print_format(this->_ContactArray[i].GetFirstName(), 0);
 		print_format(this->_ContactArray[i].GetLastName(), 0);
 		print_format(this->_ContactArray[i].GetNickname(), 1);
@@ -127,16 +133,13 @@ bool	PhoneBook::AutoAddSmall(int number_of_contacts) {
 	ft_std	ft_std;
 	for (int i = 0; i < number_of_contacts; i++)
 	{
-		int j = i;
-		if (i > 7)
-			j = 7;
-		this->_ContactArray[j].SetFirstName("FN [" + ft_std.to_string(j, 10) + "]");
-		this->_ContactArray[j].SetLastName("LN [" + ft_std.to_string(j, 10) + "]");
-		this->_ContactArray[j].SetNickname("NN [" + ft_std.to_string(j, 10) + "]");
-		this->_ContactArray[j].SetPhoneNumber("123 [" + ft_std.to_string(j, 10) + "]");
-		this->_ContactArray[j].SetDarkestSecret("BOO [" + ft_std.to_string(j, 10) + "]");
-		this->_ContactArray[j].SetIndex(j);
-		if (this->_ContactsFilled < 7)
+		this->_ContactArray[i].SetFirstName("FN [" + ft_std.to_string(i, 10) + "]");
+		this->_ContactArray[i].SetLastName("LN [" + ft_std.to_string(i, 10) + "]");
+		this->_ContactArray[i].SetNickname("NN [" + ft_std.to_string(i, 10) + "]");
+		this->_ContactArray[i].SetPhoneNumber("123 [" + ft_std.to_string(i, 10) + "]");
+		this->_ContactArray[i].SetDarkestSecret("BOO [" + ft_std.to_string(i, 10) + "]");
+		this->_ContactArray[i].SetIndex(i);
+		if (this->_ContactsFilled < 8)
 			this->_ContactsFilled++;
 	}
 	return (true);
