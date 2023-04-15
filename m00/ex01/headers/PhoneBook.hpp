@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.class.hpp                                :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:54 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 21:07:29 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/14 21:50:08 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef PHONEBOOK_CLASS_H
-#define PHONEBOOK_CLASS_H
+#ifndef PHONEBOOK_H
+#define PHONEBOOK_H
 
 #include <string>
-#include "Contact.class.hpp"
-#include "FtStd.class.hpp"
+#include "Contact.hpp"
+#include "FtStd.hpp"
 
+#define ACTION_EOF		-1
 #define ACTION_ADD		1
 #define ACTION_SEARCH	2
 #define ACTION_EXIT		4
@@ -41,4 +42,4 @@ class PhoneBook {
 		Contact	_ContactArray[8];
 };
 
-#endif // PHONEBOOK_CLASS_H
+#endif // PHONEBOOK_H

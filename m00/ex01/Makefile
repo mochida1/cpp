@@ -6,7 +6,7 @@
 #    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/03/11 14:56:33 by hmochida         ###   ########.fr        #
+#    Updated: 2023/04/13 20:09:31 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp PhoneBook.class.cpp FtStd.class.cpp Contact.class.cpp
+MAIN = main.cpp PhoneBook.cpp FtStd.cpp Contact.cpp
 
 # Names sources
 SOURCES = $(MAIN)

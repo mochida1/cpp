@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FtStd.class.cpp                                    :+:      :+:    :+:   */
+/*   FtStd.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:09:54 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 20:04:08 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:57:53 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FtStd.class.hpp"
+#include "FtStd.hpp"
 #include <stdlib.h>
+#include <cctype>
 
 ft_std::ft_std(void) {
 	return ;
@@ -81,4 +82,14 @@ std::string ft_std::to_string(very long int value, int base) {
 
 	ft_itoa(value, str, base);
 	return ((std::string) (str));
+}
+
+bool ft_std::isOnlySpace(std::string &str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (!std::isspace(str[i]))
+			return false;
+	}
+	return true;
 }

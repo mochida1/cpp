@@ -6,33 +6,43 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:49 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/11 14:56:30 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:28:52 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.class.hpp"
-#include "FtStd.class.hpp"
+#include "PhoneBook.hpp"
+#include "FtStd.hpp"
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	PhoneBook	PhoneBook;
 	int		control;
+	std::string argument;
 
 	control = 1;
 
 	int		max;
-	max = 9;
-	// PhoneBook.AutoAddSmall(max);
-
-	while (control != 4)
+	max = 8;
+	if (argc != 1)
 	{
-		control = PhoneBook.PromptUser();
-		PhoneBook.DoAction(control);
+		argument = argv[1];
+		if (!argument.compare("autoadd"))
+		{
+			std::cout << "Auto Add Called. Adding 8 serialized contacts to list" << std::endl;
+			PhoneBook.AutoAddSmall(max);
+		}
 	}
 
-	for (int i = 0; i < max; i++)
+	while (control != ACTION_EXIT)
 	{
-		PhoneBook.PrintContactData(i);
+		control = PhoneBook.PromptUser();
+		if (control == ACTION_EOF)
+		{
+			std::cout << "EOF detected. Now leaving" << std::endl;
+			return 0;
+		}
+		PhoneBook.DoAction(control);
+
 	}
 	return (0);
 }

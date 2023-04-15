@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.class.hpp                                  :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:46 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 18:21:58 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:50:46 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef CONTATCTS_CLASS_H
-#define CONTATCTS_CLASS_H
+#ifndef CONTATCTS_H
+#define CONTATCTS_H
 
 #include <string>
 #include <iostream>
+#include "FtStd.hpp"
 
 class Contact {
 	public:
@@ -32,7 +33,7 @@ class Contact {
 		std::string	GetDarkestSecret(void) const;
 
 		//Setters
-		bool		SetContactData(void);
+		int			SetContactData(void);
 		bool		SetFirstName(std::string str);
 		bool		SetLastName(std::string str);
 		bool		SetNickname(std::string str);
@@ -52,4 +53,4 @@ class Contact {
 		bool		_ParseUserInput(std::string str);
 };
 
-#endif //CONTATCTS_CLASS_H
+#endif //CONTATCTS_H

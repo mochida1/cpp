@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.class.cpp                                  :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:44 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 20:38:48 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:35:20 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.class.hpp"
+#include "Contact.hpp"
 
 Contact::Contact(void) {
 	std::cout << "Constructing contact " << std::endl;
@@ -68,42 +68,58 @@ bool		Contact::_ParseUserInput(std::string str)
 {
 	if (str.empty())
 	{
-		std::cout << "Error: please insert a value" << std::endl;
+		std::cerr << "Error: please insert a value" << std::endl;
 		return (false);
 	}
+	if (ft_std::isOnlySpace(str))
+	{
+		std::cerr << "Error: input can't be comprised of only spaces" << std::endl;
+		return (false);
+	}
+
 	return (true);
 }
 
-bool		Contact::SetContactData(void) {
+int		Contact::SetContactData(void) {
 	std::string	lFirstName;
 	std::string	lLastName;
 	std::string	lNickname;
 	std::string	lPhoneNumber;
 	std::string	lDarkestSecret;
 
+std::cout << "INDEX: ["<< this->_Index << "]" << std::endl;
 	std::cout << "Please insert first name: ";
 	std::getline(std::cin, lFirstName);
+	if (std::cin.eof())
+		return -1;
 	if (!this->_ParseUserInput(lFirstName))
 		return (false);
 
 	std::cout << "Please insert last name: ";
 	std::getline(std::cin, lLastName);
+	if (std::cin.eof())
+		return -1;
 	if (!this->_ParseUserInput(lLastName))
 		return (false);
 
 	std::cout << "Please insert nickname: ";
 	std::getline(std::cin, lNickname);
-	if (lNickname.empty())
+	if (std::cin.eof())
+		return -1;
 	if (!this->_ParseUserInput(lNickname))
 		return (false);
 
 	std::cout << "Please insert phone number: ";
 	std::getline(std::cin, lPhoneNumber);
+	if (std::cin.eof())
+		return -1;
 	if (!this->_ParseUserInput(lPhoneNumber))
 		return (false);
 
 	std::cout << "Please insert darkest secret: ";
 	std::getline(std::cin, lDarkestSecret);
+	if (std::cin.eof())
+		return -1;
 	if (!this->_ParseUserInput(lDarkestSecret))
 		return (false);
 

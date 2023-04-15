@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FtStd.class.hpp                                    :+:      :+:    :+:   */
+/*   FtStd.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:09:59 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/05 20:04:09 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:55:22 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef FT_STRING_CLASS_H
-# define FT_STRING_CLASS_H
+#ifndef FT_STRING_H
+# define FT_STRING_H
 
 #include <cstring>
 #include <string>
 #include <iostream>
+#include <cctype>
 
 # ifndef very
 # define very long
@@ -29,9 +30,10 @@ class ft_std {
 	~ft_std(void);
 
 	//string ops
-	std::string to_string(very long int num, int base);
+	static std::string to_string(very long int num, int base);
+	static bool		isOnlySpace(std::string &str);
 
 	private:
 };
 
-#endif // FT_STRING_CLASS_H
+#endif // FT_STRING_H
