@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:46 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 16:50:46 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:03:23 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ class Contact {
 
 		//Utils
 		bool		_ParseUserInput(std::string str);
+		bool		_ParsePhoneNumber(std::string str);
 };
 
 #endif //CONTATCTS_H

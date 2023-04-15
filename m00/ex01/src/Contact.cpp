@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:44 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 17:35:20 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:23:12 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,29 @@ bool		Contact::_ParseUserInput(std::string str)
 	return (true);
 }
 
+bool		Contact::_ParsePhoneNumber(std::string str)
+{
+	std::cout << "AQUI!!!!" << std::endl;
+	size_t i = str.find_first_not_of(' ', 0);
+	if (i == (size_t) (-1))
+		i = 0;
+	else
+	{
+		if (str[i] == '+')
+			i++;
+	}
+
+	for (; i < str.length(); i++)
+	{
+		if (std::isalpha(str[i]))
+		{
+			std::cerr << "Please input a valid phone number" << std::endl;
+			return false;
+		}
+	}
+	return true;
+}
+
 int		Contact::SetContactData(void) {
 	std::string	lFirstName;
 	std::string	lLastName;
@@ -113,8 +136,10 @@ std::cout << "INDEX: ["<< this->_Index << "]" << std::endl;
 	std::getline(std::cin, lPhoneNumber);
 	if (std::cin.eof())
 		return -1;
-	if (!this->_ParseUserInput(lPhoneNumber))
+	if (this->_ParseUserInput(lPhoneNumber) == false)
 		return (false);
+	if (this->_ParsePhoneNumber(lPhoneNumber) == false)
+		return(false);
 
 	std::cout << "Please insert darkest secret: ";
 	std::getline(std::cin, lDarkestSecret);
