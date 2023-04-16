@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:09:54 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 16:57:53 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 22:07:58 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,12 @@ bool ft_std::isOnlySpace(std::string &str)
 			return false;
 	}
 	return true;
+}
+
+int ft_std::stoi(std::string str)
+{
+	std::istringstream iss(str);
+	int num;
+	iss >> num;
+	return num;
 }

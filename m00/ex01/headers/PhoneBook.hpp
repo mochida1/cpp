@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 13:42:54 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/14 21:50:08 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 22:11:21 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ class PhoneBook {
 	private:
 		int		_ContactsFilled;
 		Contact	_ContactArray[8];
+		int		_PromptForIndex(void);
+		void	_PrintContact(int index) const;
 };
 
 #endif // PHONEBOOK_H

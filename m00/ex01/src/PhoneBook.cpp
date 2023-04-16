@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 20:05:36 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 18:57:41 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 22:25:44 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ dot (’.’).
 */
 bool	PhoneBook::Search(void) {
 	int	lmax;
+	int index;
 	// std::cout << "contacts filled: " <<this->_ContactsFilled<<std::endl;
 	if (this->_ContactsFilled == 0)
 	{
@@ -87,7 +88,37 @@ std::cout << "CONTACTS FILLED:" << this->_ContactsFilled << std::endl;
 		print_format(this->_ContactArray[i].GetLastName(), 0);
 		print_format(this->_ContactArray[i].GetNickname(), 1);
 	}
+	index = 0;
+	while (index < 1 || index > this->_ContactsFilled)
+	{
+		index = this->_PromptForIndex();
+		if (index == (-1 * (__INT32_MAX__) - 1))
+			return (false);
+		if (index < 1 || index > this->_ContactsFilled)
+			std::cout << "Please insert an index between 1 and " << this->_ContactsFilled<< std::endl;
+	}
+	this->_PrintContact(index);
 	return (true);
+}
+
+int		PhoneBook::_PromptForIndex(void)
+{
+	std::string str;
+	int ret;
+	std::getline(std::cin, str);
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+		return (-1 * (__INT32_MAX__) - 1);
+	}
+	ret = ft_std::stoi(str);
+	return ret;
+}
+
+void	PhoneBook::_PrintContact(int index) const
+{
+	(void) (index);
+	std::cout << "Print contact here" << std::endl;
 }
 
 int		PhoneBook::PromptUser(void) {

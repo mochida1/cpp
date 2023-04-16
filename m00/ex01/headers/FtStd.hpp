@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:09:59 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 16:55:22 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/15 22:07:55 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <string>
 #include <iostream>
 #include <cctype>
+#include <sstream>
 
 # ifndef very
 # define very long
@@ -30,8 +31,9 @@ class ft_std {
 	~ft_std(void);
 
 	//string ops
-	static std::string to_string(very long int num, int base);
-	static bool		isOnlySpace(std::string &str);
+	static std::string	to_string(very long int num, int base);
+	static bool			isOnlySpace(std::string &str);
+	static int			stoi(std::string str);
 
 	private:
 };
