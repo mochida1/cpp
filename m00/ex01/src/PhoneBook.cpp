@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 20:05:36 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/15 22:25:44 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/16 18:38:44 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ std::cout << "CONTACTS FILLED:" << this->_ContactsFilled << std::endl;
 		if (index < 1 || index > this->_ContactsFilled)
 			std::cout << "Please insert an index between 1 and " << this->_ContactsFilled<< std::endl;
 	}
-	this->_PrintContact(index);
+	this->_PrintContact(index - 1);
 	return (true);
 }
 
@@ -105,6 +105,7 @@ int		PhoneBook::_PromptForIndex(void)
 {
 	std::string str;
 	int ret;
+	std::cout << "Please insert index to be searched" << std::endl;
 	std::getline(std::cin, str);
 	if (std::cin.eof())
 	{
@@ -117,8 +118,18 @@ int		PhoneBook::_PromptForIndex(void)
 
 void	PhoneBook::_PrintContact(int index) const
 {
-	(void) (index);
-	std::cout << "Print contact here" << std::endl;
+	std::cout << "Index:\t";
+	std::cout << this->_ContactArray[index].GetIndex() + 1 << std::endl;
+	std::cout << "First Name:\t";
+	std::cout << this->_ContactArray[index].GetFirstName() << std::endl;
+	std::cout << "Last Name:\t";
+	std::cout << this->_ContactArray[index].GetLastName() << std::endl;
+	std::cout << "Nick Name:\t";
+	std::cout << this->_ContactArray[index].GetNickname() << std::endl;
+	std::cout << "Phone Number:\t";
+	std::cout << this->_ContactArray[index].GetPhoneNumber() << std::endl;
+	std::cout << "Darkest Secret:\t";
+	std::cout << this->_ContactArray[index].GetDarkestSecret() << std::endl;
 }
 
 int		PhoneBook::PromptUser(void) {
