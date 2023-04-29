@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 21:23:52 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/12 18:43:09 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/28 19:18:52 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ class Parser {
 	private:
 		int			_argc;
 		char		**_argv;
-		int			_is_verbose;
 		std::string	_file_extension;
 };
 

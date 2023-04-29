@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:10:26 by hmochida          #+#    #+#             */
-/*   Updated: 2023/03/12 19:12:28 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/28 21:06:30 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,15 @@ bool	Unsed::openInFile(void) {
 	std::stringstream stream;
 
 	std::cout << "opening file [" << this->_inFileName << "]" << std::endl;
-	this->_inFile.open(this->_inFileName.c_str(), std::fstream::in );
-	if (this->_inFile.is_open() == false)
-		return (false);
+	this->_inFile.open( this->_inFileName.c_str(), std::fstream::in );
+	if ( this->_inFile.is_open() == false)
+	{
+		std::cerr << "Error: Could not open file" << std::endl;
+		return false;
+	}
 	this->_inFileIsOpen = true;
+
+	std::cout << "Now reading file..." << std::endl;
 	while (std::getline(this->_inFile, line))
 	{
 		stream << line << std::endl;
@@ -105,22 +110,16 @@ void	Unsed::printFileContent(void) {
 }
 
 bool	Unsed::doTrFileContent(void) {
-	int idx;
-	std::string strabaene("\\n");
+	size_t idx;
 
-	idx = this->_s1.compare("\\n");
-	if (idx == 0)
-		this->_s1 = "\n";
-	if (idx != 0)
-	{
-		idx = this->_s1.find(strabaene);
-		this->_s1.erase(idx, strabaene.size());
-		this->_s1.insert(idx, "\n");
-	}
+	std::cout << "Doint the TR dance!" << std::endl;
 	idx = this->_fileContent.find(this->_s1);
-	if (idx == -1)
+	if (idx == std::string::npos)
+	{
+		std::cout << "WARNING: no instances of [" << this->_s1 << "] found on the file." << std::endl;
 		return (false);
-	while (idx != -1)
+	}
+	while (idx != std::string::npos)
 	{
 		this->_fileContent.erase(idx, this->_s1.size());
 		this->_fileContent.insert(idx, this->_s2);
@@ -132,6 +131,7 @@ bool	Unsed::doTrFileContent(void) {
 bool	Unsed::writeToOutFile(void) {
 	std::fstream out_file;
 
+	std::cout << "Writing output to outfile!" << std::endl;
 	this->_outFile.open(this->_outFileName.c_str(), std::fstream::out | std::fstream::trunc);
 	if (this->_outFile.fail())
 	{
