@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:45:21 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/07 13:06:48 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/30 19:20:44 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 Fixed::Fixed(void)
 {
 	std::cout << "Default constructor called" << std::endl;
+	this->_fixedPointNumber = 0;
 	return ;
 }
 

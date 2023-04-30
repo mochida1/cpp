@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:26:13 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/02 21:28:35 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/30 17:38:52 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ public:
 	Fixed(const Fixed &fixed);
 	Fixed & operator=(Fixed const &fixed);
 	~Fixed(void);
-	int getRawBits(void) const;
-	void setRawBits(int const raw);
+	int		getRawBits(void) const;
+	void	setRawBits(int const raw);
 	float	toFloat(void) const;
 	int		toInt(void) const;
 	void	printFixedMin(void);

@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:45:21 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/02 21:32:46 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/30 19:19:46 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 Fixed::Fixed(void)
 {
+	this->_fixedPointNumber = 0;
 	return ;
 }
 

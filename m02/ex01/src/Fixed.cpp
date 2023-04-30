@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:45:21 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/01 18:48:22 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/04/30 19:21:31 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ Fixed::Fixed(const float fixedPointNumber)
 Fixed::~Fixed(void)
 {
 	std::cout << "Destructor called" << std::endl;
+	this->_fixedPointNumber = 0;
 	return;
 }
 
