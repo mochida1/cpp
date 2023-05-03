@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:04:10 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/09 16:19:33 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:46:46 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class WrongAnimal
 		WrongAnimal(std::string type);
 
 		std::string getType(void) const;
-		virtual void makeSound(void) const;
+		void makeSound(void) const;
 
 	protected:
 		std::string type;
