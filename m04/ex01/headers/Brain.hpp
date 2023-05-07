@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:00:27 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/13 19:16:49 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/06 21:38:08 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ class Brain{
 	void printIdeas(void) const;
 	void printIdeas(int idx) const;
 	void setIdeas(const std::string * ideas);
+	void printBrainAdress(void) const;
+	void printIdeasAdresses(void) const;
 
 	protected:
 	private:

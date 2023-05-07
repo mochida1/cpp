@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:12:18 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/13 19:31:02 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/06 21:54:33 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,62 @@ void dog_brain_transplant(void)
 	std::cout << "\tDONE!" <<std::endl;
 }
 
+void	dog_brain_deep_copy(void)
+{
+	std::cout << "\n\n\tDog brain deep copy test---------\n" << std::endl;
+	Dog	chihuaha;
+	std::cout << "\n\t\tnow printing original addresses---------" << std::endl;
+	chihuaha.getBrain()->printBrainAdress();
+	chihuaha.getBrain()->printIdeasAdresses();
+
+	Dog pincher(chihuaha);
+	std::cout << "\n\t\tnow printing copy constructor addresses---------" << std::endl;
+	std::cout << "\t\t\t These should be different as from above---------" << std::endl;
+	pincher.getBrain()->printBrainAdress();
+	pincher.getBrain()->printIdeasAdresses();
+
+	Dog pomeranian_lulu;
+	std::cout << "\n\t\tnow printing original Lulu's addresses---------" << std::endl;
+	pomeranian_lulu.getBrain()->printBrainAdress();
+	pomeranian_lulu.getBrain()->printIdeasAdresses();
+	std::cout << "\n\t\tcopying ideias from chihuaha to pomeranian_lulu" << std::endl;
+	pomeranian_lulu = chihuaha;
+	std::cout << "\n\t\tnow printing original Lulu's addresses after copying---------" << std::endl;
+	std::cout << "\t\t\t These should be the same as from above---------" << std::endl;
+	pomeranian_lulu.getBrain()->printBrainAdress();
+	pomeranian_lulu.getBrain()->printIdeasAdresses();
+
+	return ;
+}
+
+void	cat_brain_deep_copy(void)
+{
+	std::cout << "\n\n\tCat brain deep copy test---------\n" << std::endl;
+	Cat	garfield;
+	std::cout << "\n\t\tnow printing original addresses---------" << std::endl;
+	garfield.getBrain()->printBrainAdress();
+	garfield.getBrain()->printIdeasAdresses();
+
+	Cat eek(garfield);
+	std::cout << "\n\t\tnow printing copy constructor addresses---------" << std::endl;
+	std::cout << "\t\t\t These should be different as from above---------" << std::endl;
+	eek.getBrain()->printBrainAdress();
+	eek.getBrain()->printIdeasAdresses();
+
+	Cat felix;
+	std::cout << "\n\t\tnow printing original Felix's addresses---------" << std::endl;
+	felix.getBrain()->printBrainAdress();
+	felix.getBrain()->printIdeasAdresses();
+	std::cout << "\n\t\tcopying ideias from garfield to felix" << std::endl;
+	felix = garfield;
+	std::cout << "\n\t\tnow printing original Felix's addresses after copying---------" << std::endl;
+	std::cout << "\t\t\t These should be the same as from above---------" << std::endl;
+	felix.getBrain()->printBrainAdress();
+	felix.getBrain()->printIdeasAdresses();
+
+	return ;
+}
+
 void test_brain(void)
 {
 	brain_constructors();
@@ -173,6 +229,8 @@ void test_brain(void)
 	dog_brain();
 	cat_brain_transplant();
 	dog_brain_transplant();
+	dog_brain_deep_copy();
+	cat_brain_deep_copy();
 }
 
 void test_subj_ex01()

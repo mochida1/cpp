@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 15:01:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/04/13 19:25:12 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/06 21:38:49 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,19 @@ void Brain::printIdeas(void) const
 void Brain::printIdeas(int idx) const
 {
 	std::cout << this->_ideas[idx] << std::endl;
+	return ;
+}
+
+void Brain::printBrainAdress(void) const
+{
+	void *ptr = (void *)(this);
+	std::cout << "Brain Address: " << ptr << std::endl;
+	return ;
+}
+
+void Brain::printIdeasAdresses(void) const
+{
+	for (int i = 0; i < 99; i++)
+		std::cout << &this->_ideas[i] << std::endl;
 	return ;
 }
