@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:03 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/01 20:02:29 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/07 19:27:25 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
-#include <iostream>
+# include <iostream>
 
 class Bureaucrat {
 	public:
@@ -42,8 +42,9 @@ class Bureaucrat {
 
 	protected:
 	private:
+		bool				_testGrade(int grade) const;
 		const std::string	_name;
-		unsigned char		_grade;
+		int		_grade;
 
 };
 std::ostream &operator<<(std::ostream &outStream, Bureaucrat const &instance);
