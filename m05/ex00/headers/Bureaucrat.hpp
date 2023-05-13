@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:03 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/07 19:27:25 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:02:29 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,17 @@ class Bureaucrat {
 		Bureaucrat (std::string name, int grade);
 		const std::string getName(void) const;
 		int getGrade(void) const;
+		void setGrade(int grade);
 		class GradeTooHighException
 		{
 			public:
 				GradeTooHighException(void);
 				~GradeTooHighException(void);
+				/*
+					since we're not overriding and reimplmenting
+					the what() method of the exception class,
+					it'll cause the program to exit with a SIGABORT!
+				*/
 				virtual const char* what() const throw();
 		};
 		class GradeTooLowException

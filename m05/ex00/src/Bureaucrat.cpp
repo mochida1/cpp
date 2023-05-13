@@ -6,13 +6,14 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:00 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/07 20:15:05 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:12:24 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+
 #ifndef VERBOSE
-#define VERBOSE
+# define VERBOSE 1
 #endif //VERBOSE
 
 Bureaucrat::Bureaucrat(void) : _name("default"), _grade(150) {
@@ -22,9 +23,8 @@ Bureaucrat::Bureaucrat(void) : _name("default"), _grade(150) {
 	catch (const std::exception& e)	{
 		std::cerr << e.what() << std::endl;
 	}
-	#ifdef VERBOSE
-	std::cout << "[Default][150] bureaucrat created" << std::endl;
-	#endif
+	if (VERBOSE)
+		std::cout << "[Default][150] bureaucrat created" << std::endl;
 	return ;
 }
 
@@ -36,16 +36,14 @@ Bureaucrat::Bureaucrat(const Bureaucrat & instance) : _name( instance.getName() 
 	catch (const std::exception& e)	{
 		std::cerr << e.what() << std::endl;
 	}
-	#ifdef VERBOSE
-	std::cout << "Copied Bureaucrat:\t"  << instance << std::endl;
-	#endif
+	if (VERBOSE)
+		std::cout << "Copied Bureaucrat:\t"  << instance << std::endl;
 	return ;
 }
 
 Bureaucrat & Bureaucrat::operator=(const Bureaucrat & instance) {
-	#ifdef VERBOSE
-	std::cout << "Copying grade of [" << instance.getName() << ":" << instance.getGrade() << "] to [" << *this << "]" <<std::endl;
-	#endif
+	if (VERBOSE)
+		std::cout << "Copying grade of [" << instance.getName() << ":" << instance.getGrade() << "] to [" << this->getName() << "]" <<std::endl;
 	this->_grade = instance.getGrade();
 
 	try {
@@ -60,9 +58,8 @@ Bureaucrat & Bureaucrat::operator=(const Bureaucrat & instance) {
 }
 
 Bureaucrat::~Bureaucrat(void) {
-	#ifdef VERBOSE
-	std::cout << "Bureaucrat default destructor called" << std::endl;
-	#endif
+	if (VERBOSE)
+		std::cout << "Bureaucrat default destructor called" << std::endl;
 	return ;
 }
 
@@ -76,9 +73,8 @@ Bureaucrat::Bureaucrat (std::string name, int grade)
 		std::cerr << e.what() << std::endl;
 		std::cout << this->getName() << " tried cheating the bureacracy. Resetting grade to 150" << std::endl;
 	}
-	#ifdef VERBOSE
-	std::cout << "Bureaucrat copy constructor called: [" << this->getName() << "][" << this->getGrade() << "]" << std::endl;
-	#endif
+	if (VERBOSE)
+		std::cout << "Bureaucrat copy constructor called: [" << this->getName() << "][" << this->getGrade() << "]" << std::endl;
 	return ;
 }
 
@@ -130,6 +126,20 @@ bool	Bureaucrat::_testGrade(int grade) const{
 		return false;
 	}
 	return true;
+}
+
+void	Bureaucrat::setGrade(int grade){
+	try {
+		this->_testGrade(grade);
+	}
+	catch (const std::exception& e)	{
+		this->_grade = 150;
+		std::cerr << e.what() << std::endl;
+		std::cout << this->getName() << " tried cheating the bureacracy. Resetting grade to 150" << std::endl;
+		return ;
+	}
+	this->_grade = grade;
+	return ;
 }
 
 // non-member functions

@@ -6,16 +6,16 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/07 20:15:51 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:06:57 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include <cassert>
-# define VERBOSE 1
 
 int test_constructors(void)
 {
+	std::cout << "\n---------------CONSTRUCTORS----------------" << std::endl;
 	std::cout << "\nMain : creating [def] at stack\t\t(default constructor)" << std::endl;
 	Bureaucrat def;
 	assert (def.getName().compare("default") == 0);
@@ -56,6 +56,7 @@ int test_constructors(void)
 
 int test_getters(void)
 {
+	std::cout << "\n---------------GETTERS----------------" << std::endl;
 	Bureaucrat def;
 	std::cout << "\n" << def << "def.getGrade: "<< def.getGrade() << " should be 150" << std::endl;
 	assert (def.getGrade() == 150);
@@ -71,8 +72,47 @@ int test_getters(void)
 	return 0;
 }
 
+int test_setters(void)
+{
+	std::cout << "\n---------------SETTERS----------------" << std::endl;
+	Bureaucrat john("John", 37);
+
+	std::cout << "\nTesting setters for " << john << std::endl;
+
+	std::cout << "Asserting initialization" << std::endl;
+	assert (john.getName().compare("John") == 0);
+	assert (john.getGrade() == 37);
+
+	std::cout << "Changing John's grade for 1" << std::endl;
+	john.setGrade(1);
+	std::cout << john << std::endl;
+	assert(john.getGrade() == 1);
+
+	std::cout << "Changing John's grade for 150" << std::endl;
+	john.setGrade(150);
+	std::cout << john << std::endl;
+	assert(john.getGrade() == 150);
+
+	std::cout << "Iterating John's grade from 1 to 150" << std::endl;
+	for (int i=1; i < 150 ; i++)
+	{
+		john.setGrade(i);
+		assert(john.getGrade() == i);
+	}
+	std::cout << "Finished iterating john's grade successfully" << std::endl;
+
+	return 0;
+}
+
+/*
+	ATTENTION THIS WILL INEVITABLY CRASH THE PROGRAM!
+*/
 int test_exceptions(void)
 {
+	std::cout << "---------------EXCEPTIONS----------------" << std::endl;
+	Bureaucrat maxerror("maxERROR", 151);
+	Bureaucrat minerror("minERROR", -1);
+
 	return 0;
 }
 
@@ -82,7 +122,7 @@ int main (int argc, char *argv[])
 
 	if (argc > 2)
 	{
-		std::cerr << "Error, please use one of the following arguments: constructors | getters | exceptions" << std::endl;
+		std::cerr << "Error, please use one of the following arguments: constructors | getters | setters | ALL | exceptions" << std::endl;
 		return 1;
 	}
 	if (argc == 1)
@@ -101,9 +141,22 @@ int main (int argc, char *argv[])
 		test_getters();
 		return 0;
 	}
+	else if (argument.compare("setters") == 0)
+	{
+		test_setters();
+		return 0;
+	}
 	else if (argument.compare("exceptions") == 0)
 	{
 		test_exceptions();
+		return 0;
+	}
+	else if (argument.compare("ALL") == 0)
+	{
+		std::cout << "!!!!!!!!!!!!!!TESTING ALL THE THINGS!!!!!!!!!!!!!!11" << std::endl;
+		test_constructors();
+		test_getters();
+		test_setters();
 		return 0;
 	}
 	std::cerr << "Error, please use one of the following arguments: constructors | exceptions | all" << std::endl;
