@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/12 21:06:57 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:16:41 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int main (int argc, char *argv[])
 	else if (argument.compare("ALL") == 0)
 	{
 		std::cout << "!!!!!!!!!!!!!!TESTING ALL THE THINGS!!!!!!!!!!!!!!11" << std::endl;
+		std::cout << ".. except exceptions..." << std::endl;
 		test_constructors();
 		test_getters();
 		test_setters();
