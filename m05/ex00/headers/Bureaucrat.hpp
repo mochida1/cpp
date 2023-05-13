@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:03 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/12 21:51:06 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 22:06:57 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ class Bureaucrat {
 		void				setGrade(int grade);
 		void				increaseGrade(int grade);
 		void				decreaseGrade(int grade);
+		void				increaseGrade(void);
+		void				decreaseGrade(void);
 
 		class GradeTooHighException
 		{

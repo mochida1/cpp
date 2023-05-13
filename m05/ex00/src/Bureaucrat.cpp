@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:00 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/12 22:03:11 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 22:07:47 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,31 @@ void Bureaucrat::decreaseGrade(int amount){
 		std::cout << "Dereasing [" << this->_name <<"] by " << amount << std::endl;
 
 	this->_grade += amount;
+	this->_validateGrade(this->_grade);
+
+	if (VERBOSE)
+		std::cout << this->_name << " grade now is " << this->_grade << std::endl;
+
+	return ;
+}
+
+void	Bureaucrat::increaseGrade(void){
+	if (VERBOSE)
+		std::cout << "Increasing [" << this->_name <<"] by 1" << std::endl;
+
+	this->_grade--;
+	this->_validateGrade(this->_grade);
+
+	if (VERBOSE)
+		std::cout << this->_name << " grade now is " << this->_grade << std::endl;
+	return;
+}
+
+void Bureaucrat::decreaseGrade(void){
+	if (VERBOSE)
+		std::cout << "Dereasing [" << this->_name <<"] by 1" << std::endl;
+
+	this->_grade++;
 	this->_validateGrade(this->_grade);
 
 	if (VERBOSE)

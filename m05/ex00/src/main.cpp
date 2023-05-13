@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/12 22:05:07 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 22:08:52 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,13 @@ int test_grades(void)
 
 	brad.decreaseGrade(25);
 	assert (brad.getGrade() == 100);
+
+	brad.increaseGrade();
+	assert (brad.getGrade() == 99);
+
+	brad.decreaseGrade();
+	assert (brad.getGrade() == 100);
+
 
 	return 0;
 }
