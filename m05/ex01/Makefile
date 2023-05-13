@@ -6,7 +6,7 @@
 #    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/05/12 21:07:35 by hmochida         ###   ########.fr        #
+#    Updated: 2023/05/13 18:58:00 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp Bureaucrat.cpp
+MAIN = main.cpp Bureaucrat.cpp Form.cpp
 
 # Names sources
 SOURCES = $(MAIN)
