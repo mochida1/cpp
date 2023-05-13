@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:03 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/12 21:51:06 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:02:29 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@ class Bureaucrat {
 		Bureaucrat & operator=(const Bureaucrat & instance);
 		~Bureaucrat(void);
 		Bureaucrat (std::string name, int grade);
-		const std::string	getName(void) const;
-		int					getGrade(void) const;
-		void				setGrade(int grade);
-		void				increaseGrade(int grade);
-		void				decreaseGrade(int grade);
-
+		const std::string getName(void) const;
+		int getGrade(void) const;
+		void setGrade(int grade);
 		class GradeTooHighException
 		{
 			public:
@@ -52,9 +49,8 @@ class Bureaucrat {
 	protected:
 	private:
 		bool				_testGrade(int grade) const;
-		void				_validateGrade(int grade);
 		const std::string	_name;
-		int					_grade;
+		int		_grade;
 
 };
 std::ostream &operator<<(std::ostream &outStream, Bureaucrat const &instance);

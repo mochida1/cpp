@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/12 22:05:07 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:16:41 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,44 +104,14 @@ int test_setters(void)
 	return 0;
 }
 
-int test_grades(void)
-{
-	std::cout << "\n---------------GRADE MODIFIERS----------------" << std::endl;
-	Bureaucrat brad("Brad" , 150);
-	std::cout << brad << std::endl;
-	brad.increaseGrade(149);
-	assert (brad.getGrade() == 1);
-
-	brad.decreaseGrade(149);
-	assert (brad.getGrade() == 150);
-
-	brad.increaseGrade(50);
-	assert (brad.getGrade() == 100);
-
-	brad.increaseGrade(50);
-	assert (brad.getGrade() == 50);
-
-	brad.decreaseGrade(25);
-	assert (brad.getGrade() == 75);
-
-	brad.decreaseGrade(25);
-	assert (brad.getGrade() == 100);
-
-	return 0;
-}
-
 /*
 	ATTENTION THIS WILL INEVITABLY CRASH THE PROGRAM!
 */
 int test_exceptions(void)
 {
 	std::cout << "---------------EXCEPTIONS----------------" << std::endl;
-
-	std::cout << "should throw GRADE TOO LOW" << std::endl;
-	Bureaucrat mixerror("minERROR", 151);
-
-	std::cout << "should throw GRADE TOO HIGH" << std::endl;
-	Bureaucrat maxerror("maxERROR", 0);
+	Bureaucrat maxerror("maxERROR", 151);
+	Bureaucrat minerror("minERROR", -1);
 
 	return 0;
 }
@@ -149,10 +119,10 @@ int test_exceptions(void)
 int main (int argc, char *argv[])
 {
 	std::string argument;
-	std::string lError("Error, please use one of the following arguments: constructors | getters | setters | grades | ALL | exceptions");
+
 	if (argc > 2)
 	{
-		std::cerr << lError << std::endl;
+		std::cerr << "Error, please use one of the following arguments: constructors | getters | setters | ALL | exceptions" << std::endl;
 		return 1;
 	}
 	if (argc == 1)
@@ -176,11 +146,6 @@ int main (int argc, char *argv[])
 		test_setters();
 		return 0;
 	}
-	else if (argument.compare("grades") == 0)
-	{
-		test_grades();
-		return 0;
-	}
 	else if (argument.compare("exceptions") == 0)
 	{
 		test_exceptions();
@@ -193,9 +158,8 @@ int main (int argc, char *argv[])
 		test_constructors();
 		test_getters();
 		test_setters();
-		test_grades();
 		return 0;
 	}
-	std::cerr << lError << std::endl;
+	std::cerr << "Error, please use one of the following arguments: constructors | exceptions | all" << std::endl;
 	return 0;
 }

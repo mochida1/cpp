@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:00 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/12 22:03:11 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:12:24 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,12 @@ const char* Bureaucrat::GradeTooLowException::what() const throw(){
 }
 
 bool	Bureaucrat::_testGrade(int grade) const{
-	if (grade < 1)
+	if (grade > 150)
 	{
 		throw Bureaucrat::GradeTooHighException();
 		return false;
 	}
-	else if (grade > 150)
+	else if (grade < 1)
 	{
 		throw Bureaucrat::GradeTooLowException();
 		return false;
@@ -139,43 +139,6 @@ void	Bureaucrat::setGrade(int grade){
 		return ;
 	}
 	this->_grade = grade;
-	return ;
-}
-
-void	Bureaucrat::_validateGrade(int grade){
-	try {
-		this->_testGrade(grade);
-	}
-	catch (const std::exception& e)	{
-		this->_grade = 150;
-		std::cerr << e.what() << std::endl;
-		std::cout << this->getName() << " tried cheating the bureacracy. Resetting grade to 150" << std::endl;
-		return ;
-	}
-}
-
-void	Bureaucrat::increaseGrade(int amount){
-	if (VERBOSE)
-		std::cout << "Increasing [" << this->_name <<"] by " << amount << std::endl;
-
-	this->_grade -= amount;
-	this->_validateGrade(this->_grade);
-
-	if (VERBOSE)
-		std::cout << this->_name << " grade now is " << this->_grade << std::endl;
-	return;
-}
-
-void Bureaucrat::decreaseGrade(int amount){
-	if (VERBOSE)
-		std::cout << "Dereasing [" << this->_name <<"] by " << amount << std::endl;
-
-	this->_grade += amount;
-	this->_validateGrade(this->_grade);
-
-	if (VERBOSE)
-		std::cout << this->_name << " grade now is " << this->_grade << std::endl;
-
 	return ;
 }
 
