@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 21:57:11 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/13 22:00:49 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,7 +319,11 @@ void test_exceptions_forms(void){
 int test_exceptions(void)
 {
 	std::cout << "################## EXCEPTIONS ##################" << std::endl;
-
+	if (TEST_EXCEPTION_ERROR == 0)
+	{
+		std::cout << "skipping exceptions...." << std::endl;
+		return 0;
+	}
 	test_exceptions_bureaucrats();
 	test_exceptions_forms();
 
@@ -387,9 +391,11 @@ int main (int argc, char *argv[])
 		test_getters();
 		test_setters();
 		test_grades();
+		test_exceptions();
 
-		std::cout << "\n\nALL TESTS COMPLETED SUCCESSFULLY!" << std::endl;
+		std::cout << "\n" << std::endl;
 		print_timestamp();
+		std::cout << "ALL TESTS COMPLETED SUCCESSFULLY!" << std::endl;
 		return 0;
 	}
 	std::cerr << lError << std::endl;
