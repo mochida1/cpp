@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 22:00:49 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:15:51 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,6 +333,80 @@ int test_exceptions(void)
 	****************************************************************************
 */
 
+void test_be_signed(void)
+{
+	std::cout << "################## BE SIGNED ##################" << std::endl;
+
+	Bureaucrat	def;
+	Bureaucrat	limit("Limit", 42);
+	Bureaucrat	chad("Chad", 1);
+	Form		test("testForm", false, 42, 20);
+
+	assert (test.getIsSigned() == false);
+	std::cout << "[01]" << test << " being signed by " << def << "should fail!" << std::endl;
+	assert (test.beSigned(def) == false);
+	test.setIsSigned(true);
+	assert(test.getIsSigned() == true);
+	std::cout << "[02]" << test << " being signed by " << def << "should fail!" << std::endl;
+	assert (test.beSigned(def) == false);
+
+	test.setIsSigned(false);
+	assert (test.getIsSigned() == false);
+	std::cout << "[03]" << test << " being signed by " << limit << "should succeed!" << std::endl;
+	assert (test.beSigned(limit) == true);
+	assert(test.getIsSigned() == true);
+	std::cout << "[05]" << test << " being signed by " << limit << "should not succeed!" << std::endl;
+	assert (test.beSigned(limit) == false);
+
+	test.setIsSigned(false);
+	assert (test.getIsSigned() == false);
+	std::cout << "[06]" << test << " being signed by " << chad << "should succeed!" << std::endl;
+	assert (test.beSigned(chad) == true);
+	assert(test.getIsSigned() == true);
+	std::cout << "[07]" << test << " being signed by " << chad << "should not succeed!" << std::endl;
+	assert (test.beSigned(chad) == false);
+
+	std::cout << "\tAll 'be_signed' tests sucessful!-------" << std::endl;
+	return ;
+}
+
+void test_sign(void)
+{
+	std::cout << "################## SIGN ##################" << std::endl;
+
+	Bureaucrat	def;
+	Bureaucrat	limit("Limit", 42);
+	Bureaucrat	chad("Chad", 1);
+	Form		test("testForm", false, 42, 20);
+
+	assert (test.getIsSigned() == false);
+	std::cout << "[01]" << test << " being signed by " << def << "should fail!" << std::endl;
+	assert (def.signForm(test) == false);
+	test.setIsSigned(true);
+	assert(test.getIsSigned() == true);
+	std::cout << "[02]" << test << " being signed by " << def << "should fail!" << std::endl;
+	assert (def.signForm(test) == false);
+
+	test.setIsSigned(false);
+	assert (test.getIsSigned() == false);
+	std::cout << "[03]" << test << " being signed by " << limit << "should succeed!" << std::endl;
+	assert (limit.signForm(test) == true);
+	assert(test.getIsSigned() == true);
+	std::cout << "[05]" << test << " being signed by " << limit << "should not succeed!" << std::endl;
+	assert (limit.signForm(test) == false);
+
+	test.setIsSigned(false);
+	assert (test.getIsSigned() == false);
+	std::cout << "[06]" << test << " being signed by " << chad << "should succeed!" << std::endl;
+	assert (chad.signForm(test) == true);
+	assert(test.getIsSigned() == true);
+	std::cout << "[07]" << test << " being signed by " << chad << "should not succeed!" << std::endl;
+	assert (chad.signForm(test) == false);
+
+	std::cout << "\tAll 'sign' tests sucessful!-------" << std::endl;
+	return ;
+}
+
 void print_timestamp()
 {
 	std::time_t currentTime = std::time(NULL);
@@ -343,7 +417,7 @@ void print_timestamp()
 int main (int argc, char *argv[])
 {
 	std::string argument;
-	std::string lError("Error, please use one of the following arguments: constructors | getters | setters | grades | ALL | exceptions");
+	std::string lError("Error, please use one of the following arguments: constructors | getters | setters | grades | be_signed | sign | ALL | exceptions");
 	if (argc > 2)
 	{
 		std::cerr << lError << std::endl;
@@ -380,6 +454,16 @@ int main (int argc, char *argv[])
 		test_exceptions();
 		return 0;
 	}
+	else if (argument.compare("be_signed") == 0)
+	{
+		test_be_signed();
+		return 0;
+	}
+	else if (argument.compare("sign") == 0)
+	{
+		test_sign();
+		return 0;
+	}
 	else if (argument.compare("ALL") == 0)
 	{
 
@@ -392,6 +476,8 @@ int main (int argc, char *argv[])
 		test_setters();
 		test_grades();
 		test_exceptions();
+		test_be_signed();
+		test_sign();
 
 		std::cout << "\n" << std::endl;
 		print_timestamp();

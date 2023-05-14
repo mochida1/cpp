@@ -6,19 +6,22 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:03 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 18:59:47 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:05:47 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+# define BUREAUCRAT_HPP
 
 #ifndef VERBOSE
 # define VERBOSE 0
 #endif //VERBOSE
 
 # include <iostream>
+# include "Form.hpp"
+
+class Form;
 
 class Bureaucrat {
 	public:
@@ -34,7 +37,7 @@ class Bureaucrat {
 		void				decreaseGrade(int grade);
 		void				increaseGrade(void);
 		void				decreaseGrade(void);
-		bool				signForm(void);
+		bool				signForm(Form & instance);
 
 		class GradeTooHighException
 		{

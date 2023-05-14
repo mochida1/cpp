@@ -6,9 +6,13 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:40 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 21:14:48 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:05:49 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma once
+#ifndef FORM_HPP
+# define FORM_HPP
 
 #include <iostream>
 #include "Bureaucrat.hpp"
@@ -16,6 +20,8 @@
 #ifndef VERBOSE
 # define VERBOSE 0
 #endif //VERBOSE
+
+class Bureaucrat;
 
 class Form
 {
@@ -71,3 +77,5 @@ class Form
 };
 
 std::ostream &operator<<(std::ostream &outStream, Form const &instance);
+
+#endif // FORM_HPP

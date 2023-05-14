@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 21:00:20 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:16:52 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ bool				Form::beSigned(Bureaucrat instance){
 	rc = this->_validateSignRequirements(instance);
 	if (rc)
 	{
-		std::cout << instance.getName() << " couldn't sign " << this->_name << "because";
+		std::cout << instance.getName() << " couldn't sign " << this->_name << " because";
 		if (rc & 1)
 			std::cout << " grade is too low (" << instance.getGrade() << "). Required(" << this->_gradeRequiredToSign << ");";
 		if (rc & 2)
@@ -132,6 +132,7 @@ bool				Form::beSigned(Bureaucrat instance){
 		std::cout << std::endl;
 		return false;
 	}
+	this->setIsSigned(true);
 	std::cout << instance.getName() << " signed " << this->getName() << std::endl;
 	return true;
 }

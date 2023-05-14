@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:00 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 18:58:19 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:06:25 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,12 @@ void Bureaucrat::decreaseGrade(void){
 		std::cout << this->_name << " grade now is " << this->_grade << std::endl;
 
 	return ;
+}
+
+bool Bureaucrat::signForm(Form & instance){
+	if (VERBOSE)
+		std::cout << *this << " trying to sign form " << instance << std::endl;
+	return instance.beSigned(*this);
 }
 
 // non-member functions
