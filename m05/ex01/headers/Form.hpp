@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:40 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 20:20:11 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/13 21:14:48 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Form
 		Form & operator=(const Form & instance);
 		~Form();
 	// --------------------
+		Form(std::string name, int gradeRequiredToSign, int gradeRequiredToExecute);
 		Form(std::string name, bool isSigned, int gradeRequiredToSign, int gradeRequiredToExecute);
 
 	// GETTERS
@@ -36,6 +37,7 @@ class Form
 	// SETTERS
 		bool				setIsSigned(bool state);
 		bool				setIsSigned(void);
+	// CUSTOM
 		bool				beSigned(Bureaucrat instance);
 	// EXCEPTIONS
 		class GradeTooHighException

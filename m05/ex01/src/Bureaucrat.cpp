@@ -6,15 +6,11 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:00 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/12 22:07:47 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:58:19 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-
-#ifndef VERBOSE
-# define VERBOSE 1
-#endif //VERBOSE
 
 Bureaucrat::Bureaucrat(void) : _name("default"), _grade(150) {
 	try {

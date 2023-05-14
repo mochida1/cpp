@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 20:25:10 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/13 21:00:20 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,29 @@ _gradeRequiredToSign(150),
 _gradeRequiredToExecute(150) {
 	if (VERBOSE)
 		std::cout << "Constructing default form: [name=defForm], [_isSigned=false], [_gradeRequiredToSign=150], [_gradeRequiredToExecute=150]" << std::endl;
+	return ;
+}
+
+Form::Form(const Form & instance) :
+_name(instance.getName()),
+_isSigned(instance.getIsSigned()),
+_gradeRequiredToSign(instance.getGradeRequiredToSign()),
+_gradeRequiredToExecute(instance.getGradeRequiredToExecute()) {
+	if(VERBOSE)
+		std::cout << "Constructing copy from [" << instance << "]" << std::endl;
+	return;
+}
+
+Form::Form(std::string name, int gradeRequiredToSign, int gradeRequiredToExecute) :
+_name(name),
+_isSigned(false),
+_gradeRequiredToSign(gradeRequiredToSign),
+_gradeRequiredToExecute(gradeRequiredToExecute) {
+	if (VERBOSE)
+		std::cout << "Form argument constructor: " << *this << std::endl;
+
+	this->_validateGrade(gradeRequiredToSign);
+	this->_validateGrade(gradeRequiredToExecute);
 	return ;
 }
 
