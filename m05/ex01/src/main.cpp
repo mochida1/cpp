@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/13 21:48:47 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/13 21:57:11 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ int test_grades(void)
 /*
 	ATTENTION THESE WILL INEVITABLY CRASH THE PROGRAM!**************************
 */
-#define TEST_EXCEPTION_ERROR 5
+#define TEST_EXCEPTION_ERROR 0 //change this to make it go poopoo
 
 void test_exceptions_bureaucrats(void){
 	std::cout << "\n\n---------------BUREAUCRATS----------------" << std::endl;
@@ -340,7 +340,6 @@ int main (int argc, char *argv[])
 {
 	std::string argument;
 	std::string lError("Error, please use one of the following arguments: constructors | getters | setters | grades | ALL | exceptions");
-	print_timestamp();
 	if (argc > 2)
 	{
 		std::cerr << lError << std::endl;
@@ -349,38 +348,32 @@ int main (int argc, char *argv[])
 	if (argc == 1)
 	{
 		test_constructors();
-		print_timestamp();
 		return 0;
 	}
 	argument = argv[1];
 	if (argument.compare("constuctors") == 0)
 	{
 		test_constructors();
-		print_timestamp();
 		return 0;
 	}
 	else if (argument.compare("getters") == 0)
 	{
 		test_getters();
-		print_timestamp();
 		return 0;
 	}
 	else if (argument.compare("setters") == 0)
 	{
 		test_setters();
-		print_timestamp();
 		return 0;
 	}
 	else if (argument.compare("grades") == 0)
 	{
 		test_grades();
-		print_timestamp();
 		return 0;
 	}
 	else if (argument.compare("exceptions") == 0)
 	{
 		test_exceptions();
-		print_timestamp();
 		return 0;
 	}
 	else if (argument.compare("ALL") == 0)
