@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 20:13:50 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:32:50 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 # define VERBOSE 1
 #endif //VERBOSE
 
+#define EX01_TESTS
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include <cassert>
 #include <ctime>
 
-void print_timestamp(void);
+void print_timestamp()
+{
+	std::time_t currentTime = std::time(NULL);
+	std::string timeString = std::ctime(&currentTime);
+	std::cout << timeString << std::endl;
+}
 
+#ifdef EX01_TESTS
 void ex01_test_constructors_bureaucrat(void)
 {
 	std::cout << "\n---------------BUREAUCRATS----------------" << std::endl;
@@ -69,6 +80,7 @@ void ex01_test_constructors_form(void)
 	assert (def.getIsSigned() == false);
 	assert (def.getGradeRequiredToSign() == 150 );
 	assert (def.getGradeRequiredToExecute() == 150 );
+	assert (def.getTarget().compare("") == 0);
 
 	std::cout << "\nMain : creating [argus] at stack\t\t(argument constructor 1)" << std::endl;
 	Form argus1("Argus1" , 15, 30);
@@ -76,6 +88,7 @@ void ex01_test_constructors_form(void)
 	assert (argus1.getIsSigned() == false);
 	assert (argus1.getGradeRequiredToSign() == 15 );
 	assert (argus1.getGradeRequiredToExecute() == 30 );
+	assert (def.getTarget().compare("") == 0);
 
 	std::cout << "\nMain : creating [argus] at stack\t\t(argument constructor 2)" << std::endl;
 	Form argus2("Argus2" , true, 24, 48);
@@ -416,9 +429,14 @@ void ex01_test_sign(void)
 	std::cout << "\tAll 'sign' tests sucessful!-------" << std::endl;
 	return ;
 }
+#endif // EX01_TESTS
 
 void test_ex01(void)
 {
+	#ifndef EX01_TESTS
+	std::cout << "Warning: Not testing ex01." << std::endl;
+	#endif // !EX01_TESTS
+	#ifdef EX01_TESTS
 	std::cout << "!!!!!!!!!!!!!!TESTING EX01 THINGS!!!!!!!!!!!!!!11" << std::endl;
 	std::cout << ".. except exceptions..." << std::endl;
 
@@ -433,14 +451,34 @@ void test_ex01(void)
 	std::cout << "\n" << std::endl;
 	print_timestamp();
 	std::cout << "ALL TESTS COMPLETED SUCCESSFULLY!" << std::endl;
+	#endif // EX01_TESTS
 }
 
-void print_timestamp()
+
+
+void ex02_test_constructors(void)
 {
-	std::time_t currentTime = std::time(NULL);
-	std::string timeString = std::ctime(&currentTime);
-	std::cout << timeString << std::endl;
+
 }
+
+void ex02_test_getters(void)
+{}
+
+void ex02_test_setters(void)
+{}
+
+void ex02_test_grades(void)
+{}
+
+void ex02_test_exceptions(void)
+{}
+
+void ex02_test_be_signed(void)
+{}
+
+void ex02_test_sign(void)
+{}
+
 
 int main (int argc, char *argv[])
 {
@@ -453,7 +491,7 @@ int main (int argc, char *argv[])
 	}
 	if (argc == 1)
 	{
-		ex01_test_constructors();
+		ex02_test_constructors();
 		return 0;
 	}
 	argument = argv[1];
@@ -464,17 +502,17 @@ int main (int argc, char *argv[])
 	}
 	if (argument.compare("constuctors") == 0)
 	{
-		ex01_test_constructors();
+		ex02_test_constructors();
 		return 0;
 	}
 	else if (argument.compare("getters") == 0)
 	{
-		ex01_test_getters();
+		ex02_test_getters();
 		return 0;
 	}
 	else if (argument.compare("setters") == 0)
 	{
-		ex01_test_setters();
+		ex02_test_setters();
 		return 0;
 	}
 	else if (argument.compare("grades") == 0)
@@ -484,17 +522,17 @@ int main (int argc, char *argv[])
 	}
 	else if (argument.compare("exceptions") == 0)
 	{
-		ex01_test_exceptions();
+		ex02_test_exceptions();
 		return 0;
 	}
 	else if (argument.compare("be_signed") == 0)
 	{
-		ex01_test_be_signed();
+		ex02_test_be_signed();
 		return 0;
 	}
 	else if (argument.compare("sign") == 0)
 	{
-		ex01_test_sign();
+		ex02_test_sign();
 		return 0;
 	}
 	else if (argument.compare("ALL") == 0)
@@ -503,6 +541,15 @@ int main (int argc, char *argv[])
 
 		std::cout << "!!!!!!!!!!!!!!TESTING ALL THE THINGS!!!!!!!!!!!!!!11" << std::endl;
 		std::cout << ".. except exceptions... and ex01... " << std::endl;
+
+
+ 		ex02_test_constructors();
+ 		ex02_test_getters();
+ 		ex02_test_setters();
+ 		ex01_test_grades();
+ 		ex02_test_exceptions();
+ 		ex02_test_be_signed();
+ 		ex02_test_sign();
 
 		std::cout << "\n" << std::endl;
 		print_timestamp();

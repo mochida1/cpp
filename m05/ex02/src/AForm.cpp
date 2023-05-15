@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 20:10:32 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:04:19 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,19 @@ _gradeRequiredToExecute(150) {
 	return ;
 }
 
+Form::Form(std::string target) :
+target_(target),
+_name("defForm"),
+_isSigned(false),
+_gradeRequiredToSign(150),
+_gradeRequiredToExecute(150) {
+	if (VERBOSE)
+		std::cout << "Constructing default form: [name=defForm], [_isSigned=false], [_gradeRequiredToSign=150], [_gradeRequiredToExecute=150]" << std::endl;
+	return ;
+}
+
 Form::Form(const Form & instance) :
+target_(instance.getTarget()),
 _name(instance.getName()),
 _isSigned(instance.getIsSigned()),
 _gradeRequiredToSign(instance.getGradeRequiredToSign()),
@@ -34,6 +46,7 @@ _gradeRequiredToExecute(instance.getGradeRequiredToExecute()) {
 }
 
 Form::Form(std::string name, int gradeRequiredToSign, int gradeRequiredToExecute) :
+target_(""),
 _name(name),
 _isSigned(false),
 _gradeRequiredToSign(gradeRequiredToSign),
@@ -47,6 +60,21 @@ _gradeRequiredToExecute(gradeRequiredToExecute) {
 }
 
 Form::Form(std::string name, bool isSigned, int gradeRequiredToSign, int gradeRequiredToExecute) :
+target_(""),
+_name(name),
+_isSigned(isSigned),
+_gradeRequiredToSign(gradeRequiredToSign),
+_gradeRequiredToExecute(gradeRequiredToExecute) {
+	if (VERBOSE)
+		std::cout << "Form argument constructor: " << *this << std::endl;
+
+	this->_validateGrade(gradeRequiredToSign);
+	this->_validateGrade(gradeRequiredToExecute);
+	return ;
+}
+
+Form::Form(std::string target, std::string name, bool isSigned, int gradeRequiredToSign, int gradeRequiredToExecute) :
+target_(target),
 _name(name),
 _isSigned(isSigned),
 _gradeRequiredToSign(gradeRequiredToSign),

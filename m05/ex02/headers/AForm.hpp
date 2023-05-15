@@ -6,13 +6,13 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:40 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 20:00:47 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:32:50 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 #include <iostream>
 #include "Bureaucrat.hpp"
@@ -30,10 +30,16 @@ class Form
 		Form(void);
 		Form(const Form & instance);
 		virtual Form & operator=(const Form & instance);
+		#ifdef EX01_TESTS
 		virtual ~Form(void);
+		# else // EX01_TESTS
+		virtual ~Form(void) = 0;
+		#endif //EX01_TESTS
 	// --------------------
+		Form(std::string target);
 		Form(std::string name, int gradeRequiredToSign, int gradeRequiredToExecute);
 		Form(std::string name, bool isSigned, int gradeRequiredToSign, int gradeRequiredToExecute);
+		Form(std::string target, std::string name, bool isSigned, int gradeRequiredToSign, int gradeRequiredToExecute);
 
 	// GETTERS
 		const std::string	getName(void) const;
@@ -81,4 +87,4 @@ class Form
 
 std::ostream &operator<<(std::ostream &outStream, Form const &instance);
 
-#endif // FORM_HPP
+#endif // AFORM_HPP
