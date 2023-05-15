@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 21:32:50 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:37:21 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,6 +458,8 @@ void test_ex01(void)
 
 void ex02_test_constructors(void)
 {
+	PresidentialPardonForm def;
+
 
 }
 
