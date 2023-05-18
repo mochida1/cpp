@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 21:37:21 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:43:02 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,9 +458,12 @@ void test_ex01(void)
 
 void ex02_test_constructors(void)
 {
+	std::cout << "$$$$$$$$$$$$$ TESTING EX02 CONSTRUCTORS $$$$$$$$$$$$$" << std::endl;
 	PresidentialPardonForm def;
-
-
+	std::cout << def << std::endl;
+	PresidentialPardonForm argument("argument_target");
+	std::cout << argument << std::endl;
+	std::cout << "argument sign/execute: " << argument.getGradeRequiredToSign() << " / " << argument.getGradeRequiredToExecute() << std::endl;
 }
 
 void ex02_test_getters(void)
@@ -499,7 +502,9 @@ int main (int argc, char *argv[])
 	argument = argv[1];
 	if (argument.compare("ex01") == 0)
 	{
+		#ifdef EX01_TESTS
 		test_ex01();
+		#endif
 		return 0;
 	}
 	if (argument.compare("constuctors") == 0)
@@ -519,7 +524,7 @@ int main (int argc, char *argv[])
 	}
 	else if (argument.compare("grades") == 0)
 	{
-		ex01_test_grades();
+		ex02_test_grades();
 		return 0;
 	}
 	else if (argument.compare("exceptions") == 0)
@@ -548,7 +553,7 @@ int main (int argc, char *argv[])
  		ex02_test_constructors();
  		ex02_test_getters();
  		ex02_test_setters();
- 		ex01_test_grades();
+ 		ex02_test_grades();
  		ex02_test_exceptions();
  		ex02_test_be_signed();
  		ex02_test_sign();

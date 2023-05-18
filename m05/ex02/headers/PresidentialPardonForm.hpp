@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:34:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 21:28:58 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:58:09 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ private:
 	const int			_gradeRequiredToSign;
 	const int			_gradeRequiredToExecute;
 };
+
+std::ostream &operator<<(std::ostream &outStream, PresidentialPardonForm const &instance);
 
 #endif // PRESIDENTIALPARDONFORM_HPP

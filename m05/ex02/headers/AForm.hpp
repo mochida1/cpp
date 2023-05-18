@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:40 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 21:32:50 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/17 21:40:57 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ class Form
 		bool				setTarget(std::string target);
 	// CUSTOM
 		bool				beSigned(Bureaucrat instance);
+		virtual void				print(void) const;
 	// EXCEPTIONS
 		class GradeTooHighException
 		{
@@ -84,7 +85,7 @@ class Form
 		bool				_validateGrade(int grade);
 		int					_validateSignRequirements(Bureaucrat instance) const;
 };
-
 std::ostream &operator<<(std::ostream &outStream, Form const &instance);
+
 
 #endif // AFORM_HPP

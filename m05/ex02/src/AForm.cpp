@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 21:04:19 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/17 21:34:53 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,12 @@ const char* Form::GradeTooLowException::what() const throw(){
 	return "\033[0;31m\t\tGrade TOO LOW!\033[0m]";
 }
 
+void 		Form::print(void) const {
+	std::cout << "name [" << this->getName() << "] , isSigned [" <<\
+		((this->getIsSigned() == true) ? "true" : "false")  << "], gradeRequiredToSign [" << \
+		this->getGradeRequiredToSign() << "], gradeRequiredToExecute [" << \
+		this->getGradeRequiredToExecute() << "]";
+}
 // non-member functions
 
 std::ostream &operator<<(std::ostream &outStream, Form const &instance)
@@ -283,9 +289,6 @@ std::ostream &operator<<(std::ostream &outStream, Form const &instance)
 	if (VERBOSE >=3)
 		std::cout << "insertiong operator overload called: " << std::endl;
 
-	outStream << "name [" << instance.getName() << "] , isSigned [" <<\
-		((instance.getIsSigned() == true) ? "true" : "false")  << "], gradeRequiredToSign [" << \
-		instance.getGradeRequiredToSign() << "], gradeRequiredToExecute [" << \
-		instance.getGradeRequiredToExecute() << "]";
+	instance.print();
 	return outStream;
 }
