@@ -6,12 +6,12 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/17 22:43:02 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/18 23:38:06 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VERBOSE
-# define VERBOSE 1
+# define VERBOSE 0
 #endif //VERBOSE
 
 #define EX01_TESTS
@@ -460,10 +460,44 @@ void ex02_test_constructors(void)
 {
 	std::cout << "$$$$$$$$$$$$$ TESTING EX02 CONSTRUCTORS $$$$$$$$$$$$$" << std::endl;
 	PresidentialPardonForm def;
-	std::cout << def << std::endl;
+	assert (def.getIsSigned() == false);
+	assert (def.getName().compare("PresidentialPardonForm") == 0);
+	assert (def.getTarget().compare("") == 0);
+	assert (def.getGradeRequiredToSign() == 25);
+	assert (def.getGradeRequiredToExecute() == 5);
+	if (VERBOSE)
+		std::cout << def << std::endl;
+
 	PresidentialPardonForm argument("argument_target");
-	std::cout << argument << std::endl;
-	std::cout << "argument sign/execute: " << argument.getGradeRequiredToSign() << " / " << argument.getGradeRequiredToExecute() << std::endl;
+	assert (argument.getName().compare("PresidentialPardonForm") == 0);
+	assert (argument.getTarget().compare("argument_target") == 0);
+	assert (argument.getIsSigned() == false);
+	assert (argument.getGradeRequiredToSign() == 25);
+	assert (argument.getGradeRequiredToExecute() == 5);
+	if (VERBOSE)
+		std::cout << argument << std::endl;
+
+	def.setIsSigned(true);
+	assert (def.getIsSigned() == true);
+	def = argument;
+	assert (def.getIsSigned() == false);
+	assert (def.getName().compare("PresidentialPardonForm") == 0);
+	assert (def.getTarget().compare("argument_target") == 0);
+	assert (def.getGradeRequiredToSign() == 25);
+	assert (def.getGradeRequiredToExecute() == 5);
+	if (VERBOSE)
+		std::cout << def << std::endl;
+
+	argument.setTarget("copycon_target");
+	assert (argument.getTarget().compare("copycon_target") == 0);
+	PresidentialPardonForm copycon(argument);
+	assert (copycon.getName().compare("PresidentialPardonForm") == 0);
+	assert (copycon.getTarget().compare("copycon_target") == 0);
+	assert (copycon.getIsSigned() == false);
+	assert (copycon.getGradeRequiredToSign() == 25);
+	assert (copycon.getGradeRequiredToExecute() == 5);
+	if (VERBOSE)
+		std::cout << copycon << std::endl;
 }
 
 void ex02_test_getters(void)
