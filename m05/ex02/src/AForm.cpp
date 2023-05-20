@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/19 23:24:31 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/20 16:15:36 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ int					Form::_validateExecuteRequirements(Bureaucrat instance) const{
 		rc |= 1;
 		throw Form::ExecuteGradeTooLowException();
 	}
-	if (this->_isSigned == true)
+	if (this->_isSigned == false)
 	{
 		rc |= 2;
 		throw Form::ExecuteFormUnsignedException();
@@ -330,12 +330,39 @@ const char* Form::GradeTooLowException::what() const throw(){
 	return "\033[0;31m\t\tGrade TOO LOW!\033[0m]";
 }
 
+Form::ExecuteGradeTooLowException::ExecuteGradeTooLowException(void) {
+	std::cerr << "WARNING: Exception object [ExecuteGradeTooLowException] constructed!" << std::endl;
+	return ;
+}
+
+Form::ExecuteGradeTooLowException::~ExecuteGradeTooLowException(void) {
+	return ;
+}
+
+const char* Form::ExecuteGradeTooLowException::what() const throw() {
+	return "\033[0;31m\t\tGrade TOO LOW to execute!\033[0m]";
+}
+
+Form::ExecuteFormUnsignedException::ExecuteFormUnsignedException(void) {
+	std::cerr << "WARNING: Exception object [ExecuteFormUnsignedException] constructed!" << std::endl;
+	return ;
+}
+
+Form::ExecuteFormUnsignedException::~ExecuteFormUnsignedException(void){
+	return ;
+}
+
+const char* Form::ExecuteFormUnsignedException::what() const throw() {
+	return "\033[0;31m\t\tForm is unsigned!\033[0m]";
+}
+
 void 		Form::print(void) const {
 	std::cout << "name [" << this->getName() << "] , isSigned [" <<\
 		((this->getIsSigned() == true) ? "true" : "false")  << "], gradeRequiredToSign [" << \
 		this->getGradeRequiredToSign() << "], gradeRequiredToExecute [" << \
 		this->getGradeRequiredToExecute() << "]";
 }
+
 // non-member functions
 
 std::ostream &operator<<(std::ostream &outStream, Form const &instance)

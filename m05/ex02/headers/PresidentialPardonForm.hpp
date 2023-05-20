@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:34:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/18 23:22:28 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/20 16:17:55 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ private:
 	bool				_isSigned;
 	const int			_gradeRequiredToSign;
 	const int			_gradeRequiredToExecute;
+	void				_doFormAction(void) const;
 };
 
 std::ostream &operator<<(std::ostream &outStream, PresidentialPardonForm const &instance);

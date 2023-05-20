@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:00 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 18:06:25 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/20 16:50:18 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,30 @@ bool Bureaucrat::signForm(Form & instance){
 	if (VERBOSE)
 		std::cout << *this << " trying to sign form " << instance << std::endl;
 	return instance.beSigned(*this);
+}
+
+bool Bureaucrat::executeForm(Form const & form){
+	int	rc;
+
+	rc = 0;
+	if (this->getGrade() > form.getGradeRequiredToExecute())
+		rc |= 1;
+	if (form.getIsSigned() == false)
+		rc |= 2;
+	if (rc == 0)
+	{
+		std::cout << "[" << this->getName() << "] executed form [" << form.getName() << "]" << std::endl;
+		form.execute(*this);
+		return true;
+	}
+
+	std::cout << "Form [" << form.getName() << "] couldnt be executed by [" << this->getName() << "] because ";
+	if (rc & 1)
+		std::cout << "Bureaucrat's grade was too low; ";
+	if (rc & 2)
+		std::cout << "Form was not signed; ";
+	std::cout << std::endl;
+	return false;
 }
 
 // non-member functions

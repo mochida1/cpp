@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:40 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/19 23:15:44 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/20 14:37:08 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ class Form
 		bool				_validateGrade(int grade);
 		int					_validateSignRequirements(Bureaucrat instance) const;
 		int					_validateExecuteRequirements(Bureaucrat instance) const;
-		void				_doFormAction(void) const;
+		virtual void		_doFormAction(void) const;
 };
 std::ostream &operator<<(std::ostream &outStream, Form const &instance);
 

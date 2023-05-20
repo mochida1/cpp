@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/19 22:06:43 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/20 16:49:20 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -459,6 +459,7 @@ void test_ex01(void)
 void ex02_test_constructors(void)
 {
 	std::cout << "$$$$$$$$$$$$$ TESTING EX02 CONSTRUCTORS $$$$$$$$$$$$$" << std::endl;
+
 	PresidentialPardonForm def;
 	assert (def.getIsSigned() == false);
 	assert (def.getName().compare("PresidentialPardonForm") == 0);
@@ -502,6 +503,8 @@ void ex02_test_constructors(void)
 
 void ex02_test_getters(void)
 {
+	std::cout << "$$$$$$$$$$$$$ TESTING EX02 GETTERS $$$$$$$$$$$$$" << std::endl;
+
 	PresidentialPardonForm ppf("**TARGET**");
 	assert (ppf.getTarget().compare("**TARGET**") == 0);
 	assert (ppf.getName().compare("PresidentialPardonForm") == 0);
@@ -512,6 +515,8 @@ void ex02_test_getters(void)
 
 void ex02_test_setters(void)
 {
+	std::cout << "$$$$$$$$$$$$$ TESTING EX02 SETTERS $$$$$$$$$$$$$" << std::endl;
+
 	PresidentialPardonForm ppf("start_target");
 	assert (ppf.setIsSigned(true) == true);
 	assert (ppf.getIsSigned() == true);
@@ -529,11 +534,18 @@ void ex02_test_grades(void)
 
 void ex02_test_exceptions(void)
 {
+	std::cout << "$$$$$$$$$$$$$ TESTING EX02 EXCEPTIONS $$$$$$$$$$$$$" << std::endl;
+
+	PresidentialPardonForm ppf("..target..");
+	Bureaucrat chad("chad", 1);
+
+	// ppf.execute(chad);
 
 }
 
 void ex02_test_be_signed(void)
 {
+	std::cout << "$$$$$$$$$$$$$ TESTING EX02 beSigned() $$$$$$$$$$$$$" << std::endl;
 	PresidentialPardonForm ppf("ppf_target");
 	Bureaucrat chad("chad", 1);
 	Bureaucrat failer("failer", 150);
@@ -543,18 +555,19 @@ void ex02_test_be_signed(void)
 	assert (ppf.getIsSigned() == true);
 	assert (ppf.beSigned(chad) == false);
 	assert (ppf.getIsSigned() == true);
-	
+
 
 	assert (ppf.setIsSigned(false) == false);
 	assert (ppf.beSigned(failer) == false);
 	assert (ppf.setIsSigned(true) == true);
 	assert (ppf.getIsSigned() == true);
 	assert (ppf.beSigned(failer) == false);
-	
+
 }
 
 void ex02_test_sign(void)
 {
+	std::cout << "$$$$$$$$$$$$$ TESTING EX02 signForm() $$$$$$$$$$$$$" << std::endl;
 	PresidentialPardonForm ppf("ppf_target");
 	Bureaucrat chad("chad", 1);
 	Bureaucrat failer("failer", 150);
@@ -574,11 +587,37 @@ void ex02_test_sign(void)
 	assert (ppf.getIsSigned() == false);
 }
 
+void ex02_execute(void)
+{
+	std::cout << "$$$$$$$$$$$$$ TESTING EX02 execute() $$$$$$$$$$$$$" << std::endl;
+
+	PresidentialPardonForm ppf("target");
+	Bureaucrat chad("chad", 5);
+	Bureaucrat failer("failer", 150);
+
+//	ppf.execute(chad);
+//	ppf.execute(failer);
+
+	chad.signForm(ppf);
+	ppf.execute(chad);
+}
+
+void ex02_executeForm(void)
+{
+	std::cout << "$$$$$$$$$$$$$ TESTING EX02 executeForm() $$$$$$$$$$$$$" << std::endl;
+
+	PresidentialPardonForm ppf("A really generic target");
+	Bureaucrat chad("chad", 5);
+	Bureaucrat failer("failer", 150);
+
+	chad.signForm(ppf);
+	chad.executeForm(ppf);
+}
 
 int main (int argc, char *argv[])
 {
 	std::string argument;
-	std::string lError("Error, please use one of the following arguments: ex01 | constructors | getters | setters | grades | be_signed | sign | ALL | exceptions");
+	std::string lError("Error, please use one of the following arguments: ex01 | constructors | getters | setters | grades | be_signed | sign | execute | execute_form | ALL | exceptions");
 	if (argc > 2)
 	{
 		std::cerr << lError << std::endl;
@@ -647,6 +686,8 @@ int main (int argc, char *argv[])
  		ex02_test_exceptions();
  		ex02_test_be_signed();
  		ex02_test_sign();
+		ex02_execute();
+		ex02_executeForm();
 
 		std::cout << "\n" << std::endl;
 		print_timestamp();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:57:03 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/14 19:29:50 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:55:33 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ class Bureaucrat {
 		void				increaseGrade(void);
 		void				decreaseGrade(void);
 		bool				signForm(Form & instance);
+		bool				executeForm(Form const & form);
 
 		class GradeTooHighException
 		{

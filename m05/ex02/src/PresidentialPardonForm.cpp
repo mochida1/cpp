@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 20:43:31 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/18 23:35:21 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/20 16:34:58 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ PresidentialPardonForm & PresidentialPardonForm::operator=(const PresidentialPar
 PresidentialPardonForm::~PresidentialPardonForm(){
 }
 
-// non
+void	PresidentialPardonForm::_doFormAction(void) const{
+	std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+}
+
+// non member functions
 std::ostream &operator<<(std::ostream &outStream, PresidentialPardonForm const &instance)
 {
 	if (VERBOSE >=3)
