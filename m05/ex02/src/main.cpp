@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/18 23:38:06 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/19 22:06:43 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -501,22 +501,78 @@ void ex02_test_constructors(void)
 }
 
 void ex02_test_getters(void)
-{}
+{
+	PresidentialPardonForm ppf("**TARGET**");
+	assert (ppf.getTarget().compare("**TARGET**") == 0);
+	assert (ppf.getName().compare("PresidentialPardonForm") == 0);
+	assert (ppf.getIsSigned() == false);
+	assert (ppf.getGradeRequiredToSign() == 25);
+	assert (ppf.getGradeRequiredToExecute() == 5);
+}
 
 void ex02_test_setters(void)
-{}
+{
+	PresidentialPardonForm ppf("start_target");
+	assert (ppf.setIsSigned(true) == true);
+	assert (ppf.getIsSigned() == true);
+	assert (ppf.setIsSigned(false) == false);
+	assert (ppf.getIsSigned() == false);
+	assert (ppf.getTarget().compare("start_target") == 0);
+	ppf.setTarget("end_target");
+	assert (ppf.getTarget().compare("end_target") == 0);
+}
 
 void ex02_test_grades(void)
-{}
+{
+	return ;
+}
 
 void ex02_test_exceptions(void)
-{}
+{
+
+}
 
 void ex02_test_be_signed(void)
-{}
+{
+	PresidentialPardonForm ppf("ppf_target");
+	Bureaucrat chad("chad", 1);
+	Bureaucrat failer("failer", 150);
+
+	assert (ppf.getIsSigned() == false);
+	assert (ppf.beSigned(chad) == true);
+	assert (ppf.getIsSigned() == true);
+	assert (ppf.beSigned(chad) == false);
+	assert (ppf.getIsSigned() == true);
+	
+
+	assert (ppf.setIsSigned(false) == false);
+	assert (ppf.beSigned(failer) == false);
+	assert (ppf.setIsSigned(true) == true);
+	assert (ppf.getIsSigned() == true);
+	assert (ppf.beSigned(failer) == false);
+	
+}
 
 void ex02_test_sign(void)
-{}
+{
+	PresidentialPardonForm ppf("ppf_target");
+	Bureaucrat chad("chad", 1);
+	Bureaucrat failer("failer", 150);
+
+	assert (ppf.setIsSigned(false) == false);
+	assert (chad.signForm(ppf) == true);
+	assert (ppf.getIsSigned() == true);
+	assert (chad.signForm(ppf) == false);
+	assert (ppf.getIsSigned() == true);
+
+	assert (ppf.setIsSigned(true) == true);
+	assert (failer.signForm(ppf) == false);
+	assert (ppf.getIsSigned() == true);
+	assert (ppf.setIsSigned() == false);
+	assert (ppf.getIsSigned() == false);
+	assert (failer.signForm(ppf) == false);
+	assert (ppf.getIsSigned() == false);
+}
 
 
 int main (int argc, char *argv[])

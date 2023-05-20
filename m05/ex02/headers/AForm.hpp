@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:40 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/17 21:40:57 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/19 23:15:44 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ class Form
 	// CUSTOM
 		bool				beSigned(Bureaucrat instance);
 		virtual void				print(void) const;
+		bool				execute(Bureaucrat const & executor) const;
 	// EXCEPTIONS
 		class GradeTooHighException
 		{
@@ -74,6 +75,20 @@ class Form
 				~GradeTooLowException(void);
 				virtual const char* what() const throw();
 		};
+		class ExecuteGradeTooLowException
+		{
+			public:
+				ExecuteGradeTooLowException(void);
+				~ExecuteGradeTooLowException(void);
+				virtual const char* what() const throw();
+		};
+		class ExecuteFormUnsignedException
+		{
+			public:
+				ExecuteFormUnsignedException(void);
+				~ExecuteFormUnsignedException(void);
+				virtual const char* what() const throw();
+		};
 	protected:
 		std::string			target_;
 	private:
@@ -84,6 +99,8 @@ class Form
 		bool				_testGrade(int grade) const;
 		bool				_validateGrade(int grade);
 		int					_validateSignRequirements(Bureaucrat instance) const;
+		int					_validateExecuteRequirements(Bureaucrat instance) const;
+		void				_doFormAction(void) const;
 };
 std::ostream &operator<<(std::ostream &outStream, Form const &instance);
 

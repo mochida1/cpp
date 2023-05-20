@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 21:22:32 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/17 21:34:53 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/19 23:24:31 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,8 @@ bool				Form::setTarget(std::string target){
 	return true;
 }
 
+// CUSTOM
+
 // returns true if bureaucrat has signed form;
 bool				Form::beSigned(Bureaucrat instance){
 	if (VERBOSE >= 3)
@@ -246,6 +248,58 @@ int					Form::_validateSignRequirements(Bureaucrat instance) const{
 	return rc;
 }
 
+int					Form::_validateExecuteRequirements(Bureaucrat instance) const{
+	int rc;
+
+	rc = 0;
+	if (VERBOSE >= 3)
+		std::cout << "validating execute requirements..." << std::endl;
+
+	if (this->getGradeRequiredToExecute() < instance.getGrade())
+	{
+		rc |= 1;
+		throw Form::ExecuteGradeTooLowException();
+	}
+	if (this->_isSigned == true)
+	{
+		rc |= 2;
+		throw Form::ExecuteFormUnsignedException();
+	}
+	if (VERBOSE >= 3)
+		std::cout << "execute requirements validated as " << ((rc == 0) ? "successful" : "failed") << std::endl;
+	return rc;
+}
+
+bool Form::execute(Bureaucrat const & executor) const {
+	int	rc;
+
+	rc = 0;
+	try {
+		rc = this->_validateExecuteRequirements(executor);
+		if (rc)
+		{
+			std::cerr << "CRITICAL ERROR: ["<< executor.getName() << "] tried to ";
+			if (rc & 1)
+				std::cerr << "execute a form[" << this->getName() << "]with higher grade[" << this->_gradeRequiredToExecute << "] than his [" << executor.getGrade() << "] ";
+			if (rc & 2)
+				std::cerr << "execute an unsigned form [" << this->getName() <<"]";
+			std::cerr << std::endl;
+		}
+	}
+	catch (const std::exception& e)	{
+		std::cerr << e.what() << std::endl;
+		std::cout << this->getName() << " got f'd up by " << executor.getName() << std::endl;
+		return false;
+	}
+	this->_doFormAction();
+	return true;
+}
+
+void Form::_doFormAction(void) const{
+	std::cout << "WARNING! Doing base form action!" << std::endl;
+	return ;
+}
+
 // EXCEPTIONS
 
 Form::GradeTooHighException::GradeTooHighException(void){
@@ -287,7 +341,7 @@ void 		Form::print(void) const {
 std::ostream &operator<<(std::ostream &outStream, Form const &instance)
 {
 	if (VERBOSE >=3)
-		std::cout << "insertiong operator overload called: " << std::endl;
+		std::cout << "insertion operator overload called: " << std::endl;
 
 	instance.print();
 	return outStream;
