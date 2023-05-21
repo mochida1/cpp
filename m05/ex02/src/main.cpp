@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/20 17:34:39 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/21 15:55:18 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define VERBOSE 0
 #endif //VERBOSE
 
-#define EX01_TESTS
+// #define EX01_TESTS
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"

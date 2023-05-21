@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 20:43:33 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/20 17:38:00 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/21 15:51:17 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(void) : Form("", "RobotomyRequestForm", false, 75, 45), _gradeRequiredToSign(75), _gradeRequiredToExecute(45) {
+RobotomyRequestForm::RobotomyRequestForm(void) : Form("", "RobotomyRequestForm", false, 75, 45) {
 	if (VERBOSE)
 		std::cout << "[RobotomyRequestForm] Default constructor called" << std::endl;
 	return ;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form(target, "RobotomyRequestForm", false, 75, 45), _gradeRequiredToSign(75), _gradeRequiredToExecute(45) {
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form(target, "RobotomyRequestForm", false, 75, 45) {
 	if (VERBOSE)
 		std::cout << "[RobotomyRequestForm] Argument constructor called" << std::endl;
 	return ;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm & instance) : Form(instance.getTarget(), instance.getName(), false, 75, 45), _gradeRequiredToSign(75), _gradeRequiredToExecute(45) {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm & instance) : Form(instance.getTarget(), instance.getName(), false, 75, 45) {
 	if (VERBOSE)
 		std::cout << "[RobotomyRequestForm] Copy constructor called" << std::endl;
 	return;
@@ -34,8 +34,8 @@ RobotomyRequestForm & RobotomyRequestForm::operator=(const RobotomyRequestForm &
 	if (VERBOSE)
 		std::cout << "[RobotomyRequestForm] copy operator called" << std::endl;
 	Form::operator=(instance);
-	this->target_ = instance.getTarget();
 	this->_isSigned = instance.getIsSigned();
+	this->target_ = instance.getTarget();
 	return *this;
 }
 

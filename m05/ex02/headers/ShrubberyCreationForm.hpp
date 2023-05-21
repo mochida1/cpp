@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:35:23 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/20 18:07:57 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/21 15:54:22 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ protected:
 private:
 	const std::string	_name;
 	bool				_isSigned;
-	const int			_gradeRequiredToSign;
-	const int			_gradeRequiredToExecute;
 	void				_doFormAction(void) const;
 };
 

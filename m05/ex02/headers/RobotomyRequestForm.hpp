@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:35:17 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/20 17:37:53 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/21 15:51:32 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ protected:
 private:
 	const std::string	_name;
 	bool				_isSigned;
-	const int			_gradeRequiredToSign;
-	const int			_gradeRequiredToExecute;
 	void				_doFormAction(void) const;
 };
 

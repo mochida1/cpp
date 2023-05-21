@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 20:43:36 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/20 18:09:23 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/21 15:51:41 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("", "ShrubberyCreationForm", false, 145, 137), _gradeRequiredToSign(145), _gradeRequiredToExecute(137) {
+ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("", "ShrubberyCreationForm", false, 145, 137) {
 	if (VERBOSE)
 		std::cout << "[ShrubberyCreationForm] Default constructor called" << std::endl;
 	return ;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form(target, "ShrubberyCreationForm", false, 145, 137), _gradeRequiredToSign(145), _gradeRequiredToExecute(137) {
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form(target, "ShrubberyCreationForm", false, 145, 137) {
 	if (VERBOSE)
 		std::cout << "[ShrubberyCreationForm] Argument constructor called" << std::endl;
 	return ;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & instance) : Form(instance.getTarget(), instance.getName(), false, 145, 137), _gradeRequiredToSign(145), _gradeRequiredToExecute(137) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & instance) : Form(instance.getTarget(), instance.getName(), false, 145, 137) {
 	if (VERBOSE)
 		std::cout << "[ShrubberyCreationForm] Copy constructor called" << std::endl;
 	return;
