@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/20 16:49:20 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/20 17:34:39 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -592,6 +592,7 @@ void ex02_execute(void)
 	std::cout << "$$$$$$$$$$$$$ TESTING EX02 execute() $$$$$$$$$$$$$" << std::endl;
 
 	PresidentialPardonForm ppf("target");
+	RobotomyRequestForm rrf("bill");
 	Bureaucrat chad("chad", 5);
 	Bureaucrat failer("failer", 150);
 
@@ -600,6 +601,9 @@ void ex02_execute(void)
 
 	chad.signForm(ppf);
 	ppf.execute(chad);
+
+	chad.signForm(rrf);
+	rrf.execute(chad);
 }
 
 void ex02_executeForm(void)
