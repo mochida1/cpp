@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 19:35:23 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/21 15:54:22 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:25:07 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define SHRUBBERYCREATIONFORM_HPP
 
 #include "AForm.hpp"
+#include <fstream>
 
 class ShrubberyCreationForm : public Form
 {
@@ -31,6 +32,7 @@ private:
 	const std::string	_name;
 	bool				_isSigned;
 	void				_doFormAction(void) const;
+	std::string			_createTrees(void) const;
 };
 
 std::ostream &operator<<(std::ostream &outStream, ShrubberyCreationForm const &instance);

@@ -6,7 +6,7 @@
 #    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/05/14 19:29:14 by hmochida         ###   ########.fr        #
+#    Updated: 2023/05/21 17:15:17 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,10 +59,10 @@ test:
 clean:
 	@rm -rf $(BUILDDIR)
 	@rm -f vgcore*
+	@rm -f *_shrubbery
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f vgcore*
 
 re: fclean all
 

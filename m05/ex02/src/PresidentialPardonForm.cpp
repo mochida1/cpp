@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 20:43:31 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/21 15:49:45 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:25:22 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form(target
 	return ;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm & instance) : Form(instance.getTarget(), instance.getName(), false, 25, 5) {
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm & instance) : Form(instance.getTarget(), instance.getName(), instance.getIsSigned(), 25, 5) {
 	if (VERBOSE)
 		std::cout << "[PresidentialPardonForm] Copy constructor called" << std::endl;
 	return;

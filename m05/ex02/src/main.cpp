@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/21 15:55:18 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:38:22 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -499,6 +499,116 @@ void ex02_test_constructors(void)
 	assert (copycon.getGradeRequiredToExecute() == 5);
 	if (VERBOSE)
 		std::cout << copycon << std::endl;
+
+	// SHRUBBERY
+	ShrubberyCreationForm scfDef;
+	assert (scfDef.getTarget().compare("") == 0);
+	assert (scfDef.getName().compare("ShrubberyCreationForm") == 0);
+	assert (scfDef.getGradeRequiredToSign() == 145);
+	assert (scfDef.getGradeRequiredToExecute() == 137);
+	assert (scfDef.getIsSigned() == false);
+	if (VERBOSE)
+		std::cout << scfDef << std::endl;
+
+	ShrubberyCreationForm scfArg("scfArg_target");
+	assert (scfArg.getTarget().compare("scfArg_target") == 0);
+	assert (scfArg.getName().compare("ShrubberyCreationForm") == 0);
+	assert (scfArg.getGradeRequiredToSign() == 145);
+	assert (scfArg.getGradeRequiredToExecute() == 137);
+	assert (scfArg.getIsSigned() == false);
+	if (VERBOSE)
+		std::cout << scfArg << std::endl;
+
+	scfArg.setTarget("scfCopyConstructor_target");
+	assert (scfArg.getTarget().compare("scfCopyConstructor_target") == 0);
+	assert (scfArg.setIsSigned(true) == true);
+	assert (scfArg.getIsSigned() == true);
+	ShrubberyCreationForm scfCopy(scfArg);
+	assert (scfCopy.getTarget().compare("scfCopyConstructor_target") == 0);
+	assert (scfCopy.getName().compare("ShrubberyCreationForm") == 0);
+	assert (scfCopy.getGradeRequiredToSign() == 145);
+	assert (scfCopy.getGradeRequiredToExecute() == 137);
+	assert (scfCopy.getIsSigned() == true);
+	if (VERBOSE)
+	{
+		std::cout << scfArg << std::endl;
+		std::cout << scfCopy << std::endl;
+	}
+
+	ShrubberyCreationForm scfCopyOp;
+	assert (scfCopyOp.getTarget().compare("") == 0);
+	assert (scfCopyOp.getName().compare("ShrubberyCreationForm") == 0);
+	assert (scfCopyOp.getGradeRequiredToSign() == 145);
+	assert (scfCopyOp.getGradeRequiredToExecute() == 137);
+	assert (scfCopyOp.getIsSigned() == false);
+	if (VERBOSE)
+		std::cout << scfCopyOp << std::endl;
+	scfCopyOp = scfArg;
+	assert (scfCopyOp.getTarget().compare("scfCopyConstructor_target") == 0);
+	assert (scfCopyOp.getName().compare("ShrubberyCreationForm") == 0);
+	assert (scfCopyOp.getGradeRequiredToSign() == 145);
+	assert (scfCopyOp.getGradeRequiredToExecute() == 137);
+	assert (scfCopyOp.getIsSigned() == true);
+	if (VERBOSE)
+	{
+		std::cout << scfArg << std::endl;
+		std::cout << scfCopyOp << std::endl;
+	}
+
+	// ROBOTOMY
+	RobotomyRequestForm rrfDef;
+	assert (rrfDef.getTarget().compare("") == 0);
+	assert (rrfDef.getName().compare("RobotomyRequestForm") == 0);
+	assert (rrfDef.getGradeRequiredToSign() == 72);
+	assert (rrfDef.getGradeRequiredToExecute() == 45);
+	assert (rrfDef.getIsSigned() == false);
+	if (VERBOSE)
+		std::cout << rrfDef << std::endl;
+
+	RobotomyRequestForm rrfArg("rrfArg_target");
+	assert (rrfArg.getTarget().compare("rrfArg_target") == 0);
+	assert (rrfArg.getName().compare("RobotomyRequestForm") == 0);
+	assert (rrfArg.getGradeRequiredToSign() == 72);
+	assert (rrfArg.getGradeRequiredToExecute() == 45);
+	assert (rrfArg.getIsSigned() == false);
+	if (VERBOSE)
+		std::cout << rrfArg << std::endl;
+
+	rrfArg.setTarget("rrfCopyConstructor_target");
+	assert (rrfArg.getTarget().compare("rrfCopyConstructor_target") == 0);
+	assert (rrfArg.setIsSigned(true) == true);
+	assert (rrfArg.getIsSigned() == true);
+	RobotomyRequestForm rrfCopy(rrfArg);
+	assert (rrfCopy.getTarget().compare("rrfCopyConstructor_target") == 0);
+	assert (rrfCopy.getName().compare("RobotomyRequestForm") == 0);
+	assert (rrfCopy.getGradeRequiredToSign() == 72);
+	assert (rrfCopy.getGradeRequiredToExecute() == 45);
+	assert (rrfCopy.getIsSigned() == true);
+	if (VERBOSE)
+	{
+		std::cout << rrfArg << std::endl;
+		std::cout << rrfCopy << std::endl;
+	}
+
+	RobotomyRequestForm rrfCopyOp;
+	assert (rrfCopyOp.getTarget().compare("") == 0);
+	assert (rrfCopyOp.getName().compare("RobotomyRequestForm") == 0);
+	assert (rrfCopyOp.getGradeRequiredToSign() == 72);
+	assert (rrfCopyOp.getGradeRequiredToExecute() == 45);
+	assert (rrfCopyOp.getIsSigned() == false);
+	if (VERBOSE)
+		std::cout << rrfCopyOp << std::endl;
+	rrfCopyOp = rrfArg;
+	assert (rrfCopyOp.getTarget().compare("rrfCopyConstructor_target") == 0);
+	assert (rrfCopyOp.getName().compare("RobotomyRequestForm") == 0);
+	assert (rrfCopyOp.getGradeRequiredToSign() == 72);
+	assert (rrfCopyOp.getGradeRequiredToExecute() == 45);
+	assert (rrfCopyOp.getIsSigned() == true);
+	if (VERBOSE)
+	{
+		std::cout << rrfArg << std::endl;
+		std::cout << rrfCopyOp << std::endl;
+	}
 }
 
 void ex02_test_getters(void)
@@ -611,11 +721,19 @@ void ex02_executeForm(void)
 	std::cout << "$$$$$$$$$$$$$ TESTING EX02 executeForm() $$$$$$$$$$$$$" << std::endl;
 
 	PresidentialPardonForm ppf("A really generic target");
+	RobotomyRequestForm rrf("RRF_TARGET");
+	ShrubberyCreationForm scr("SCF_TARGET");
 	Bureaucrat chad("chad", 5);
 	Bureaucrat failer("failer", 150);
 
 	chad.signForm(ppf);
 	chad.executeForm(ppf);
+
+	chad.signForm(rrf);
+	chad.executeForm(rrf);
+
+	chad.signForm(scr);
+	chad.executeForm(scr);
 }
 
 int main (int argc, char *argv[])
