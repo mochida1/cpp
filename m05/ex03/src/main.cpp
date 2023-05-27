@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/21 19:05:45 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:58:14 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 
 #include "Bureaucrat.hpp"
+#include "Intern.hpp"
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -915,10 +916,69 @@ void ex02_executeForm(void)
 
 }
 
+void test_ex02(void)
+{
+	ex02_test_constructors();
+	ex02_test_getters();
+	ex02_test_setters();
+	ex02_test_exceptions();
+	ex02_test_be_signed();
+	ex02_test_sign();
+	ex02_execute();
+	ex02_executeForm();
+}
+
+void ex03_test_constructors(void)
+{
+	std::cout << "\n@@@@@@@@@@@@@ TESTING EX03 CONSTRUCTORS @@@@@@@@@@@@@" << std::endl;
+	Intern a;
+	Intern b;
+	b = a;
+	assert (&a != &b);
+	Intern c(a);
+	assert (&a != &c);
+}
+
+void	ex03_makeForm(void)
+{
+	std::cout << "\n@@@@@@@@@@@@@ TESTING EX03 makeForm() @@@@@@@@@@@@@" << std::endl;
+	Intern a;
+	Form * scf = a.makeForm("shrubbery creation", "scf_target");
+	assert (scf != NULL);
+	assert (scf->getName().compare("ShrubberyCreationForm") == 0);
+	assert (scf->getTarget().compare("scf_target") == 0);
+	assert (scf->getIsSigned() == false);
+	assert (scf->getGradeRequiredToSign() == SCF_SIGN);
+	assert (scf->getGradeRequiredToExecute() == SCF_EXEC);
+
+	Form * rrf = a.makeForm("robotomy request", "rrf_target");
+	assert (rrf != NULL);
+	assert (rrf->getName().compare("RobotomyRequestForm") == 0);
+	assert (rrf->getTarget().compare("rrf_target") == 0);
+	assert (rrf->getIsSigned() == false);
+	assert (rrf->getGradeRequiredToSign() == RRF_SIGN);
+	assert (rrf->getGradeRequiredToExecute() == RRF_EXEC);
+
+	Form * ppf = a.makeForm("presidential pardon", "ppf_target");
+	assert (ppf != NULL);
+	assert (ppf->getName().compare("PresidentialPardonForm") == 0);
+	assert (ppf->getTarget().compare("ppf_target") == 0);
+	assert (ppf->getIsSigned() == false);
+	assert (ppf->getGradeRequiredToSign() == PPF_SIGN);
+	assert (ppf->getGradeRequiredToExecute() == PPF_EXEC);
+
+	Form * wrongForm = a.makeForm("wrong form", "wrong_ form_target");
+	assert (wrongForm == NULL);
+
+	delete scf;
+	delete rrf;
+	delete ppf;
+}
+
 int main (int argc, char *argv[])
 {
 	std::string argument;
-	std::string lError("Error, please use one of the following arguments: ex01 | constructors | getters | setters | be_signed | sign | execute | execute_form | ALL | exceptions");
+	std::string lError("Error, please use one of the following arguments: ex01 | ex02 | constructors | make_form | ALL");
 	if (argc > 2)
 	{
 		std::cerr << lError << std::endl;
@@ -926,7 +986,7 @@ int main (int argc, char *argv[])
 	}
 	if (argc == 1)
 	{
-		ex02_test_constructors();
+		ex03_test_constructors();
 		return 0;
 	}
 	argument = argv[1];
@@ -937,44 +997,19 @@ int main (int argc, char *argv[])
 		#endif
 		return 0;
 	}
+	if (argument.compare("ex02") == 0)
+	{
+		test_ex02();
+		return 0;
+	}
 	if (argument.compare("constuctors") == 0)
 	{
 		ex02_test_constructors();
 		return 0;
 	}
-	else if (argument.compare("getters") == 0)
+	if (argument.compare("make_form") == 0)
 	{
-		ex02_test_getters();
-		return 0;
-	}
-	else if (argument.compare("setters") == 0)
-	{
-		ex02_test_setters();
-		return 0;
-	}
-	else if (argument.compare("exceptions") == 0)
-	{
-		ex02_test_exceptions();
-		return 0;
-	}
-	else if (argument.compare("be_signed") == 0)
-	{
-		ex02_test_be_signed();
-		return 0;
-	}
-	else if (argument.compare("sign") == 0)
-	{
-		ex02_test_sign();
-		return 0;
-	}
-	else if (argument.compare("execute") == 0)
-	{
-		ex02_execute();
-		return 0;
-	}
-	else if (argument.compare("execute_form") == 0)
-	{
-		ex02_executeForm();
+		ex03_makeForm();
 		return 0;
 	}
 	else if (argument.compare("ALL") == 0)
@@ -982,18 +1017,11 @@ int main (int argc, char *argv[])
 
 
 		std::cout << "!!!!!!!!!!!!!!TESTING ALL THE THINGS!!!!!!!!!!!!!!11" << std::endl;
-		std::cout << ".. except exceptions... and ex01... " << std::endl;
+		std::cout << ".. except exceptions... and ex01 and ex02... " << std::endl;
 
 
- 		ex02_test_constructors();
- 		ex02_test_getters();
- 		ex02_test_setters();
- 		ex02_test_exceptions();
- 		ex02_test_be_signed();
- 		ex02_test_sign();
-		ex02_execute();
-		ex02_executeForm();
-
+ 		ex03_test_constructors();
+ 		ex03_makeForm();
 		std::cout << "\n" << std::endl;
 		print_timestamp();
 		std::cout << "ALL TESTS COMPLETED SUCCESSFULLY!" << std::endl;
