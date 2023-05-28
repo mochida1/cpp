@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 19:56:58 by hmochida          #+#    #+#             */
-/*   Updated: 2023/05/27 16:58:14 by mochida          ###   ########.fr       */
+/*   Updated: 2023/05/28 19:14:06 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include <cassert>
 #include <ctime>
+#include <sstream>
 
 void print_timestamp()
 {
@@ -975,10 +976,169 @@ void	ex03_makeForm(void)
 	delete ppf;
 }
 
+#define MAX_CMD_NUMBER 4
+
+void ex03_poc_doCommand(int index, Form *&formTemplate, Bureaucrat *burList);
+
+void	ex03_poc(void)
+{
+	Bureaucrat	master("Master", PPF_EXEC);
+	Bureaucrat	specialist("Specialist", PPF_SIGN);
+	Bureaucrat	senior("Senior", RRF_EXEC);
+	Bureaucrat	midlvl("Midlvl", RRF_SIGN);
+	Bureaucrat	junior("Junior", SCF_EXEC);
+	Bureaucrat	trainee("Trainee", SCF_SIGN);
+	Bureaucrat	intern("Intern", 150);
+	Bureaucrat	burList[7] = { master, specialist, senior, midlvl, junior,trainee, intern };
+	Form		*formTemplate = NULL;
+	char		errflag = 1;
+
+	std::string command_list[MAX_CMD_NUMBER] = {
+		"A",
+		"B",
+		"C",
+		"D"
+	};
+	std::cout << "Welcome to bureaucracy!" << std::endl;
+	std::string command;
+	while (1)
+	{
+		std::cout << "\nPlease chose a command: ";
+		std::cout << "\n[A] - Make a form";
+		std::cout << "\n[B] - Sign a form";
+		std::cout << "\n[C] - Execute a form";
+		std::cout << "\n[D] - Get the hell outta here" << std::endl;
+		std::cin >> command;
+		for (int i = 0; i < MAX_CMD_NUMBER; i++)
+		{
+			if (command.compare(command_list[i]) == 0 )
+			{
+				if (i == 3)
+				{
+					if (formTemplate)
+						delete formTemplate;
+					return ;
+				}
+				ex03_poc_doCommand(i, formTemplate, burList);
+				errflag = 0;
+			}
+		}
+		if (errflag)
+			std::cout << "\nPlease insert a valid option. Number only." << std::endl;
+		errflag = 1;
+	}
+}
+
+void ex03_poc_doCommand(int index, Form *&formTemplate, Bureaucrat *burList)
+{
+	std::string knownForms[3] = {
+		"presidential pardon",
+		"robotomy request",
+		"shrubbery creation"
+	};
+	if (index == 0)
+	{
+		Intern		factory;
+		std::string formName;
+		std::string formTarget;
+		std::cout << "\n*You have decided to search for an Itern to make a form for you." << std::endl;
+		if (formTemplate != NULL)
+		{
+			std::cout << "\tsince you still have a form, the Intern burns your old form" << std::endl;
+			delete formTemplate;
+			formTemplate = NULL;
+		}
+		std::cout << "[Intern] - Please insert the name of the form" << std::endl;
+		std::cin.clear();
+		std::cin.ignore();
+		std::getline(std::cin, formName);
+		std::cout << "[Intern] - Please insert the target of the form" << std::endl;
+		std::cin.clear();
+		std::cin.ignore();
+		std::getline(std::cin, formTarget);
+		formTemplate = factory.makeForm(formName, formTarget);
+		if (formTemplate == NULL)
+		{
+			std::cout << "[Intern] - these are the forms I know: " << knownForms[0] << ", " + knownForms[1] + ", " << knownForms[2] << std::endl;
+		}
+		else
+			std::cout << "*The intern handles you back a new form, it reads: Name[" << formTemplate->getName() << "] Target["<< formTemplate->getTarget() << "] GradeRequiredToSign[" << formTemplate->getGradeRequiredToSign() << "] GradeRequiredToExecute[" << formTemplate->getGradeRequiredToExecute() << "]" << std::endl;
+	}
+	else if (index == 1)
+	{
+		std::string burIdx;
+		int			booth = -1;
+
+		std::cout << "\n*You start searching for a bureaucrat to sign your form, there are a few cublicles:" << std::endl;
+		for (int i = 0; i < 7; i++)
+			std::cout << "\t[" << i << "]" << burList[i].getName() << "[" << burList[i].getGrade() << "]" << std::endl;
+		std::cout << "Chose a booth to go to:" << std::endl;
+		std::cin.clear();
+		std::cin.ignore();
+		std::getline(std::cin, burIdx);
+		std::istringstream iss(burIdx);
+		if (iss >> booth && booth < 7 && booth >=0)
+		{
+			if (formTemplate == NULL)
+			{
+				std::cout << "The bureaucrat extends it's hands waiting for you to handle him the papers... You have no papers" << std::endl;
+				return ;
+			}
+			std:: cout << "You handle the form to the bureacrat...." << std::endl;
+			if (burList[booth].signForm(*formTemplate))
+			{
+				std::cout << "The bureaucrat handles the papers back to you. You head back to the entrance" << std::endl;
+				return ;
+			}
+		}
+		else
+		{
+			std::cout << "That is not a valid booth. You got lost in the bureau and decided to head back to the entrance..." << std::endl;
+			return ;
+		}
+	}
+	else if (index == 2)
+	{
+		std::string burIdx;
+		int			booth = -1;
+
+		std::cout << "\n*You start searching for a bureaucrat to execute your form, there are a few cublicles:" << std::endl;
+		for (int i = 0; i < 7; i++)
+			std::cout << "\t[" << i << "]" << burList[i].getName() << "[" << burList[i].getGrade() << "]" << std::endl;
+		std::cout << "Chose a booth to go to:" << std::endl;
+		std::cin.clear();
+		std::cin.ignore();
+		std::getline(std::cin, burIdx);
+		std::istringstream iss(burIdx);
+		if (iss >> booth && booth < 7 && booth >=0)
+		{
+			if (formTemplate == NULL)
+			{
+				std::cout << "The bureaucrat extends it's hands waiting for you to handle him the papers... You have no papers" << std::endl;
+				return ;
+			}
+			std:: cout << "You handle the form to the bureacrat...." << std::endl;
+			if (burList[booth].executeForm(*formTemplate))
+			{
+				std::cout << "The bureaucrat executes your order and burns it. You head back to the entrance" << std::endl;
+				delete formTemplate;
+				formTemplate = NULL;
+				return ;
+			}
+		}
+		else
+		{
+			std::cout << "That is not a valid booth. You got lost in the bureau and decided to head back to the entrance..." << std::endl;
+			return ;
+		}
+	}
+	return ;
+}
+
 int main (int argc, char *argv[])
 {
 	std::string argument;
-	std::string lError("Error, please use one of the following arguments: ex01 | ex02 | constructors | make_form | ALL");
+	std::string lError("Error, please use one of the following arguments: ex01 | ex02 | constructors | make_form | poc | ALL");
 	if (argc > 2)
 	{
 		std::cerr << lError << std::endl;
@@ -1012,6 +1172,11 @@ int main (int argc, char *argv[])
 		ex03_makeForm();
 		return 0;
 	}
+	if (argument.compare("poc") == 0)
+	{
+		ex03_poc();
+		return 0;
+	}
 	else if (argument.compare("ALL") == 0)
 	{
 
@@ -1022,6 +1187,7 @@ int main (int argc, char *argv[])
 
  		ex03_test_constructors();
  		ex03_makeForm();
+		ex03_poc();
 		std::cout << "\n" << std::endl;
 		print_timestamp();
 		std::cout << "ALL TESTS COMPLETED SUCCESSFULLY!" << std::endl;
