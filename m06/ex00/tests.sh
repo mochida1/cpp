@@ -44,11 +44,13 @@ validateFalse() {
 }
 
 make
+if [[ $? != 0 ]]; then
+	echo "COMPILATION ERROR!"
+	exit 1
+fi
 clear
 
 echo "######### STARTING TESTS ###############"
-echo "testing name literals"
-# {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"}
 
 TESTNBR=0
 COMMAND="./convert"
@@ -63,15 +65,62 @@ else
 	VERBOSE=0
 fi
 
-
-validateFalse "nan" "test"
-validateTrue "nan"
-validateTrue "+inf"
-validateTrue "-inf"
+#testing floats
+	#TODO: implement max/min
+echo ">>>>>>>>>>>>>>>>>>TESTING FLOATS"
 validateTrue "nanf"
 validateTrue "+inff"
 validateTrue "-inff"
+validateTrue "42.042f"
+validateTrue "0.042f"
+validateTrue "42f"
+validateTrue "0f"
+validateTrue "0.0f"
+validateTrue "-42.042f"
+validateTrue "-0.042f"
+validateTrue "-42f"
+validateTrue "-0f"
+#testing doubles
+	#TODO: implement max/min
+echo ">>>>>>>>>>>>>>>>>>TESTING DOUBLES"
+validateTrue "nan"
+validateTrue "+inf"
+validateTrue "-inf"
+validateTrue "42.042"
+validateTrue "0.042"
+validateTrue "0.0"
+validateTrue "-42.042"
+validateTrue "-0.042"
+validateTrue "123.123"
+
+#testing ints
+echo ">>>>>>>>>>>>>>>>>>TESTING INTS"
+validateTrue "123"
+validateTrue "42";
+validateTrue "-42";
+validateTrue "-0";
+validateTrue "0";
+#testing chars
+echo ">>>>>>>>>>>>>>>>>>TESTING CHARS"
 validateTrue "a"
 validateTrue "z"
+validateTrue "A"
+validateTrue "Z"
+validateTrue "f"
+
+#testing errors
+echo ">>>>>>>>>>>>>>>>>>TESTING ERRORS"
+validateFalse "nan" "test"
+validateFalse ""
+validateFalse ".123f"
+validateFalse ".f"
+validateFalse "123.123ff"
+validateFalse "1.f"
+validateFalse "123.123f123"
+validateFalse "123.f"
+validateFalse "ff"
+validateFalse "123.f"
+
+
 
 echo "FULLY RAN ALL TESTS!"

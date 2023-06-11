@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:26:39 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/09 21:58:32 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:33:58 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,70 @@ ScalarConverter::~ScalarConverter(void) {
 }
 
 bool ScalarConverter::convert(std::string argument) {
-	if (!_checkArgument(argument))
+	std::string str = _trim(argument);
+	int dataType = _checkArgument(str);
+	switch (dataType)
+	{
+	case DATA_TYPE_ERROR:
+		std::cerr << "ERROR[convert]: Parser didn't recognize input as valid!" << std::endl;
 		return false;
+		break;
+	case DATA_TYPE_DOUBLE:
+		std::cout << "DATA_TYPE is DOUBLE!" << std::endl;
+		break;
+	case DATA_TYPE_FLOAT:
+		std::cout << "DATA_TYPE is FLOAT" << std::endl;
+		break;
+	case DATA_TYPE_INT:
+		std::cout << "DATA_TYPE is INT" << std::endl;
+		break;
+	case DATA_TYPE_CHAR:
+		std::cout << "DATA_TYPE is CHAR!" << std::endl;
+		break;
+	default:
+		std::cerr << "You've fucked up big time, pal" << std::endl;
+		break;
+	}
 	return true;
 }
 
-bool _isWordLiteral(std::string argument) {
-	std::string wordedLiterals[] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
+std::string ScalarConverter::_trim(const std::string& str) {
+	size_t start = str.find_first_not_of(" \t\n\r\f\v");
+	size_t end = str.find_last_not_of(" \t\n\r\f\v");
+
+	if (start == std::string::npos || end == std::string::npos)
+		return "";
+
+	return str.substr(start, end - start + 1);
+}
+
+bool ScalarConverter::_isWordLiteral(std::string argument) {
+	const std::string wordedLiterals[] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
 
 	for (int i = 0; i < 6; i++)
 		if (!argument.compare(wordedLiterals[i]))
 			return true;
+	return false;
+}
+
+bool ScalarConverter::_isFloatWordLiteral(std::string argument) {
+	const std::string wordedFloatLiterals[] = {"-inff", "+inff", "nanf"};
+	int arraySize = sizeof(wordedFloatLiterals) / sizeof(wordedFloatLiterals[0]);
+
+	for (int i = 0; i < arraySize; i++)
+		if (!argument.compare(wordedFloatLiterals[i]))
+			return true;
+	return false;
+}
+
+bool ScalarConverter::_isDoubleWordLiteral(std::string argument) {
+	const	std::string wordedDoubleLiterals[] = {"-inf", "+inf", "nan"};
+	int		arraySize = sizeof(wordedDoubleLiterals) / sizeof(wordedDoubleLiterals[0]);
+
+	for (int i = 0; i < arraySize; i++)
+		if (!argument.compare(wordedDoubleLiterals[i]))
+			return true;
+	return false;
 }
 
 bool	ScalarConverter::_isAlpha(char c) {
@@ -62,8 +115,12 @@ bool	ScalarConverter::_isDigit(char c){
 
 bool	ScalarConverter::_isFloat(std::string argument) {
 	int i = 0;
-	if (&argument == NULL)
+	if (argument.compare("") == 0)
 		return false;
+	if (_isFloatWordLiteral(argument))
+		return true;
+	if (argument[i] == '-' || argument[i] == '+') // checks wheter there's a signal
+		i++;
 	if (!_isDigit(argument[i]))
 		return false;
 	while (_isDigit(argument[i])) // integer part of the float
@@ -86,9 +143,60 @@ bool	ScalarConverter::_isFloat(std::string argument) {
 }
 
 bool	ScalarConverter::_isDouble(std::string argument) {
+	int i = 0;
+	if (argument.compare("") == 0)
+		return false;
+	if (_isDoubleWordLiteral(argument))
+		return true;
+	if (argument[i] == '-' || argument[i] == '+') // checks wheter there's a signal
+		i++;
+	if (!_isDigit(argument[i]))
+		return false;
+	while (_isDigit(argument[i])) // integer part of the float
+		i++;
+	if (argument[i] != '.') // we've reached the . part of the float
+	{
+		if (argument[i] == '\0') // if the double has no fractional part, it is true; ie 42
+			return true;
+		return false;
+	}
+	if (argument[i] && argument[i] == '.') // now we assert this is not a \0 and that it must be a '.'
+		i++;
+	if (!_isDigit(argument[i]))
+		return false; // means the string comes as DD.C
+	while (_isDigit(argument[i]))
+		i++;
+	while (argument[i] && std::isspace(argument[i]))
+		i++;
+	if (!argument[i])
+		return true;
+	return false;
 }
 
 bool	ScalarConverter::_isInt(std::string argument) {
+	int	i = 0;
+	if (argument.length() == 0)
+		return false;
+	if (argument[0] == '-' || argument[0] == '+')
+		i++;
+	if (argument[i] == '\0')
+		return false;
+	while (argument[i])
+	{
+		if (_isDigit(argument[i]))
+			i++;
+		else
+			return false;
+	}
+	return true;
+}
+
+bool ScalarConverter::_isChar(std::string argument) {
+	if (argument.length() != 1)
+		return false;
+	if (std::isprint(argument[0]) && argument[1] == '\0')
+		return true;
+	return false;
 }
 
 /*
@@ -98,32 +206,240 @@ bool	ScalarConverter::_isInt(std::string argument) {
 	Examples of double literals: 0.0, -4.2, 4.2...-inf, +inf and nan.
 */
 int ScalarConverter::_checkArgument(std::string argument) {
-	if ( _isFloat("42.042f"))
-		return true;
-	return false;
-
-	if ( _isWordLiteral(argument) )
-		return true;
-	if ( argument.length() == 1 && _isAlpha(argument[0]) )
-		return true;
-
-	return false;
+	if (_isInt(argument))
+		return DATA_TYPE_INT;
+	else if (_isFloat(argument))
+		return DATA_TYPE_FLOAT;
+	else if (_isDouble(argument))
+		return DATA_TYPE_DOUBLE;
+	else if (_isChar(argument))
+		return DATA_TYPE_CHAR;
+	else
+		return DATA_TYPE_ERROR;
 }
 
+
+//-inff", "+inff", "nanf", "-inf", "+inf", "nan"
 bool		ScalarConverter::tests(void){
+	_printMaxValues();
+	std::cout << "\n-------------TESTING [_trim]----------------" << std::endl;
+	assert(_trim("   spaces     and stuff \t\v").compare("spaces     and stuff") == 0);
 
 	std::cout << "-------------TESTING [_isFloat]-------------" << std::endl;
+	assert(_isFloat("-inff") == true);
+	assert(_isFloat("+inff") == true);
+	assert(_isFloat("nanf") == true);
 	assert(_isFloat("42.042f") == true);
 	assert(_isFloat("0.042f") == true);
 	assert(_isFloat("42f") == true);
 	assert(_isFloat("0f") == true);
+	assert(_isFloat("0.0f") == true);
+	assert(_isFloat("-42.042f") == true);
+	assert(_isFloat("-0.042f") == true);
+	assert(_isFloat("-42f") == true);
+	assert(_isFloat("-0f") == true);
 	assert(_isFloat("") == false);
 	assert(_isFloat("f") == false);
 	assert(_isFloat("123") == false);
+	assert(_isFloat("123.123") == false);
 	assert(_isFloat("123.123ff") == false);
 	assert(_isFloat(".123f") == false);
 	assert(_isFloat(".f") == false);
 	assert(_isFloat("1.f") == false);
 	assert(_isFloat("123.123f123") == false);
+	assert(_isFloat("123.f") == false);
+	assert(_isFloat("-inf") == false);
+	assert(_isFloat("+inf") == false);
+	assert(_isFloat("nan") == false);
+	assert(_isFloat("a") == false);
+	assert(_isFloat("z") == false);
+	assert(_isFloat("A") == false);
+	assert(_isFloat("Z") == false);
 
+	std::cout << "-------------TESTING [_isDouble]------------" << std::endl;
+	assert(_isDouble("123") == true);
+	assert(_isDouble("42.042") == true);
+	assert(_isDouble("0.042") == true);
+	assert(_isDouble("42") == true);
+	assert(_isDouble("0") == true);
+	assert(_isDouble("0.0") == true);
+	assert(_isDouble("-42.042") == true);
+	assert(_isDouble("-0.042") == true);
+	assert(_isDouble("-42") == true);
+	assert(_isDouble("-0") == true);
+	assert(_isDouble("42.042f") == false);
+	assert(_isDouble("0.042f") == false);
+	assert(_isDouble("42f") == false);
+	assert(_isDouble("0f") == false);
+	assert(_isDouble("-42.042f") == false);
+	assert(_isDouble("-0.042f") == false);
+	assert(_isDouble("-42f") == false);
+	assert(_isDouble("-0f") == false);
+	assert(_isDouble("") == false);
+	assert(_isDouble("f") == false);
+	assert(_isDouble("123.123ff") == false);
+	assert(_isDouble(".123f") == false);
+	assert(_isDouble(".f") == false);
+	assert(_isDouble("1.f") == false);
+	assert(_isDouble("123.123f123") == false);
+	assert(_isDouble("123.f") == false);
+	assert(_isDouble("a") == false);
+	assert(_isDouble("z") == false);
+	assert(_isDouble("A") == false);
+	assert(_isDouble("Z") == false);
+
+	std::cout << "-------------TESTING [_isInt]---------------" << std::endl;
+	assert(_isInt("123") == true);
+	assert(_isInt("42") == true);
+	assert(_isInt("-42") == true);
+	assert(_isInt("-0") == true);
+	assert(_isInt("0") == true);
+	assert(_isInt("0.0") == false);
+	assert(_isInt("42.042") == false);
+	assert(_isInt("0.042") == false);
+	assert(_isInt("-42.042") == false);
+	assert(_isInt("-0.042") == false);
+	assert(_isInt("42.042f") == false);
+	assert(_isInt("0.042f") == false);
+	assert(_isInt("42f") == false);
+	assert(_isInt("0f") == false);
+	assert(_isInt("-42.042f") == false);
+	assert(_isInt("-0.042f") == false);
+	assert(_isInt("-42f") == false);
+	assert(_isInt("-0f") == false);
+	assert(_isInt("") == false);
+	assert(_isInt("f") == false);
+	assert(_isInt("123.123ff") == false);
+	assert(_isInt(".123f") == false);
+	assert(_isInt(".f") == false);
+	assert(_isInt("1.f") == false);
+	assert(_isInt("123.123f123") == false);
+	assert(_isInt("123.f") == false);
+	assert(_isInt("a") == false);
+	assert(_isInt("z") == false);
+	assert(_isInt("A") == false);
+	assert(_isInt("Z") == false);
+
+	std::cout << "-------------TESTING [_isChar]--------------" << std::endl;
+	assert(_isChar("a") == true);
+	assert(_isChar("z") == true);
+	assert(_isChar("A") == true);
+	assert(_isChar("f") == true);
+	assert(_isChar("Z") == true);
+	assert(_isChar("0") == true);
+	assert(_isChar("123") == false);
+	assert(_isChar("42") == false);
+	assert(_isChar("-42") == false);
+	assert(_isChar("-0") == false);
+	assert(_isChar("0.0") == false);
+	assert(_isChar("42.042") == false);
+	assert(_isChar("0.042") == false);
+	assert(_isChar("-42.042") == false);
+	assert(_isChar("-0.042") == false);
+	assert(_isChar("42.042f") == false);
+	assert(_isChar("0.042f") == false);
+	assert(_isChar("42f") == false);
+	assert(_isChar("0f") == false);
+	assert(_isChar("-42.042f") == false);
+	assert(_isChar("-0.042f") == false);
+	assert(_isChar("-42f") == false);
+	assert(_isChar("-0f") == false);
+	assert(_isChar("") == false);
+	assert(_isChar("123.123ff") == false);
+	assert(_isChar(".123f") == false);
+	assert(_isChar(".f") == false);
+	assert(_isChar("1.f") == false);
+	assert(_isChar("123.123f123") == false);
+	assert(_isChar("123.f") == false);
+
+	return true;
+}
+
+void ScalarConverter::_printMaxValues(void){
+	std::cout << "\n## Printing VARIABLES WITH ALL BITS ON ##" << std::endl;
+	_printMaxDouble();
+	_printMaxFloat();
+	_printMaxInt();
+	_printMaxChar();
+}
+
+void ScalarConverter::_printMaxDouble(void){
+	unsigned long long valueAsInt = 0xffffffffffffffff;
+	bool	bitVal;
+	double	val = *reinterpret_cast<double*>(&valueAsInt);
+	double	max = std::numeric_limits<double>::max();
+	size_t	lSize = sizeof(val) * 8;
+	std::cout << "MAX DOUBLE: size["<< lSize <<"] Value:[" << val << "]  INT value:[" << valueAsInt <<"] max valid value:[" << max << "]" << std::endl;
+	for (int i = lSize - 1; i >= 0; i--)
+	{
+		if ( (i%8 == 0) && i != 0 )
+			std::cout << ' ';
+		bitVal = (valueAsInt & (1ULL << i));
+		std::cout << bitVal;
+	}
+	std::cout << std::endl;
+	valueAsInt = *reinterpret_cast<unsigned long long*>(&max);
+	std::cout << "MAX valid DOUBLE: size["<< lSize <<"] Value:[" << max << "]  INT value:[" << valueAsInt <<"]" << std::endl;
+	for (int i = lSize - 1; i >= 0; i--)
+	{
+		if ( (i%8 == 0) && i != 0 )
+			std::cout << ' ';
+		bitVal = (valueAsInt & (1ULL << i));
+		std::cout << bitVal;
+	}
+	std::cout << std::endl;
+	return ;
+}
+
+void ScalarConverter::_printMaxFloat(void){
+	unsigned int valueAsInt = 0xffffffff;
+	bool	bitVal;
+	float	val = *reinterpret_cast<float*>(&valueAsInt);
+	size_t	lSize = sizeof(val) * 8;
+	std::cout << "MAX float: size["<< lSize <<"] Value:[" << val << "]  INT value:[" << valueAsInt <<"]" << std::endl;
+	for (int i = lSize - 1; i >= 0; i--)
+	{
+		if ( (i%8 == 0) && i != 0 )
+			std::cout << ' ';
+		bitVal = (valueAsInt & (1 << i));
+		std::cout << bitVal;
+	}
+	std::cout << std::endl;
+	return ;
+}
+
+void ScalarConverter::_printMaxInt(void){
+	int	printme = 0;
+	size_t	lSize = sizeof(printme) * 8;
+	bool	bitVal;
+	for (size_t i = 0; i < lSize; i++)
+		printme += (1 << i);
+	std::cout << "MAX Int: size["<< lSize <<"] [" << printme << "]" << std::endl;
+	for (size_t i = 0; i < lSize; i++)
+	{
+		if ( (i%8 == 0) && i != 0 )
+			std::cout << ' ';
+		bitVal = (printme & (1 << i));
+		std::cout << bitVal;
+	}
+	std::cout << std::endl;
+	return ;
+}
+
+void ScalarConverter::_printMaxChar(void){
+	char	printme = 0;
+	size_t	lSize = sizeof(printme) * 8;
+	bool	bitVal;
+	for (size_t i = 0; i < lSize; i++)
+		printme += (1 << i);
+	std::cout << "MAX Char: size["<< lSize <<"] [" << (int)(printme) << "]" << std::endl;
+	for (size_t i = 0; i < lSize; i++)
+	{
+		if ( (i%8 == 0) && i != 0 )
+			std::cout << ' ';
+		bitVal = (printme & (1 << i));
+		std::cout << bitVal;
+	}
+	std::cout << std::endl;
+	return ;
 }

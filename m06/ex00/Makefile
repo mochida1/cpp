@@ -6,7 +6,7 @@
 #    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/06/09 17:53:55 by hmochida         ###   ########.fr        #
+#    Updated: 2023/06/11 13:43:01 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ CC = c++
 CF = -Wall -Wextra -Werror -std=c++98
 GDB = -ggdb
 VAL = valgrind --trace-children=no --leak-check=full --track-origins=yes \
-		./$(NAME) ALL
+		./$(NAME) "42f"
 
 $(NAME): $(BUILDDIR) $(OBJS)
 	@printf "Compiling $(NAME)\n"

@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:23:17 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/09 21:56:30 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:07:10 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ScalarConverter.hpp"
 
 int main (int argc, char *argv[]){
-	char tests = 1;
+	char tests = 0;
 
 	if (argc != 2)
 	{
