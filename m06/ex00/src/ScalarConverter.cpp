@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:26:39 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/11 21:26:20 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:52:15 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,6 +453,10 @@ void	ScalarConverter::_convertFromDouble(std::string argument){
 	// infinity is greater than a really fucking humongous number. No warnings should be sent;
 	if (doubleValue >= std::numeric_limits<double>::max() && doubleValue != std::numeric_limits<double>::infinity())
 			std::cout << "WARNING! You used a LOT of numbers, double may have been overflown!" << std::endl;
+	doubleValueTemp = doubleValue;
+	if (doubleValue < 0) // the sign bit does not affects or limits
+		doubleValueTemp *= -1;
+
 	intValue = static_cast<int>(doubleValue);
 	charValue = static_cast<char>(doubleValue);
 	if (_isWordLiteral(argument))
@@ -463,32 +467,70 @@ void	ScalarConverter::_convertFromDouble(std::string argument){
 		std::cout << "double:\t" << doubleValue << std::endl;
 		return ;
 	}
+	//char
 	if (std::floor(doubleValue) > 127 || std::floor(doubleValue) < -128)
-		std::cout << "char:\t impossible" << std::endl;
+		std::cout << "char:\timpossible" << std::endl;
 	else
 		std::cout << "char:\t" << _charValueToPrint(charValue) << std::endl;
+	// ints
 	if (std::floor(doubleValue) > std::numeric_limits<int>::max() || std::floor(doubleValue) < std::numeric_limits<int>::min())
-		std::cout << "int:\t impossible" << std::endl;
+		std::cout << "int:\timpossible" << std::endl;
 	else
 		std::cout << "int:\t" << intValue << std::endl;
-	if (doubleValue < 0) // the sign bit does not affects or limits
-		doubleValueTemp = doubleValue* -1;
-	if ( (doubleValueTemp > std::numeric_limits<float>::max() || doubleValueTemp < std::numeric_limits<float>::min()) && doubleValue != 0)
+	// floats
+	if ( (doubleValueTemp >= std::numeric_limits<float>::max() || doubleValueTemp <= std::numeric_limits<float>::min()) && doubleValue != 0)
 		std::cout << "float:\timpossible"<< std::endl;
 	else
 		std::cout << "float:\t" << floatValue << _printZeroIfNeeded(floatValue) << 'f' << std::endl;
+	// double
 	std::cout << "double:\t" << doubleValue << _printZeroIfNeeded(doubleValue) << std::endl;
 }
 
 void	ScalarConverter::_convertFromFloat(std::string argument){
 	std::istringstream iss(argument);
 	float	floatValue;
-	// double	doubleValue;
-	// int		intValue;
-	// char	charValue;
+	double	doubleValue;
+	int		intValue;
+	char	charValue;
+	float	floatValueTemp = 0;
 	iss >> floatValue;
-	if (floatValue > std::numeric_limits<int>::max())
-		std::cout << "SUFHDUGDFGHXFDHXFDIHXFIHFHIXFDHXHXFGH" << std::endl;
+
+	if (_isWordLiteral(argument))
+		_setToLiterals(argument, doubleValue, floatValue);
+	else
+	{
+		iss >> floatValue;
+		doubleValue = static_cast<double>(floatValue);
+	}
+	if (floatValue < 0) // the sign bit does not affects or limits
+		floatValueTemp = floatValue* -1;
+	if (floatValueTemp >= std::numeric_limits<float>::max() && floatValueTemp != std::numeric_limits<float>::infinity())
+		std::cout << "WARNING! You used a LOT of numbers, float may have been overflown!" << std::endl;
+	if ( (floatValueTemp < std::numeric_limits<float>::min()) && floatValue != 0)
+		std::cout << "WARNING! You used a LOT of numbers, float may have been underflown!" << std::endl;
+
+	intValue = static_cast<int>(floatValue);
+	charValue = static_cast<char>(floatValue);
+	if (_isWordLiteral(argument))
+	{
+		std::cout << "char:\timpossible" << std::endl;
+		std::cout << "int:\timpossible" << std::endl;
+		std::cout << "float:\t" << _getFloatLiteralString(floatValue) << std::endl;
+		std::cout << "double:\t" << doubleValue << std::endl;
+		return ;
+	}
+	if (std::floor(doubleValue) > 127 || std::floor(doubleValue) < -128)
+		std::cout << "char:\timpossible" << std::endl;
+	else
+		std::cout << "char:\t" << _charValueToPrint(charValue) << std::endl;
+	if (std::floor(doubleValue) > std::numeric_limits<int>::max() || std::floor(doubleValue) < std::numeric_limits<int>::min())
+		std::cout << "int:\timpossible" << std::endl;
+	else
+		std::cout << "int:\t" << intValue << std::endl;
+
+	std::cout << "float:\t" << floatValue << _printZeroIfNeeded(floatValue) << 'f' << std::endl;
+	std::cout << "double:\t" << doubleValue << _printZeroIfNeeded(doubleValue) << std::endl;
+	return ;
 }
 
 void	ScalarConverter::_convertFromInt(std::string argument){
