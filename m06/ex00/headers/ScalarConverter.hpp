@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:26:46 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/11 18:34:01 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:19:31 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 #  define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <sstream>
 #include <cassert>
 #include <limits>
+#include <string>
+#include <cmath>
 
 #define DATA_TYPE_ERROR		0
 #define DATA_TYPE_CHAR		1
@@ -48,11 +51,17 @@ private:
 	static bool	_isInt(std::string argument);
 	static bool	_isChar(std::string argument);
 	static bool	_isDigit(char c);
-	// double	_double;
-	// float	_float;
-	// int		_int;
-	// char	_char;
+	static void	_convertFromDouble(std::string argument);
+	static void	_convertFromFloat(std::string argument);
+	static void	_convertFromInt(std::string argument);
+	static void	_convertFromChar(std::string argument);
+	static void	_setToLiterals(std::string argument, double &doubleValue, float &floatValue);
+	static std::string _getFloatLiteralString(float floatvalue);
+	static std::string	_charValueToPrint(char c);
+	static std::string _printZeroIfNeeded(float floatValue);
+	static std::string _printZeroIfNeeded(double doubleValue);
 
+	// DEBUG
 	static void	_printMaxValues(void);
 	static void	_printMaxDouble(void);
 	static void	_printMaxFloat(void);

@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:26:39 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/11 18:33:58 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:26:20 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ bool ScalarConverter::convert(std::string argument) {
 		break;
 	case DATA_TYPE_DOUBLE:
 		std::cout << "DATA_TYPE is DOUBLE!" << std::endl;
+		_convertFromDouble(argument);
 		break;
 	case DATA_TYPE_FLOAT:
 		std::cout << "DATA_TYPE is FLOAT" << std::endl;
@@ -56,7 +57,7 @@ bool ScalarConverter::convert(std::string argument) {
 		std::cout << "DATA_TYPE is CHAR!" << std::endl;
 		break;
 	default:
-		std::cerr << "You've fucked up big time, pal" << std::endl;
+		std::cerr << "you IS hackerman" << std::endl;
 		break;
 	}
 	return true;
@@ -115,6 +116,7 @@ bool	ScalarConverter::_isDigit(char c){
 
 bool	ScalarConverter::_isFloat(std::string argument) {
 	int i = 0;
+
 	if (argument.compare("") == 0)
 		return false;
 	if (_isFloatWordLiteral(argument))
@@ -128,7 +130,14 @@ bool	ScalarConverter::_isFloat(std::string argument) {
 	if (argument[i] != '.') // we've reached the . part of the float
 	{
 		if (argument[i] == 'f') // if the float has no fractional part, it is true; ie 42f
+		{
+			std::istringstream iss(argument);
+			double	doubleValue;
+			iss >> doubleValue;
+			if (doubleValue > std::numeric_limits<int>::max() || doubleValue < std::numeric_limits<int>::min())
+				return false;
 			return true;
+		}
 		return false;
 	}
 	if (argument[i] && argument[i] == '.') // now we assert this is not a \0 and that it must be a '.'
@@ -138,7 +147,16 @@ bool	ScalarConverter::_isFloat(std::string argument) {
 	while (_isDigit(argument[i]))
 		i++;
 	if (argument[i] && argument[i] == 'f' && argument[i+1] == '\0')
+	{
+		std::istringstream iss(argument);
+		double	doubleValue;
+		iss >> doubleValue;
+		if (doubleValue < 0) // the sign bit does not affects or limits
+			doubleValue *= -1;
+		if ( (doubleValue > std::numeric_limits<float>::max() || doubleValue < std::numeric_limits<float>::min()) && doubleValue != 0) // edge case of 0.0f IS a valid float.
+			return false;
 		return true;
+	}
 	return false;
 }
 
@@ -171,6 +189,7 @@ bool	ScalarConverter::_isDouble(std::string argument) {
 	if (!argument[i])
 		return true;
 	return false;
+
 }
 
 bool	ScalarConverter::_isInt(std::string argument) {
@@ -188,6 +207,12 @@ bool	ScalarConverter::_isInt(std::string argument) {
 		else
 			return false;
 	}
+	std::istringstream iss(argument);
+
+	double	doubleValue;
+	iss >> doubleValue;
+	if (doubleValue > std::numeric_limits<int>::max() || doubleValue < std::numeric_limits<int>::min())
+		return false;
 	return true;
 }
 
@@ -206,20 +231,19 @@ bool ScalarConverter::_isChar(std::string argument) {
 	Examples of double literals: 0.0, -4.2, 4.2...-inf, +inf and nan.
 */
 int ScalarConverter::_checkArgument(std::string argument) {
-	if (_isInt(argument))
+	if (_isChar(argument))
+		return DATA_TYPE_CHAR;
+	else if (_isInt(argument))
 		return DATA_TYPE_INT;
 	else if (_isFloat(argument))
 		return DATA_TYPE_FLOAT;
 	else if (_isDouble(argument))
 		return DATA_TYPE_DOUBLE;
-	else if (_isChar(argument))
-		return DATA_TYPE_CHAR;
 	else
 		return DATA_TYPE_ERROR;
 }
 
 
-//-inff", "+inff", "nanf", "-inf", "+inf", "nan"
 bool		ScalarConverter::tests(void){
 	_printMaxValues();
 	std::cout << "\n-------------TESTING [_trim]----------------" << std::endl;
@@ -353,6 +377,126 @@ bool		ScalarConverter::tests(void){
 	assert(_isChar("123.f") == false);
 
 	return true;
+}
+
+void	ScalarConverter::_setToLiterals(std::string argument, double &doubleValue, float &floatValue){
+	if (argument.compare("nan") == 0)
+	{
+		doubleValue = std::numeric_limits<double>::quiet_NaN();
+		floatValue = std::numeric_limits<float>::quiet_NaN();
+	}
+	else if (argument.compare("+inf") == 0)
+	{
+		doubleValue = std::numeric_limits<double>::infinity();
+		floatValue = std::numeric_limits<float>::infinity();
+	}
+	else if (argument.compare("-inf") == 0)
+	{
+		doubleValue = std::numeric_limits<double>::infinity() * -1;
+		floatValue = std::numeric_limits<float>::infinity() * -1;
+	}
+	else
+		return ;
+}
+
+std::string ScalarConverter::_getFloatLiteralString(float floatvalue){
+	if (std::isnan(floatvalue))
+		return "nanf";
+	else if (floatvalue == std::numeric_limits<float>::infinity())
+		return "inff";
+	else
+		return "-inff";
+}
+
+std::string	ScalarConverter::_charValueToPrint(char c){
+	std::string ret("");
+	if (std::isprint(c))
+	{
+		ret += '\'';
+		ret += c;
+		ret += '\'';
+	}
+	else
+		ret = "Non displayable";
+	return ret;
+}
+
+std::string ScalarConverter::_printZeroIfNeeded(float floatValue)
+{
+	int temp = static_cast<int>(floatValue);
+	if (floatValue - temp == 0)
+		return ".0";
+	return "";
+}
+
+std::string ScalarConverter::_printZeroIfNeeded(double doubleValue){
+	int temp = static_cast<int>(doubleValue);
+	if (doubleValue - temp == 0)
+		return ".0";
+	return "";
+}
+
+void	ScalarConverter::_convertFromDouble(std::string argument){
+	std::istringstream iss(argument);
+	float	floatValue = 0;
+	double	doubleValue = 0;
+	int		intValue = 0;
+	char	charValue = 0;
+	double	doubleValueTemp = 0;
+	if (_isWordLiteral(argument))
+		_setToLiterals(argument, doubleValue, floatValue);
+	else
+	{
+		iss >> doubleValue;
+		floatValue = static_cast<float>(doubleValue);
+	}
+	// infinity is greater than a really fucking humongous number. No warnings should be sent;
+	if (doubleValue >= std::numeric_limits<double>::max() && doubleValue != std::numeric_limits<double>::infinity())
+			std::cout << "WARNING! You used a LOT of numbers, double may have been overflown!" << std::endl;
+	intValue = static_cast<int>(doubleValue);
+	charValue = static_cast<char>(doubleValue);
+	if (_isWordLiteral(argument))
+	{
+		std::cout << "char:\timpossible" << std::endl;
+		std::cout << "int:\timpossible" << std::endl;
+		std::cout << "float:\t" << _getFloatLiteralString(floatValue) << std::endl;
+		std::cout << "double:\t" << doubleValue << std::endl;
+		return ;
+	}
+	if (std::floor(doubleValue) > 127 || std::floor(doubleValue) < -128)
+		std::cout << "char:\t impossible" << std::endl;
+	else
+		std::cout << "char:\t" << _charValueToPrint(charValue) << std::endl;
+	if (std::floor(doubleValue) > std::numeric_limits<int>::max() || std::floor(doubleValue) < std::numeric_limits<int>::min())
+		std::cout << "int:\t impossible" << std::endl;
+	else
+		std::cout << "int:\t" << intValue << std::endl;
+	if (doubleValue < 0) // the sign bit does not affects or limits
+		doubleValueTemp = doubleValue* -1;
+	if ( (doubleValueTemp > std::numeric_limits<float>::max() || doubleValueTemp < std::numeric_limits<float>::min()) && doubleValue != 0)
+		std::cout << "float:\timpossible"<< std::endl;
+	else
+		std::cout << "float:\t" << floatValue << _printZeroIfNeeded(floatValue) << 'f' << std::endl;
+	std::cout << "double:\t" << doubleValue << _printZeroIfNeeded(doubleValue) << std::endl;
+}
+
+void	ScalarConverter::_convertFromFloat(std::string argument){
+	std::istringstream iss(argument);
+	float	floatValue;
+	// double	doubleValue;
+	// int		intValue;
+	// char	charValue;
+	iss >> floatValue;
+	if (floatValue > std::numeric_limits<int>::max())
+		std::cout << "SUFHDUGDFGHXFDHXFDIHXFIHFHIXFDHXHXFGH" << std::endl;
+}
+
+void	ScalarConverter::_convertFromInt(std::string argument){
+	(void)(argument);
+}
+
+void	ScalarConverter::_convertFromChar(std::string argument){
+	(void)(argument);
 }
 
 void ScalarConverter::_printMaxValues(void){

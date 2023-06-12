@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:23:17 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/11 18:07:10 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/06/11 20:51:26 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int main (int argc, char *argv[]){
 	char tests = 0;
-
 	if (argc != 2)
 	{
 		std::cerr << "ERROR! Try again with valid inputs" << std::endl;
@@ -34,3 +33,4 @@ int main (int argc, char *argv[]){
 		return 2;
 	}
 }
+

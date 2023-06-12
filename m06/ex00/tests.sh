@@ -56,6 +56,8 @@ TESTNBR=0
 COMMAND="./convert"
 VB1="verbose"
 VB2="VERBOSE"
+INT_MAX="2147483648" #int max +1
+INT_MIN="-2147483649"
 
 if [[ "$1" == "$VB1" ]]; then
 	VERBOSE=1
@@ -92,6 +94,8 @@ validateTrue "0.0"
 validateTrue "-42.042"
 validateTrue "-0.042"
 validateTrue "123.123"
+validateTrue $INT_MAX
+validateTrue $INT_MIN
 
 #testing ints
 echo ">>>>>>>>>>>>>>>>>>TESTING INTS"
@@ -120,6 +124,8 @@ validateFalse "123.123f123"
 validateFalse "123.f"
 validateFalse "ff"
 validateFalse "123.f"
+validateFalse $INT_MAX"f"
+validateFalse $INT_MIN"f"
 
 
 
