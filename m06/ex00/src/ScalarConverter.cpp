@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:26:39 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/11 21:52:15 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/06/14 22:48:29 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ bool ScalarConverter::convert(std::string argument) {
 		break;
 	case DATA_TYPE_FLOAT:
 		std::cout << "DATA_TYPE is FLOAT" << std::endl;
+		_convertFromFloat(argument);
 		break;
 	case DATA_TYPE_INT:
 		std::cout << "DATA_TYPE is INT" << std::endl;
+		_convertFromInt(argument);
 		break;
 	case DATA_TYPE_CHAR:
 		std::cout << "DATA_TYPE is CHAR!" << std::endl;
@@ -129,7 +131,7 @@ bool	ScalarConverter::_isFloat(std::string argument) {
 		i++;
 	if (argument[i] != '.') // we've reached the . part of the float
 	{
-		if (argument[i] == 'f') // if the float has no fractional part, it is true; ie 42f
+		if (argument[i] == 'f' && argument[i + 1] == 0) // if the float has no fractional part, it is true; ie 42f
 		{
 			std::istringstream iss(argument);
 			double	doubleValue;
@@ -220,7 +222,8 @@ bool ScalarConverter::_isChar(std::string argument) {
 	if (argument.length() != 1)
 		return false;
 	if (std::isprint(argument[0]) && argument[1] == '\0')
-		return true;
+		if (isalpha(argument[0]))
+			return true;
 	return false;
 }
 
@@ -450,12 +453,14 @@ void	ScalarConverter::_convertFromDouble(std::string argument){
 		iss >> doubleValue;
 		floatValue = static_cast<float>(doubleValue);
 	}
-	// infinity is greater than a really fucking humongous number. No warnings should be sent;
-	if (doubleValue >= std::numeric_limits<double>::max() && doubleValue != std::numeric_limits<double>::infinity())
-			std::cout << "WARNING! You used a LOT of numbers, double may have been overflown!" << std::endl;
 	doubleValueTemp = doubleValue;
 	if (doubleValue < 0) // the sign bit does not affects or limits
 		doubleValueTemp *= -1;
+	// infinity is greater than a really fucking humongous number. No warnings should be sent;
+	if (doubleValue >= std::numeric_limits<double>::max() && doubleValue != std::numeric_limits<double>::infinity())
+			std::cout << "WARNING! You used a LOT of numbers, double may have been overflown!" << std::endl;
+	if ( (doubleValueTemp < std::numeric_limits<double>::min()) && doubleValue != 0)
+		std::cout << "WARNING! You used a LOT of numbers, double may have been underflown!" << std::endl;
 
 	intValue = static_cast<int>(doubleValue);
 	charValue = static_cast<char>(doubleValue);
@@ -534,7 +539,30 @@ void	ScalarConverter::_convertFromFloat(std::string argument){
 }
 
 void	ScalarConverter::_convertFromInt(std::string argument){
-	(void)(argument);
+	std::istringstream iss(argument);
+	float	floatValue;
+	double	doubleValue;
+	int		intValue;
+	char	charValue;
+	float	intValueTemp = 0;
+	iss >> intValue;
+
+	if (intValueTemp >= std::numeric_limits<int>::max() && intValueTemp != std::numeric_limits<int>::infinity())
+		std::cout << "WARNING! You used a LOT of numbers, int may have been overflown!" << std::endl;
+	if ( intValueTemp < 0 && ((intValueTemp < std::numeric_limits<int>::min()) && intValue != 0))
+		std::cout << "WARNING! You used a LOT of numbers, int may have been underflown!" << std::endl;
+	floatValue = static_cast<float>(intValue);
+	doubleValue = static_cast<double>(intValue);
+	charValue = static_cast<char>(intValue);
+
+	if (intValue > 127 || intValue < -128)
+		std::cout << "char:\timpossible" << std::endl;
+	else
+		std::cout << "char:\t" << _charValueToPrint(charValue) << std::endl;
+	std::cout << "int:\t" << intValue << std::endl;
+	std::cout << "float:\t" << floatValue << "f" << std::endl;
+	std::cout << "double:\t" << doubleValue << std::endl;
+	return ;
 }
 
 void	ScalarConverter::_convertFromChar(std::string argument){

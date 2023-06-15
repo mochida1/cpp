@@ -56,8 +56,10 @@ TESTNBR=0
 COMMAND="./convert"
 VB1="verbose"
 VB2="VERBOSE"
-INT_MAX="2147483648" #int max +1
-INT_MIN="-2147483649"
+INT_MAX1="2147483648" #int max +1
+INT_MIN1="-2147483649" #int min -1
+INT_MAX="2147483647"
+INT_MIN="-2147483648"
 
 if [[ "$1" == "$VB1" ]]; then
 	VERBOSE=1
@@ -67,8 +69,21 @@ else
 	VERBOSE=0
 fi
 
-#testing floats
+#testing doubles
 	#TODO: implement max/min
+echo ">>>>>>>>>>>>>>>>>>TESTING DOUBLES"
+validateTrue "nan"
+validateTrue "+inf"
+validateTrue "-inf"
+validateTrue "42.042"
+validateTrue "0.042"
+validateTrue "0.0"
+validateTrue "-42.042"
+validateTrue "-0.042"
+validateTrue "123.123"
+validateTrue $INT_MAX1
+validateTrue $INT_MIN1
+#testing floats
 echo ">>>>>>>>>>>>>>>>>>TESTING FLOATS"
 validateTrue "nanf"
 validateTrue "+inff"
@@ -82,21 +97,8 @@ validateTrue "-42.042f"
 validateTrue "-0.042f"
 validateTrue "-42f"
 validateTrue "-0f"
-#testing doubles
-	#TODO: implement max/min
-echo ">>>>>>>>>>>>>>>>>>TESTING DOUBLES"
-validateTrue "nan"
-validateTrue "+inf"
-validateTrue "-inf"
-validateTrue "42.042"
-validateTrue "0.042"
-validateTrue "0.0"
-validateTrue "-42.042"
-validateTrue "-0.042"
-validateTrue "123.123"
-validateTrue $INT_MAX
-validateTrue $INT_MIN
-
+validateTrue $INT_MAX"f"
+validateTrue $INT_MIN"f"
 #testing ints
 echo ">>>>>>>>>>>>>>>>>>TESTING INTS"
 validateTrue "123"
@@ -104,6 +106,10 @@ validateTrue "42";
 validateTrue "-42";
 validateTrue "-0";
 validateTrue "0";
+validateTrue "1";
+validateTrue "-1";
+validateTrue $INT_MAX
+validateTrue $INT_MIN
 #testing chars
 echo ">>>>>>>>>>>>>>>>>>TESTING CHARS"
 validateTrue "a"
@@ -122,10 +128,20 @@ validateFalse "123.123ff"
 validateFalse "1.f"
 validateFalse "123.123f123"
 validateFalse "123.f"
+validateFalse "123fsdffgfdfg"
 validateFalse "ff"
+validateFalse "-a"
+validateFalse "-z"
+validateFalse "+a"
+validateFalse "+z"
+validateFalse "-A"
+validateFalse "-Z"
+validateFalse "+A"
+validateFalse "+Z"
 validateFalse "123.f"
-validateFalse $INT_MAX"f"
-validateFalse $INT_MIN"f"
+##the following two are not representable as float
+validateFalse $INT_MAX1"f"
+validateFalse $INT_MIN1"f"
 
 
 
