@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:26:39 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/15 23:34:14 by mochida          ###   ########.fr       */
+/*   Updated: 2023/06/15 23:40:52 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,20 @@ bool ScalarConverter::convert(std::string argument) {
 		return false;
 		break;
 	case DATA_TYPE_DOUBLE:
-		std::cout << "DATA_TYPE is DOUBLE!" << std::endl;
+		// std::cout << "DATA_TYPE is DOUBLE!" << std::endl;
 		_convertFromDouble(argument);
 		break;
 	case DATA_TYPE_FLOAT:
-		std::cout << "DATA_TYPE is FLOAT" << std::endl;
+		// std::cout << "DATA_TYPE is FLOAT" << std::endl;
 		_convertFromFloat(argument);
 		break;
 	case DATA_TYPE_INT:
-		std::cout << "DATA_TYPE is INT" << std::endl;
+		// std::cout << "DATA_TYPE is INT" << std::endl;
 		_convertFromInt(argument);
 		break;
 	case DATA_TYPE_CHAR:
-		std::cout << "DATA_TYPE is CHAR!" << std::endl;
+		// std::cout << "DATA_TYPE is CHAR!" << std::endl;
+		_convertFromChar(argument);
 		break;
 	default:
 		std::cerr << "you IS hackerman" << std::endl;
@@ -566,7 +567,22 @@ void	ScalarConverter::_convertFromInt(std::string argument){
 }
 
 void	ScalarConverter::_convertFromChar(std::string argument){
-	(void)(argument);
+	std::istringstream iss(argument);
+	float	floatValue;
+	double	doubleValue;
+	int		intValue;
+	char	charValue;
+	iss >> charValue;
+
+	floatValue = static_cast<float>(charValue);
+	doubleValue = static_cast<double>(charValue);
+	intValue = static_cast<int>(charValue);
+
+	std::cout << "char:\t" << _charValueToPrint(charValue) << std::endl;
+	std::cout << "int:\t" << intValue << std::endl;
+	std::cout << "float:\t" << floatValue << "f" << std::endl;
+	std::cout << "double:\t" << doubleValue << std::endl;
+	return ;
 }
 
 void ScalarConverter::_printMaxValues(void){
