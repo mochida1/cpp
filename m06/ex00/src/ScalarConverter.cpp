@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:26:39 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/14 22:48:29 by mochida          ###   ########.fr       */
+/*   Updated: 2023/06/15 23:34:14 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,17 +383,17 @@ bool		ScalarConverter::tests(void){
 }
 
 void	ScalarConverter::_setToLiterals(std::string argument, double &doubleValue, float &floatValue){
-	if (argument.compare("nan") == 0)
+	if (argument.compare("nan") == 0 || argument.compare("nanf") == 0)
 	{
 		doubleValue = std::numeric_limits<double>::quiet_NaN();
 		floatValue = std::numeric_limits<float>::quiet_NaN();
 	}
-	else if (argument.compare("+inf") == 0)
+	else if (argument.compare("+inf") == 0 || argument.compare("+inff") == 0)
 	{
 		doubleValue = std::numeric_limits<double>::infinity();
 		floatValue = std::numeric_limits<float>::infinity();
 	}
-	else if (argument.compare("-inf") == 0)
+	else if (argument.compare("-inf") == 0 || argument.compare("-inff") == 0)
 	{
 		doubleValue = std::numeric_limits<double>::infinity() * -1;
 		floatValue = std::numeric_limits<float>::infinity() * -1;
@@ -492,18 +492,18 @@ void	ScalarConverter::_convertFromDouble(std::string argument){
 }
 
 void	ScalarConverter::_convertFromFloat(std::string argument){
-	std::istringstream iss(argument);
 	float	floatValue;
 	double	doubleValue;
 	int		intValue;
 	char	charValue;
 	float	floatValueTemp = 0;
-	iss >> floatValue;
 
 	if (_isWordLiteral(argument))
 		_setToLiterals(argument, doubleValue, floatValue);
 	else
 	{
+		argument.resize(argument.size() - 1);
+		std::istringstream iss(argument);
 		iss >> floatValue;
 		doubleValue = static_cast<double>(floatValue);
 	}
