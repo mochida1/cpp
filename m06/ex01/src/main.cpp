@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 17:23:17 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/27 22:39:49 by mochida          ###   ########.fr       */
+/*   Updated: 2023/07/01 19:49:55 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,8 @@ int main (void){
 	/* We could however, access it's innards */
 	std::cout << "anOpaquePointer first int:\t"<<*(unsigned int *)(anOpaquePointer) << std::endl;
 
-	/* There is however a better usage of this crap */
-	std::cout << "\n##### byteSerializer #####" << std::endl;
-	unsigned char *byteptr = (unsigned char *)(anOpaquePointer);
-	for (size_t i = 0; i < sizeof(Data); i++)
-		std::cout << (unsigned int)(byteptr[i]) << "|";
-	std::cout << std::endl;
+	/* Now we delete the data because valgrind */
+	delete justSomeData;
 
 	/* But seriously, if you're casting shit left and right, you're probably just fucking up the code */
 
