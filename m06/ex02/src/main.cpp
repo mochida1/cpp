@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 20:17:18 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/30 22:06:45 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/07/01 17:03:10 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,68 @@ Base * generate(void) {
 	return (new C);
 }
 
-void identify(Base* p);
-void identify(Base& p);
+void identify(Base* p){
+	std::cout << "Base POINTER identifier: " << std::endl;
+	if( dynamic_cast<A*>(p) )
+		std::cout << "\tClass generated is A" << std::endl;
+	else if ( dynamic_cast<B*>(p) )
+		std::cout << "\tClass generated is B" << std::endl;
+	else if ( dynamic_cast<C*>(p) )
+		std::cout << "\tClass generated is C" << std::endl;
+	return ;
+}
+void identify(Base& p){
+	std::cout << "Base reference identifier: " << std::endl;
+	try
+	{
+		(void)(dynamic_cast<A&>(p));
+		std::cout << "\tClass reference is A" << std::endl;
+		return ;
+	}
+	catch (std::exception &e)
+	{
+		// std::cout << "\t" <<  e.what() << " Not A!" << std::endl;
+	}
+
+	try
+	{
+		(void)(dynamic_cast<B&>(p));
+		std::cout << "\tClass reference is B" << std::endl;
+		return ;
+	}
+	catch (std::exception &e)
+	{
+		// std::cout << "\t" <<  e.what() << " Not B!" << std::endl;
+	}
+
+	try
+	{
+		(void)(dynamic_cast<C&>(p));
+		std::cout << "\tClass reference is C" << std::endl;
+		return ;
+	}
+	catch (std::exception &e)
+	{
+		// std::cout << "\t" << e.what() << " Not C!" << std::endl;
+	}
+	std::cout << "WTF THIS SHOULDN'T BE HAPPENING! OMG SOMETHING WENT REALLY WRONG" << std::endl;
+	return ;
+}
 
 int main (void)
 {
 	tests();
+	Base * basePtr;
+
+	for (int i = 0; i < 250 ; i++)
+	{
+		std::cout << "\n-------------------------------------------[" << i + 1 << "]" << std::endl;
+		basePtr = generate();
+		Base &baseRef = *basePtr;
+		std::cout << basePtr->getClassName() << std::endl;
+		identify(basePtr);
+		identify(baseRef);
+		delete basePtr;
+		usleep(1000 * 1000);
+	}
 }
