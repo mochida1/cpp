@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   C.hpp                                              :+:      :+:    :+:   */
+/*   main.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 21:18:44 by hmochida          #+#    #+#             */
-/*   Updated: 2023/06/30 21:18:54 by hmochida         ###   ########.fr       */
+/*   Created: 2023/06/30 21:21:19 by hmochida          #+#    #+#             */
+/*   Updated: 2023/06/30 21:56:59 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef C_HPP
-# define C_HPP
+#ifndef MAIN_HPP
+#define MAIN_HPP
 
 #include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+#include <cassert>
+#include <cstdlib>
+#include <unistd.h>
+#include <iostream>
 
-class C : public Base {
-public:
-	C(void);
-	~C(void);
-protected:
-private:
-};
+Base * generate(void);
+void identify(Base* p);
+void identify(Base& p);
 
-#endif //C_HPP
+#endif // MAIN_HPP

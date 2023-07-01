@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mochida <mochida@student.42.fr>            +#+  +:+       +#+         #
+#    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/06/27 22:32:07 by mochida          ###   ########.fr        #
+#    Updated: 2023/06/30 20:31:38 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = serializer
+NAME = ex02
 MAKEFLAGS = --no-print-directory
 BUILDDIR = objs
 VPATH = src
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp Serializer.cpp Data.cpp
+MAIN = main.cpp Base.cpp A.cpp B.cpp C.cpp
 
 # Names sources
 SOURCES = $(MAIN)
