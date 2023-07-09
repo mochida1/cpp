@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:50:53 by hmochida          #+#    #+#             */
-/*   Updated: 2023/07/09 16:34:19 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/07/09 17:00:29 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,32 @@ void test_max(void)
 	std::cout << "\n@@@@@@@@@@@@@@@@@@@@@@@\n" << std::endl;
 }
 
+void test_subject(void)
+{
+	std::cout << "\n\t### Starting SUBJECT tests\n" << std::endl;
+
+	int a = 2;
+	int b = 3;
+	::swap( a, b );
+	std::cout << "a = " << a << ", b = " << b << std::endl;
+	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+	std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+	std::string c = "chaine1";
+	std::string d = "chaine2";
+	::swap(c, d);
+	std::cout << "c = " << c << ", d = " << d << std::endl;
+	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
+	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+
+	std::cout << "\n@@@@@@@@@@@@@@@@@@@@@@@\n" << std::endl;
+}
+
 int main (void)
 {
 	test_swap();
 	test_min();
 	test_max();
+	test_subject();
 
 	return 0;
 }
