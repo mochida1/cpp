@@ -6,11 +6,11 @@
 #    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/07/09 18:51:02 by hmochida         ###   ########.fr        #
+#    Updated: 2023/07/09 19:02:13 by hmochida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex01
+NAME = ex02
 MAKEFLAGS = --no-print-directory
 BUILDDIR = objs
 VPATH = src
