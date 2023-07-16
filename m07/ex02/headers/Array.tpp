@@ -6,7 +6,7 @@
 /*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 19:00:27 by hmochida          #+#    #+#             */
-/*   Updated: 2023/07/16 20:00:05 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:12:44 by hmochida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@ public:
 		return this->_ptr[index];
 	}
 	Array &operator=(Array const &instance) const{
-		// this->_ptr
-		(void)(instance);
+		this->_n
+		try{
+			for (unsigned int i = 0; i < instance._n; i++)
+			{
+				this->
+			}
+		}
 	}
 	~Array(void){
 		if (this->_ptr)
