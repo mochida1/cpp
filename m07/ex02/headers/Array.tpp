@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 19:00:27 by hmochida          #+#    #+#             */
-/*   Updated: 2023/07/16 20:12:44 by hmochida         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:28:40 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,27 @@ public:
 	Array(void): _n(0), _ptr(NULL){return ;};
 	Array(unsigned int n): _ptr(new T[n]), _n(n){return ;};
 	T &operator[](unsigned int index) {
-		if (index < 0 || index >= this->_n)
+		if (index >= this->_n)
 			throw OutOfRangeExc();
 		return this->_ptr[index];
 	}
-	Array &operator=(Array const &instance) const{
-		this->_n
-		try{
+	Array &operator=(Array const &instance) const {
+		if (this->_ptr != NULL)
+			delete [] this->_ptr;
+		this->_n = instance.size();
+		this->_ptr = new T[this->_n];
+		try {
 			for (unsigned int i = 0; i < instance._n; i++)
 			{
-				this->
+				if (i >= instance._n || i >= this->_n)
+					throw OutOfRangeExc();
+				this->_ptr[i] = instance._ptr[i];
 			}
 		}
+		catch (const std::exception &e) {
+			std::cerr << e.what() << std::endl;
+		}
+		return *this;
 	}
 	~Array(void){
 		if (this->_ptr)
