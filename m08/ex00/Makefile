@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
+#    By: mochida <mochida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/07/09 16:14:59 by hmochida         ###   ########.fr        #
+#    Updated: 2023/07/29 16:43:24 by mochida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp Fixed.cpp
+MAIN = main.cpp
 
 # Names sources
 SOURCES = $(MAIN)
