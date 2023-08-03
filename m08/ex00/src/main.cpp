@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 16:42:59 by mochida           #+#    #+#             */
-/*   Updated: 2023/07/30 15:30:27 by mochida          ###   ########.fr       */
+/*   Updated: 2023/08/02 21:35:57 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,47 +228,64 @@ int TEST_set(void)
 {
 	std::cout << "\n<<<<<<<<< TESTING easyfind - SETs <<<<<<<<<" << std::endl;
 	
-	int toFind = 42;
+	int toFind = rngeezus(1, 84000);
 	int set_size = 42000;
 	int instance_pos = set_size;
 	std::set<int> haystack;
 	std::set<int>::iterator iter;
-	std::cout << "... populating set with random values..." << std::endl;
+	int randomInt;
+	std::cout << "instance to find is: [" << toFind << "]" << std::endl;
+	std::cout << "... populating set with values" << std::endl;
 	iter = haystack.begin();
+	std::pair<std::set<int>::iterator, bool> ret;
+	ret.second = false;
 	for (int i = 0; i < set_size; i++)
 	{
-		int randomInt = rngeezus(1, 84000);
+		randomInt = rngeezus(1, 84000);
+		ret = haystack.insert(randomInt);
 		if (randomInt == toFind)
 		{
-			std::cout << "instance generated at index [" << i << "]" << std::endl;
+			std::cout << "instance generated at iteration [" << i << "]" << std::endl;
 			if (instance_pos == set_size)
 			{
 				instance_pos = i;
+				std::cout << "index at generation is [" << std::distance(haystack.begin(), ret.first) << "]" << std::endl;
 				std::cout << "keeping track of first occurence" << std::endl;
 			}
 		}
-		haystack.insert(randomInt);
+		while (ret.second == false)
+		{
+			iter = ret.first;
+			randomInt = rngeezus(1, 84000);
+			ret = haystack.insert(randomInt);
+		}
 	}
-	if (instance_pos == set_size)
-		std::cout << "no instance of number to find generated. Exception expeceted." << std::endl;
+	// for (iter = haystack.begin(); iter != haystack.end(); ++iter)
+	// 	std::cout << *iter << std::endl;
+	std::cout << "set size: " << haystack.size() << std::endl;
+	assert (haystack.size() == (unsigned long)(set_size));
 	try {
 		iter = easyfind(haystack, toFind);
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << "exception caught: [" << e.what() << "]" << std::endl;
-		std::cout << ">>>>>>>>> Test of easyfind - SETs succeeded!" << std::endl;
-		return 0;
+		if (instance_pos >= set_size)
+		{
+			std::cout << ">>>>>>>>> Test of easyfind - SETs succeeded!" << std::endl;
+			return 0;
+		}
+		std::cerr << "FAILURE AT SET TESTS!!!!" << std::endl;
+		return 16;		
 	}
 	if (iter != haystack.end())
 	{
-		std::cout << "First instance found at index [" << std::distance(haystack.begin(), iter) << "]" <<std::endl;
-		assert (std::distance(haystack.begin(), iter) == instance_pos);
+		std::cout << "First instance found at index [" << std::distance(haystack.begin(), iter) << "]" << std::endl;
 	}
 	else 
 	{
 		std::cerr << "Value to find was instantiated, but not found!" << std::endl;
-		return 8;
+		return 32;
 	}
 	std::cout << ">>>>>>>>> Test of easyfind - SETs succeeded!" << std::endl;
 	return 0;
