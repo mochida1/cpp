@@ -6,12 +6,14 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:42:45 by mochida           #+#    #+#             */
-/*   Updated: 2023/08/06 10:41:44 by mochida          ###   ########.fr       */
+/*   Updated: 2023/08/13 11:57:39 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
-#include "cassert"
+#include <cassert>
+#include <ctime>
+#include <iomanip>
 
 int rngeezus(int min, int max)
 {
@@ -34,6 +36,7 @@ void TEST_constructors(void){
 }
 
 void TEST_addNumber(void){
+	std::cout << "\n############# addNumber() #############" << std::endl;
 	Span spam_ok(20);
 
 	std::vector<int>::iterator iter;
@@ -64,6 +67,7 @@ void TEST_addNumber(void){
 }
 
 void TEST_sort(void){
+	std::cout << "\n############# _sort() #############" << std::endl;
 	Span spam_ok(20);
 
 	for (int i=0; i<20; i++)
@@ -84,6 +88,7 @@ void TEST_sort(void){
 }
 
 void TEST_longestSpan(void){
+	std::cout << "\n############# longestSpan() #############" << std::endl;
 	Span spam_ok(20);
 
 
@@ -119,10 +124,29 @@ void TEST_longestSpan(void){
 		}
 	}
 	std::cout << "spam_100k: [" << spam_100k.longestSpan() << "]" << std::endl;
+	Span span_test_exc(10);
+	try {
+		std::cout << "Longest span no elements. Should throw exception. >>" << std::endl;
+		span_test_exc.longestSpan();
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << "Exception thrown successfully: " << e.what() << std::endl;
+	}
+	span_test_exc.addNumber(1);	
+	try {
+		std::cout << "Longest span one elements. Should throw exception." << std::endl;
+		span_test_exc.longestSpan();
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << "Exception thrown successfully: " << e.what() << std::endl;
+	}
 }
 
 void TEST_shortestSpan(void)
 {
+	std::cout << "\n############# shortestSpan() #############" << std::endl;
 	Span span_test(5);
 	span_test.addNumber(1);
 	span_test.addNumber(7);
@@ -134,16 +158,36 @@ void TEST_shortestSpan(void)
 	catch (const std::exception &e)
 	{
 		std::cout << "This shouldn't have happened..." << std::endl;
-	}	
+	}
+	Span span_test_exc(10);
+	try {
+		std::cout << "Shortest span no elements. Should throw exception. >>" << std::endl;
+		span_test_exc.shortestSpan();
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << "Exception thrown successfully: " << e.what() << std::endl;
+	}
+	span_test_exc.addNumber(1);	
+	try {
+		std::cout << "Shortest span one elements. Should throw exception." << std::endl;
+		span_test_exc.shortestSpan();
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << "Exception thrown successfully: " << e.what() << std::endl;
+	}
 }
 
 int main (void)
 {
+	std::cout << "RUNNING ex01 TESTS >>>>>>>>>>>>>>>>>>>" << std::endl;
 	srand(time(0));
 	TEST_constructors();
 	TEST_addNumber();
 	TEST_sort();
 	TEST_longestSpan();
 	TEST_shortestSpan();
+	std::cout << "<<<<<<<<<<<<<<<<<<<< ENDING ex01 TESTS" << std::endl;
 	return 0;
 }
