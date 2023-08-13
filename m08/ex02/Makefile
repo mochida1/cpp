@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hmochida <hmochida@student.42.fr>          +#+  +:+       +#+         #
+#    By: mochida <mochida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/07/09 16:14:59 by hmochida         ###   ########.fr        #
+#    Updated: 2023/08/13 12:40:51 by mochida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex00
+NAME = ex02
 MAKEFLAGS = --no-print-directory
 BUILDDIR = objs
 VPATH = src
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp Fixed.cpp
+MAIN = main.cpp
 
 # Names sources
 SOURCES = $(MAIN)
