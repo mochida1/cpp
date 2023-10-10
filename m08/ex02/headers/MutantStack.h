@@ -6,8 +6,8 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 20:52:22 by mochida           #+#    #+#             */
-/*   Updated: 2023/10/09 20:52:25 by mochida          ###   ########.fr       */
+/*   Updated: 2023/10/09 21:29:27 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// This is a legacy of 42 unwillingness to make a half decent subject.
+// This is a testament of 42 unwillingness to make a half decent subject.
