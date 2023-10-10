@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 12:13:36 by mochida           #+#    #+#             */
-/*   Updated: 2023/10/09 21:44:16 by mochida          ###   ########.fr       */
+/*   Updated: 2023/10/09 21:59:24 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void TEST_subject_01()
 		++it;
 	}
 	std::stack<int> s(mstack);
-	std::cout << "ending " <<__FUNCTION__ << " >>>>>>>>>" << std::endl;
+	std::cout << "ending " <<__FUNCTION__ << " >>>>>>>>>\n" << std::endl;
 	return ;
 }
 
@@ -66,7 +66,7 @@ void TEST_subject_02()
 		++it;
 	}
 	// std::stack<int> s(mstack); we can't use this because there are no constructos in std::stack that use a list object as a parameter. Yes, the subject keeps on fucking up.
-	std::cout << "ending " <<__FUNCTION__ << " >>>>>>>>>" << std::endl;
+	std::cout << "ending " <<__FUNCTION__ << " >>>>>>>>>\n" << std::endl;
 	return ;
 }
 
@@ -86,7 +86,36 @@ void TEST_iterator_validator()
 		assert (i == *it);
 		it++;
 	}
-	std::cout << "ending " <<__FUNCTION__ << " >>>>>>>>>" << std::endl;
+	std::cout << "ending " <<__FUNCTION__ << " >>>>>>>>>\n" << std::endl;
+	return ;
+}
+
+void TEST_iterator_assignment()
+{
+	std::cout << "<<<<<<<<< starting " <<__FUNCTION__ << "(" << __FILE__ << ":" << __LINE__ << ")" << std::endl;
+	MutantStack<int> mstack;
+	int toInsert = 0;
+	for (int i = 0; i < 25; i++) // populates stack with 0;
+	{
+		mstack.push(0);
+	}
+	MutantStack<int>::iterator it = mstack.begin();
+	MutantStack<int>::iterator ite = mstack.end();
+	while (it < ite) // inserts increasing numbers from back to front
+	{
+		ite--;
+		*ite = toInsert;
+		toInsert++;
+	}
+	ite = mstack.end();
+	toInsert = 0;
+	while (it != ite) // inserts increasing numbers from back to front
+	{
+		std::cout << "mstack[" << toInsert << "] is " << "[" << *it << "]" << std::endl;
+		toInsert++;
+		it++;
+	}
+	std::cout << "ending " <<__FUNCTION__ << " >>>>>>>>>\n" << std::endl;
 	return ;
 }
 
@@ -95,6 +124,7 @@ int main (void)
 	TEST_subject_01();
 	TEST_subject_02();
 	TEST_iterator_validator();
+	TEST_iterator_assignment();
 	// not implementing tests to check iterators' inherited methods because too lazy to test something that already works.
 	// GL trying to test it if you want.
 	return 0;
