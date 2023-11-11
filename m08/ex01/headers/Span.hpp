@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 22:09:16 by mochida           #+#    #+#             */
-/*   Updated: 2023/08/05 22:52:20 by mochida          ###   ########.fr       */
+/*   Updated: 2023/11/11 11:57:26 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ public:
 	Span(unsigned int N);
 	// ------------------- OCF
 	int					addNumber(int number);
+	int					addNumber(std::vector<int>::iterator rangeBegin, std::vector<int>::iterator rangeEnd);;
 	int					shortestSpan(void);
 	int					longestSpan(void);
 	std::vector<int>	getData(void) const;

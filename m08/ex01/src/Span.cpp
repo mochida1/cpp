@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 22:11:29 by mochida           #+#    #+#             */
-/*   Updated: 2023/08/06 09:35:50 by mochida          ###   ########.fr       */
+/*   Updated: 2023/11/11 12:25:10 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,24 @@ int					Span::addNumber(int number) {
 	this->_data.push_back(number);
 	this->_totalElements++;
 	this->_isDataSorted = false;
+	return 0;
+}
+
+int				Span::addNumber(std::vector<int>::iterator rangeBegin, std::vector<int>::iterator rangeEnd){
+	std::vector<int>::iterator itBegin = rangeBegin;
+	std::vector<int>::iterator itEnd = rangeEnd;
+	if (rangeBegin > rangeEnd){
+		itBegin = rangeEnd;
+		itEnd = rangeBegin;
+	}
+	if (itEnd > this->_data.end())
+		itEnd = this->_data.end();
+	while (itBegin != itEnd)
+	{
+		addNumber(*itBegin);
+		itBegin++;
+	}
+	addNumber(*itBegin);
 	return 0;
 }
 

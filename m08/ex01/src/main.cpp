@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:42:45 by mochida           #+#    #+#             */
-/*   Updated: 2023/08/13 11:57:39 by mochida          ###   ########.fr       */
+/*   Updated: 2023/11/11 12:27:04 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,45 @@ void TEST_addNumber(void){
 	for (int i=0; i<50; i++)
 	{
 		try{spam_ko.addNumber(rngeezus(-10000, 25000));}
+		catch (const std::exception&e)
+		{
+			std::cout << "Exception thrown successfully!!!" << e.what() << std::endl;
+			std::cout << "\t[spam_ko] at iteration [" << i << "], maxElements: [" << spam_ko.getMaxElements() << "], totalElements: [" << spam_ko.getTotalElements() << "]" << std::endl;
+			break ;
+		}
+	}
+}
+
+void TEST_addNumberOverload(void){
+	std::cout << "\n############# addNumber() OVERLOAD #############" << std::endl;
+	Span spam_ok(20);
+
+	std::vector<int> vec;
+	std::vector<int>::iterator iter;
+
+	for (int i = 0; i < 20; i++)
+	{
+		vec.push_back(rngeezus(-10000, 25000));
+	}
+	try{spam_ok.addNumber(vec.begin(), vec.end());}
+	catch (const std::exception&e)
+	{
+		std::cout << "FAILURE!!!" << e.what() << std::endl;
+	}
+	std::cout << "printing SPAM_OK numbers" << std::endl;
+	spam_ok.print(); 
+	std::cout << "max elements:	[" << spam_ok.getMaxElements()<< "]" << std::endl;
+	std::cout << "total elements:	[" << spam_ok.getTotalElements() << "]" << std::endl;
+
+	Span spam_ko(20);
+	std::vector<int> vec_ko;
+	for (int i = 0; i < 50; i++)
+	{
+		vec_ko.push_back(rngeezus(-10000, 25000));
+	}
+	for (int i=0; i<50; i++)
+	{
+		try{spam_ko.addNumber(vec_ko.begin(), vec_ko.end());}
 		catch (const std::exception&e)
 		{
 			std::cout << "Exception thrown successfully!!!" << e.what() << std::endl;
@@ -185,6 +224,7 @@ int main (void)
 	srand(time(0));
 	TEST_constructors();
 	TEST_addNumber();
+	TEST_addNumberOverload();
 	TEST_sort();
 	TEST_longestSpan();
 	TEST_shortestSpan();
