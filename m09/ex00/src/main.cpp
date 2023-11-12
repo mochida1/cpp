@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 09:07:43 by mochida           #+#    #+#             */
-/*   Updated: 2023/11/11 11:34:12 by mochida          ###   ########.fr       */
+/*   Updated: 2023/11/12 15:57:19 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,5 @@ int main (int argc, char *argv[])
 		return 1;
 	}
 	BitcoinExchange bc(argv[1]);
-	if (bc.tests())
-	{
-		return 2;
-	}
-	// bc.run();
-
-	std::cout << "So far so good!" << std::endl;
+	bc.run();
 }

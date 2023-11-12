@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 09:07:53 by mochida           #+#    #+#             */
-/*   Updated: 2023/11/11 11:34:27 by mochida          ###   ########.fr       */
+/*   Updated: 2023/11/12 14:54:15 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 # define BITCOINEXCHANGE_HPP
 
 #include <iostream>
+#include "cassert"
+#include "cstdlib" // system()
+#include <set>
 #include "fstream"
 #include "sys/stat.h"
+#include<sstream>
 
 class BitcoinExchange{
 public:
@@ -28,12 +32,29 @@ public:
 	//------------
 	BitcoinExchange(char *filename);
 	BitcoinExchange(std::string filename);
-	static int validateFiles(char *file_name);
+
+	// ----------- Getters
 	std::string getFileName(void);
-	int uintTests();
+	std::string getCsvFileName(void);
+	int getTotalCsvLines(void);
+	std::set<std::string> getCsvData(void);
+	// ----------- Setters
+
+	// ----------- Tests
+	static int validateFiles(char *file_name);
+	static int testConstructors(void);
+	int testSet(void);
+	void run(void);
 protected:
 private:
+	std::string _csvFileName;
 	std::string _fileName;
+	int _totalCsvLines;
+	std::set<std::string> _csvData;
+	// ----------- Methods
+	int _readTotalCsvLines(void);
+	std::set<std::string> _populateCsvData(void);
+	std::string _readCurrentInputLine(void);
 };
 
 #endif //BITCOINEXCHANGE_HPP

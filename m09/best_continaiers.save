@@ -1,2 +1,3 @@
-ex00 - anything. ordered Map is better.
-ex01 - 
+ex00 - anything. ordered set is better.
+ex01 - deque
+ex02 - vector / list
