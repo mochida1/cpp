@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 09:07:49 by mochida           #+#    #+#             */
-/*   Updated: 2023/11/12 15:55:16 by mochida          ###   ########.fr       */
+/*   Updated: 2023/11/12 16:18:18 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,6 +425,12 @@ float multiplyValues(std::string currentInputLine, std::string csvLine){
 	return getInputValue(currentInputLine) * getCsvValue(csvLine);
 }
 
+bool checkEarleistEntry(std::string input, std::string csvEarliest){
+	if (compareDate(input, csvEarliest) == -1)
+		return false;
+	return true;
+}
+
 typedef enum e_InputError
 {
 	ok = 0,
@@ -434,11 +440,11 @@ typedef enum e_InputError
 	badSize = 4,
 	badValueNegative = 5,
 	badValueTooLarge = 6,
-	badFormatting = 7
-
+	badFormatting = 7,
+	badNoPreviousCsvEntry = 8
 } t_InputError;
 // A valid value must be either a float or a positive integer, between 0 and 100
-static t_InputError validateInput(std::string input){
+static t_InputError validateInput(std::string input, std::string csvEarliest){
 	const std::string stringFormat("0000-00-00 | 1");
 	u_int16_t inputYear = 0;
 	u_int16_t inputMonth = 0;
@@ -493,6 +499,8 @@ static t_InputError validateInput(std::string input){
 	float fValue = getInputValue(input);
 	if (fValue < 0 || fValue > 1000)
 		return badValueTooLarge;
+	if (checkEarleistEntry(input, csvEarliest) == false)
+		return badNoPreviousCsvEntry;
 	return ok;
 }
 
@@ -507,7 +515,7 @@ void BitcoinExchange::run(void){
 	while (1) // percorre o input
 	{
 		currentInputLine = this->_readCurrentInputLine();
-		t_InputError rc = validateInput(currentInputLine);
+		t_InputError rc = validateInput(currentInputLine, *this->_csvData.begin());
 		
 		if (rc == ok)
 			;
@@ -539,6 +547,10 @@ void BitcoinExchange::run(void){
 			std::cout << "Input error: badFormatting => \"" << currentInputLine << "\"" << std::endl;
 			continue;
 		}
+		else if (rc == badNoPreviousCsvEntry){
+			std::cout << "Input error: badNoPreviousCsvEntry => \"" << currentInputLine << "\" earliest entry: \"" << *this->_csvData.begin() << "\"" << std::endl;
+			continue; 
+		}
 		else{
 			std::cout << "validate input ret:wtf?!!?" << std::endl;
 		}
@@ -553,14 +565,13 @@ void BitcoinExchange::run(void){
 				break;
 			if (compareDate(currentInputLine, *it) == 0){
 				found = true;
-				std::cout << "csvDate = inputDate : [" << currentInputLine << "] : [" << *it << "] => " << multiplyValues(currentInputLine, *it) << std::endl;
-				
+				std::cout << "inputDate = csvDate : [" << currentInputLine << "] : [" << *it << "] => " << multiplyValues(currentInputLine, *it) << std::endl;
 			}
 			else if (compareDate(currentInputLine, *it) == -1){
 				if(it != this->_csvData.begin()){
 					found = true;
 					it--;
-					std::cout << "csvDate > inputDate : [" << currentInputLine << "] : [" << *it << "] => " << multiplyValues(currentInputLine, *it) << std::endl;
+					std::cout << "inputDate > csvDate : [" << currentInputLine << "] : [" << *it << "] => " << multiplyValues(currentInputLine, *it) << std::endl;
 					//faz as operacoes especificas com a ultima posicao do iterador
 					it++;
 				}
