@@ -6,11 +6,11 @@
 #    By: mochida <mochida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/08/05 20:01:17 by mochida          ###   ########.fr        #
+#    Updated: 2023/11/12 19:00:41 by mochida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex01
+NAME = RPN
 MAKEFLAGS = --no-print-directory
 BUILDDIR = objs
 VPATH = src
@@ -19,7 +19,7 @@ VPATH = src
 INCLUDES = -I ./headers
 
 # Lists sources. Manually because of norm...
-MAIN = main.cpp Span.cpp
+MAIN = main.cpp RPN.cpp
 
 # Names sources
 SOURCES = $(MAIN)
@@ -32,7 +32,9 @@ CC = c++
 CF = -Wall -Wextra -Werror -std=c++98
 GDB = -ggdb
 VAL = valgrind --trace-children=no --leak-check=full --track-origins=yes \
-		./$(NAME)
+		./$(NAME) "1 2 * 2 / 2 * 2 4 - +" #0
+#		./$(NAME) "3 5 + 7 2 - *" #40
+
 
 $(NAME): $(BUILDDIR) $(OBJS)
 	@printf "Compiling $(NAME)\n"
