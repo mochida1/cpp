@@ -6,7 +6,7 @@
 /*   By: mochida <mochida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:08:08 by mochida           #+#    #+#             */
-/*   Updated: 2023/11/20 22:54:53 by mochida          ###   ########.fr       */
+/*   Updated: 2023/11/23 21:49:10 by mochida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void PmergeMe::printVector(std::vector<int> vector){
 		i++;
 	}
 	std::cout << std::endl;
-	std::cout << "vector entries: " << i << std::endl;
+	if (PmergeMe::isVerbose())
+		std::cout << "vector entries: " << i << std::endl;
 }
 
 std::vector<int>::iterator PmergeMe::getNthIterator(std::vector<int> & pVector, int index){
@@ -292,7 +293,8 @@ void PmergeMe::printList(std::list<int> list){
 			i++;
 		}
 		std::cout <<  std::endl;
-		std::cout << "list entries: " << i << std::endl;
+		if (PmergeMe::isVerbose())
+			std::cout << "list entries: " << i << std::endl;
 }
 
 void PmergeMe::argvToList(std::list<int> & pList, int argc, char *argv[]){

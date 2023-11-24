@@ -6,7 +6,7 @@
 #    By: mochida <mochida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/05 13:42:57 by hmochida          #+#    #+#              #
-#    Updated: 2023/11/20 21:57:40 by mochida          ###   ########.fr        #
+#    Updated: 2023/11/23 22:07:15 by mochida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ CF = -Wall -Wextra -Werror -std=c++98
 GDB = -ggdb
 GO = ./$(NAME) `shuf -i 1-22 -n 21 | tr "\n" " "`
 VAL = valgrind --trace-children=no --leak-check=full --track-origins=yes \
-		./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
+		./$(NAME) `shuf -i 1-100000 -n 3001 | tr "\n" " "`
 #		./$(NAME) 21 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1
 #		./$(NAME) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
 #		./$(NAME) `shuf -i 1-100000 -n 21 | tr "\n" " "`
